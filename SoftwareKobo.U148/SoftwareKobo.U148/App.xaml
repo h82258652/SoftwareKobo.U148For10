@@ -1,0 +1,11 @@
+﻿<toolkit:Bootstrapper x:Class="SoftwareKobo.U148.App"
+                      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                      xmlns:local="using:SoftwareKobo.U148"
+                      xmlns:toolkit="using:SoftwareKobo.UniversalToolkit"
+                      xmlns:vm="using:SoftwareKobo.U148.ViewModels"
+                      RequestedTheme="Light">
+    <toolkit:Bootstrapper.Resources>
+        <vm:ViewModelLocator x:Key="Locator" />
+    </toolkit:Bootstrapper.Resources>
+</toolkit:Bootstrapper>

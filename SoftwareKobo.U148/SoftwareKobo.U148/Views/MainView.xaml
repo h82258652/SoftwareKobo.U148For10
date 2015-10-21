@@ -1,0 +1,82 @@
+﻿<Page x:Class="SoftwareKobo.U148.Views.MainView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:local="using:SoftwareKobo.U148.Views"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:models="using:SoftwareKobo.U148.Models"
+      xmlns:localConv="using:SoftwareKobo.U148.Converters"
+      xmlns:localControls="using:SoftwareKobo.U148.Controls"
+      xmlns:controls="using:SoftwareKobo.UniversalToolkit.Controls"
+      mc:Ignorable="d"
+      DataContext="{Binding Source={StaticResource Locator},Path=Main}">
+    <Page.Resources>
+        <localConv:FeedCategoryNameConverter x:Key="FeedCategoryNameConverter" />
+    </Page.Resources>
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0"
+              Background="Orange">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="0"
+                    Content="有意思吧"
+                    Background="{x:Null}"></Button>
+            <Button Grid.Column="2"
+                    Content="搜索"
+                    Background="{x:Null}"></Button>
+        </Grid>
+        <Pivot Grid.Row="1"
+               ItemsSource="{Binding Path=Categories}"
+               Background="#E5E5E5">
+            <Pivot.HeaderTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Path=Key,Converter={StaticResource ResourceKey=FeedCategoryNameConverter}}"></TextBlock>
+                </DataTemplate>
+            </Pivot.HeaderTemplate>
+            <Pivot.ItemTemplate>
+                <DataTemplate>
+                    <localControls:FeedView ItemsSource="{Binding Path=Value}"
+                                            ItemClick="ListView_ItemClick" />
+                    <!--<controls:AdaptiveCollectionView ItemsSource="{Binding Path=Value}"
+                                                     SelectionMode="None"
+                                                     IsItemClickEnabled="True"
+                                                     Mode="Grid"
+                                                     ItemClick="ListView_ItemClick">
+                        <controls:AdaptiveCollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <localControls:FeedItem />
+                            </DataTemplate>
+                        </controls:AdaptiveCollectionView.ItemTemplate>
+                        <controls:AdaptiveCollectionView.ItemContainerStyle>
+                            <Style TargetType="controls:AdaptiveCollectionViewItem">
+                                <Setter Property="HorizontalContentAlignment"
+                                        Value="Stretch" />
+                                <Setter Property="Padding"
+                                        Value="0" />
+                                <Setter Property="Background"
+                                        Value="#F0F0F0" />
+                                <Setter Property="BorderBrush"
+                                        Value="#E3E3E3" />
+                                <Setter Property="BorderThickness"
+                                        Value="0,0,0,1" />
+                            </Style>
+                        </controls:AdaptiveCollectionView.ItemContainerStyle>
+                    </controls:AdaptiveCollectionView>-->
+                </DataTemplate>
+            </Pivot.ItemTemplate>
+            <Pivot.ItemContainerStyle>
+                <Style TargetType="PivotItem">
+                    <Setter Property="Margin"
+                            Value="0" />
+                </Style>
+            </Pivot.ItemContainerStyle>
+        </Pivot>
+    </Grid>
+</Page>
