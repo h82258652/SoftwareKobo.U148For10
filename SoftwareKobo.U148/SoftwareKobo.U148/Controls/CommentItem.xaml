@@ -17,11 +17,38 @@
         <conv:StringFormatConverter x:Key="TimeFormatConverter" />
     </UserControl.Resources>
     <Grid Padding="10">
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup>
+                <VisualState x:Name="narrow">
+                    <VisualState.Setters>
+                        <Setter Target="icon.Width"
+                                Value="48" />
+                        <Setter Target="icon.Height"
+                                Value="48" />
+                    </VisualState.Setters>
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="0"></AdaptiveTrigger>
+                    </VisualState.StateTriggers>
+                </VisualState>
+                <VisualState x:Name="wide">
+                    <VisualState.Setters>
+                        <Setter Target="icon.Width"
+                                Value="96" />
+                        <Setter Target="icon.Height"
+                                Value="96" />
+                    </VisualState.Setters>
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="800"></AdaptiveTrigger>
+                    </VisualState.StateTriggers>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
-        <Image Grid.Column="0"
+        <Image x:Name="icon"
+               Grid.Column="0"
                Source="{Binding Path=User.Icon}"
                Stretch="UniformToFill"
                VerticalAlignment="Top"
@@ -37,7 +64,8 @@
                            Margin="10,0,0,0" />
             </StackPanel>
             <TextBlock Text="{Binding Path=Contents,Converter={StaticResource ResourceKey=HtmlToTextConverter}}"
-                       Margin="0,5,0,0" />
+                       Margin="0,5,0,0" 
+                       TextWrapping="Wrap"/>
         </StackPanel>
     </Grid>
 </UserControl>

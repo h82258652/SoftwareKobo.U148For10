@@ -1,39 +1,84 @@
-﻿using SoftwareKobo.UniversalToolkit.Controls;
+﻿using Microsoft.Graphics.Canvas;
+using Microsoft.Graphics.Canvas.Effects;
+using Microsoft.Graphics.Canvas.UI;
+using Microsoft.Graphics.Canvas.UI.Xaml;
+using SoftwareKobo.U148.Datas;
+using SoftwareKobo.U148.Models;
+using SoftwareKobo.UniversalToolkit.Mvvm;
+using System;
+using System.Threading.Tasks;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 
-// “空白页”项模板在 http://go.microsoft.com/fwlink/?LinkId=234238 上提供
-
 namespace SoftwareKobo.U148.Views
 {
-    /// <summary>
-    /// 可用于自身或导航至 Frame 内部的空白页。
-    /// </summary>
-    public sealed partial class MainView : Page
+    public sealed partial class MainView : Page, IView
     {
+        private CanvasBitmap _bitmap;
+
         public MainView()
         {
             this.InitializeComponent();
             this.NavigationCacheMode = NavigationCacheMode.Required;
         }
 
-        private async void ListView_ItemClick(object sender, ItemClickEventArgs e)
+        public async void ReceiveFromViewModel(dynamic parameter)
         {
-            await App.Current.ShowNewWindowAsync(typeof(DetailView), e.ClickedItem);
-           // Frame.Navigate(typeof(DetailView), e.ClickedItem);
+            if (parameter is Feed)
+            {
+                if (AppSettings.ShowDetailInNewWindow == false)
+                {
+                    this.Frame.Navigate(typeof(DetailView), parameter);
+                }
+                else
+                {
+                    await App.Current.ShowNewWindowAsync(typeof(DetailView), parameter);
+                }
+            }
         }
 
-        private void feedView_SizeChanged(object sender, SizeChangedEventArgs e)
+        protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
-            AdaptiveCollectionView view = (AdaptiveCollectionView)sender;
-            if (e.NewSize.Width >= 1000)
+            base.OnNavigatedFrom(e);
+
+            Messenger.Unregister(this);
+        }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            base.OnNavigatedTo(e);
+
+            Messenger.Register(this);
+        }
+
+        private void Canvas_CreateResources(CanvasControl sender, CanvasCreateResourcesEventArgs args)
+        {
+            args.TrackAsyncAction(this.Canvas_CreateResourcesAsync(sender, args).AsAsyncAction());
+        }
+
+        private async Task Canvas_CreateResourcesAsync(CanvasControl sender, CanvasCreateResourcesEventArgs args)
+        {
+            this._bitmap = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/menu_background.jpg"));
+        }
+
+        private void Canvas_Draw(CanvasControl sender, CanvasDrawEventArgs args)
+        {
+            GaussianBlurEffect effect = new GaussianBlurEffect()
             {
-                view.Mode = AdaptiveCollectionViewMode.Grid;
-            }
-            else
+                Source = this._bitmap,
+                BlurAmount = 5,
+                BorderMode = EffectBorderMode.Hard
+            };
+            args.DrawingSession.DrawImage(effect);
+        }
+
+        private void Page_Unloaded(object sender, RoutedEventArgs e)
+        {
+            if (this.canvas != null)
             {
-                view.Mode = AdaptiveCollectionViewMode.List;
+                this.canvas.RemoveFromVisualTree();
+                this.canvas = null;
             }
         }
     }

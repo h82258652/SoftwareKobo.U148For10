@@ -2,7 +2,8 @@
   "dependencies": {
     "Microsoft.NETCore.UniversalWindowsPlatform": "5.0.0",
     "Newtonsoft.Json": "7.0.1",
-    "SoftwareKobo.UniversalToolkit": "0.2.3"
+    "PlatformSpecific.Analyzer": "1.0.5",
+    "Win2D.uwp": "1.7.0"
   },
   "frameworks": {
     "uap10.0": {}

@@ -1,5 +1,6 @@
 ﻿using SoftwareKobo.U148.Views;
 using SoftwareKobo.UniversalToolkit;
+using SoftwareKobo.UniversalToolkit.Extensions;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -23,7 +24,14 @@ namespace SoftwareKobo.U148
     {
         public App()
         {
+            this.InitializeComponent();
+
             this.DefaultNavigatePage = typeof(MainView);
+
+#if DEBUG
+            //this.DebugSettings.EnableFrameRateCounter = true;
+            this.DebugSettings.EnableDisplayMemoryUsage();
+#endif
         }
     }
 

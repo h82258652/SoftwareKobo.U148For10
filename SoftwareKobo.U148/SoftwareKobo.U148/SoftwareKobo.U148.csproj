@@ -106,12 +106,14 @@
     <Compile Include="Controls\FeedView.xaml.cs">
       <DependentUpon>FeedView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\ItemClickEventHandler.cs" />
     <Compile Include="Converters\FeedCategoryNameConverter.cs" />
     <Compile Include="Converters\HtmlToTextConverter.cs" />
     <Compile Include="DataModels\CommentCollection.cs" />
     <Compile Include="DataModels\FeedCollection.cs" />
     <Compile Include="DataSources\CommentSource.cs" />
     <Compile Include="DataSources\FeedSource.cs" />
+    <Compile Include="Datas\AppSettings.cs" />
     <Compile Include="Models\Article.cs" />
     <Compile Include="Models\Comment.cs" />
     <Compile Include="Models\CommentUser.cs" />
@@ -152,6 +154,7 @@
     <None Include="SoftwareKobo.U148_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\menu_background.jpg" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />
@@ -178,6 +181,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Styles\AppStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Page>
     <Page Include="Views\CommentView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -200,7 +208,15 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Styles\" />
+    <ProjectReference Include="..\..\..\SoftwareKobo.UniversalToolkit3\SoftwareKobo.UniversalToolkit\SoftwareKobo.UniversalToolkit\SoftwareKobo.UniversalToolkit.csproj">
+      <Project>{2835cfd9-6d57-4b0e-a2f9-0e0fd12d3abd}</Project>
+      <Name>SoftwareKobo.UniversalToolkit</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <SDKReference Include="BehaviorsXamlSDKManaged, Version=12.0">
+      <Name>Behaviors SDK %28XAML%29</Name>
+    </SDKReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>

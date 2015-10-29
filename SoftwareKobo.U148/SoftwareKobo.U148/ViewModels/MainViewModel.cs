@@ -1,6 +1,5 @@
 ﻿using SoftwareKobo.U148.DataModels;
 using SoftwareKobo.U148.Models;
-using SoftwareKobo.U148.Services;
 using SoftwareKobo.UniversalToolkit.Extensions;
 using SoftwareKobo.UniversalToolkit.Mvvm;
 using System.Collections.Generic;
@@ -11,11 +10,15 @@ namespace SoftwareKobo.U148.ViewModels
     {
         private Dictionary<FeedCategory, FeedCollection> _categories = new Dictionary<FeedCategory, FeedCollection>();
 
+        private DelegateCommand<Feed> _detailCommand;
+
+        private DelegateCommand<FeedCollection> _refreshCommand;
+
         public MainViewModel()
         {
             foreach (FeedCategory category in EnumExtensions.GetValues<FeedCategory>())
             {
-                _categories[category] = new FeedCollection(category);
+                this._categories[category] = new FeedCollection(category);
             }
         }
 
@@ -27,14 +30,37 @@ namespace SoftwareKobo.U148.ViewModels
             }
         }
 
-        private DelegateCommand _detailCommand;
-
-        public DelegateCommand DetailCommand
+        public DelegateCommand<Feed> DetailCommand
         {
             get
             {
-                return _detailCommand;
+                if (this._detailCommand == null)
+                {
+                    this._detailCommand = new DelegateCommand<Feed>(feed =>
+                    {
+                        this.SendToView(feed);
+                    });
+                }
+                return this._detailCommand;
             }
         }
+
+        public DelegateCommand<FeedCollection> RefreshCommand
+        {
+            get
+            {
+                if (this._refreshCommand == null)
+                {
+                    this._refreshCommand = new DelegateCommand<FeedCollection>(collection =>
+                    {
+                        if (collection != null)
+                        {
+                            collection.Refresh();
+                        }
+                    });
+                }
+                return this._refreshCommand;
+            }
+        }        
     }
 }

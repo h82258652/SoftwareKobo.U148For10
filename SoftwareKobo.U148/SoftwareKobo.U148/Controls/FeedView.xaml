@@ -1,35 +1,59 @@
-﻿<controls:AdaptiveCollectionView x:Class="SoftwareKobo.U148.Controls.FeedView"
-                                 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                                 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                                 xmlns:local="using:SoftwareKobo.U148.Controls"
-                                 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-                                 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-                                 xmlns:controls="using:SoftwareKobo.UniversalToolkit.Controls"
-                                 xmlns:dataModels="using:SoftwareKobo.U148.DataModels"
-                                 xmlns:localControls="using:SoftwareKobo.U148.Controls"
-                                 mc:Ignorable="d"
-                                 d:DesignHeight="300"
-                                 d:DesignWidth="400"
-                                 SelectionMode="None"
-                                 IsItemClickEnabled="True"
-                                 Mode="List">
-    <controls:AdaptiveCollectionView.ItemTemplate>
-        <DataTemplate>
-            <localControls:FeedItem />
-        </DataTemplate>
-    </controls:AdaptiveCollectionView.ItemTemplate>
-    <controls:AdaptiveCollectionView.ItemContainerStyle>
-        <Style TargetType="controls:AdaptiveCollectionViewItem">
-            <Setter Property="HorizontalContentAlignment"
-                    Value="Stretch" />
-            <Setter Property="Padding"
-                    Value="0" />
-            <Setter Property="Background"
-                    Value="#F0F0F0" />
-            <Setter Property="BorderBrush"
-                    Value="#E3E3E3" />
-            <Setter Property="BorderThickness"
-                    Value="0,0,0,1" />
-        </Style>
-    </controls:AdaptiveCollectionView.ItemContainerStyle>
-</controls:AdaptiveCollectionView>
+﻿<UserControl x:Class="SoftwareKobo.U148.Controls.FeedView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:localControls="using:SoftwareKobo.U148.Controls"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:controls="using:SoftwareKobo.UniversalToolkit.Controls"
+             xmlns:conv="using:SoftwareKobo.UniversalToolkit.Converters"
+             xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
+             xmlns:core="using:Microsoft.Xaml.Interactions.Core"
+             xmlns:behavior="using:SoftwareKobo.UniversalToolkit.Behaviors"
+             mc:Ignorable="d"
+             d:DesignHeight="300"
+             d:DesignWidth="400">
+    <UserControl.Resources>
+        <conv:BooleanToVisibilityConverter x:Key="ProcessBarVisibilityConverter" />
+    </UserControl.Resources>
+    <Grid>
+        <controls:AdaptiveCollectionView x:Name="view"
+                                         SelectionMode="None"
+                                         IsItemClickEnabled="True"
+                                         Mode="List"
+                                         ItemClick="View_ItemClick">
+            <interactivity:Interaction.Behaviors>
+                <behavior:ListViewBaseScrollBehavior ScrollDown="AdaptiveCollectionView_ScrollDown"
+                                                     ScrollUp="AdaptiveCollectionView_ScrollUp" />
+            </interactivity:Interaction.Behaviors>
+            <controls:AdaptiveCollectionView.ItemTemplate>
+                <DataTemplate>
+                    <localControls:FeedItem />
+                </DataTemplate>
+            </controls:AdaptiveCollectionView.ItemTemplate>
+            <controls:AdaptiveCollectionView.ItemContainerStyle>
+                <Style TargetType="controls:AdaptiveCollectionViewItem">
+                    <Setter Property="HorizontalContentAlignment"
+                            Value="Stretch" />
+                    <Setter Property="VerticalContentAlignment"
+                            Value="Stretch" />
+                    <Setter Property="Padding"
+                            Value="0" />
+                    <Setter Property="Background"
+                            Value="#F0F0F0" />
+                    <Setter Property="BorderBrush"
+                            Value="#E3E3E3" />
+                    <Setter Property="BorderThickness"
+                            Value="0,0,0,1" />
+                </Style>
+            </controls:AdaptiveCollectionView.ItemContainerStyle>
+            <controls:AdaptiveCollectionView.ItemContainerTransitions>
+                <TransitionCollection>
+                    <AddDeleteThemeTransition />
+                </TransitionCollection>
+            </controls:AdaptiveCollectionView.ItemContainerTransitions>
+        </controls:AdaptiveCollectionView>
+        <ProgressBar VerticalAlignment="Top"
+                     IsIndeterminate="{Binding ElementName=view,Path=ItemsSource.IsLoading}"
+                     Visibility="{Binding ElementName=view,Path=ItemsSource.IsLoading,Converter={StaticResource ProcessBarVisibilityConverter}}" />
+    </Grid>
+</UserControl>

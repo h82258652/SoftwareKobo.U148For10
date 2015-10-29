@@ -20,8 +20,8 @@ namespace SoftwareKobo.U148.ViewModels
                 this.Set(ref this._article, value);
             }
         }
-
-        protected override void ReceiveFromView(FrameworkElement originSourceView, dynamic parameter)
+        
+        protected override void ReceiveFromView( dynamic parameter)
         {
             if (parameter is Feed)
             {

@@ -8,12 +8,47 @@
       xmlns:localConv="using:SoftwareKobo.U148.Converters"
       xmlns:localControls="using:SoftwareKobo.U148.Controls"
       xmlns:controls="using:SoftwareKobo.UniversalToolkit.Controls"
+      xmlns:win2d="using:Microsoft.Graphics.Canvas.UI.Xaml"
+      xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
+      xmlns:core="using:Microsoft.Xaml.Interactions.Core"
+      xmlns:conv="using:SoftwareKobo.UniversalToolkit.Converters"
       mc:Ignorable="d"
-      DataContext="{Binding Source={StaticResource Locator},Path=Main}">
+      x:Name="page"
+      DataContext="{Binding Source={StaticResource Locator},Path=Main}"
+      Unloaded="Page_Unloaded">
     <Page.Resources>
+        <conv:ItemClickEventArgsConverter x:Key="ItemClickEventArgsConverter" />
         <localConv:FeedCategoryNameConverter x:Key="FeedCategoryNameConverter" />
     </Page.Resources>
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup>
+                <VisualState x:Name="Snapped">
+                    <VisualState.Setters></VisualState.Setters>
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="0" />
+                    </VisualState.StateTriggers>
+                </VisualState>
+                <VisualState x:Name="Narrow">
+                    <VisualState.Setters></VisualState.Setters>
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="548" />
+                    </VisualState.StateTriggers>
+                </VisualState>
+                <VisualState x:Name="Square">
+                    <VisualState.Setters></VisualState.Setters>
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="720" />
+                    </VisualState.StateTriggers>
+                </VisualState>
+                <VisualState x:Name="Wide">
+                    <VisualState.Setters></VisualState.Setters>
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="900" />
+                    </VisualState.StateTriggers>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
@@ -25,58 +60,127 @@
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
-            <Button Grid.Column="0"
-                    Content="有意思吧"
-                    Background="{x:Null}"></Button>
-            <Button Grid.Column="2"
-                    Content="搜索"
-                    Background="{x:Null}"></Button>
+            <Border Grid.Column="0">
+                <controls:HamburgerMenu Grid.Column="0"
+                                        IsChecked="{Binding ElementName=menu,Path=IsPaneOpen,Mode=TwoWay}"
+                                        Content="有意思吧" />
+            </Border>
+            <!--<AutoSuggestBox Grid.Column="2"
+                            VerticalAlignment="Center"
+                            PlaceholderText="搜索"
+                            Width="200"></AutoSuggestBox>-->
         </Grid>
-        <Pivot Grid.Row="1"
-               ItemsSource="{Binding Path=Categories}"
-               Background="#E5E5E5">
-            <Pivot.HeaderTemplate>
-                <DataTemplate>
-                    <TextBlock Text="{Binding Path=Key,Converter={StaticResource ResourceKey=FeedCategoryNameConverter}}"></TextBlock>
-                </DataTemplate>
-            </Pivot.HeaderTemplate>
-            <Pivot.ItemTemplate>
-                <DataTemplate>
-                    <localControls:FeedView ItemsSource="{Binding Path=Value}"
-                                            ItemClick="ListView_ItemClick" />
-                    <!--<controls:AdaptiveCollectionView ItemsSource="{Binding Path=Value}"
-                                                     SelectionMode="None"
-                                                     IsItemClickEnabled="True"
-                                                     Mode="Grid"
-                                                     ItemClick="ListView_ItemClick">
-                        <controls:AdaptiveCollectionView.ItemTemplate>
+        <SplitView x:Name="menu"
+                   Grid.Row="1">
+            <SplitView.Pane>
+                <Grid>
+                    <Viewbox Stretch="UniformToFill">
+                        <win2d:CanvasControl x:Name="canvas"
+                                             Draw="Canvas_Draw"
+                                             CreateResources="Canvas_CreateResources"
+                                             Width="400"
+                                             Height="960" />
+                    </Viewbox>
+                    <ScrollViewer VerticalScrollBarVisibility="Auto">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Grid Grid.Row="2">
+                                <StackPanel Orientation="Vertical">
+                                    <Rectangle Height="1">
+                                        <Rectangle.Fill>
+                                            <LinearGradientBrush StartPoint="0,0.5"
+                                                                 EndPoint="1,0.5">
+                                                <GradientStop Color="WhiteSmoke"
+                                                              Offset="0" />
+                                                <GradientStop Color="Transparent"
+                                                              Offset="1" />
+                                            </LinearGradientBrush>
+                                        </Rectangle.Fill>
+                                    </Rectangle>
+                                    <controls:HamburgerItem Foreground="WhiteSmoke"
+                                                            Text="设置">
+                                        <controls:HamburgerItem.Icon>
+                                            <SymbolIcon Symbol="Setting" />
+                                        </controls:HamburgerItem.Icon>
+                                        <interactivity:Interaction.Behaviors>
+                                            <core:EventTriggerBehavior EventName="Click">
+                                                <core:ChangePropertyAction TargetObject="{Binding ElementName=menu}"
+                                                                           PropertyName="IsPaneOpen"
+                                                                           Value="False" />
+                                                <core:NavigateToPageAction TargetPage="SoftwareKobo.U148.Views.SettingView" />
+                                            </core:EventTriggerBehavior>
+                                        </interactivity:Interaction.Behaviors>
+                                    </controls:HamburgerItem>
+                                    <controls:HamburgerItem Foreground="WhiteSmoke"
+                                                            Text="关于">
+                                        <controls:HamburgerItem.Icon>
+                                            <FontIcon FontFamily="Segoe MDL2 Assets"
+                                                      Glyph="&#xE946;" />
+                                        </controls:HamburgerItem.Icon>
+                                    </controls:HamburgerItem>
+                                </StackPanel>
+                            </Grid>
+                        </Grid>
+                    </ScrollViewer>
+                </Grid>
+            </SplitView.Pane>
+            <SplitView.Content>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Pivot x:Name="pivot"
+                           Grid.Row="0"
+                           ItemsSource="{Binding Path=Categories}"
+                           Background="#E5E5E5">
+                        <Pivot.HeaderTemplate>
                             <DataTemplate>
-                                <localControls:FeedItem />
+                                <TextBlock Text="{Binding Path=Key,Converter={StaticResource ResourceKey=FeedCategoryNameConverter}}" />
                             </DataTemplate>
-                        </controls:AdaptiveCollectionView.ItemTemplate>
-                        <controls:AdaptiveCollectionView.ItemContainerStyle>
-                            <Style TargetType="controls:AdaptiveCollectionViewItem">
-                                <Setter Property="HorizontalContentAlignment"
-                                        Value="Stretch" />
-                                <Setter Property="Padding"
+                        </Pivot.HeaderTemplate>
+                        <Pivot.ItemTemplate>
+                            <DataTemplate>
+                                <localControls:FeedView ItemsSource="{Binding Path=Value}">
+                                    <interactivity:Interaction.Behaviors>
+                                        <core:EventTriggerBehavior EventName="ItemClick">
+                                            <core:InvokeCommandAction Command="{Binding ElementName=page,Path=DataContext.DetailCommand}"
+                                                                      InputConverter="{StaticResource ItemClickEventArgsConverter}" />
+                                        </core:EventTriggerBehavior>
+                                        <core:EventTriggerBehavior EventName="ScrollDown">
+                                            <core:ChangePropertyAction TargetObject="{Binding ElementName=appBar}"
+                                                                       PropertyName="ClosedDisplayMode"
+                                                                       Value="Minimal" />
+                                        </core:EventTriggerBehavior>
+                                        <core:EventTriggerBehavior EventName="ScrollUp">
+                                            <core:ChangePropertyAction TargetObject="{Binding ElementName=appBar}"
+                                                                       PropertyName="ClosedDisplayMode"
+                                                                       Value="Compact" />
+                                        </core:EventTriggerBehavior>
+                                    </interactivity:Interaction.Behaviors>
+                                </localControls:FeedView>
+                            </DataTemplate>
+                        </Pivot.ItemTemplate>
+                        <Pivot.ItemContainerStyle>
+                            <Style TargetType="PivotItem">
+                                <Setter Property="Margin"
                                         Value="0" />
-                                <Setter Property="Background"
-                                        Value="#F0F0F0" />
-                                <Setter Property="BorderBrush"
-                                        Value="#E3E3E3" />
-                                <Setter Property="BorderThickness"
-                                        Value="0,0,0,1" />
                             </Style>
-                        </controls:AdaptiveCollectionView.ItemContainerStyle>
-                    </controls:AdaptiveCollectionView>-->
-                </DataTemplate>
-            </Pivot.ItemTemplate>
-            <Pivot.ItemContainerStyle>
-                <Style TargetType="PivotItem">
-                    <Setter Property="Margin"
-                            Value="0" />
-                </Style>
-            </Pivot.ItemContainerStyle>
-        </Pivot>
+                        </Pivot.ItemContainerStyle>
+                    </Pivot>
+                    <CommandBar Grid.Row="1"
+                                x:Name="appBar">
+                        <AppBarButton Icon="Refresh"
+                                      Label="刷新"
+                                      Command="{Binding Path=RefreshCommand}"
+                                      CommandParameter="{Binding ElementName=pivot,Path=SelectedItem.Value}" />
+                    </CommandBar>
+                </Grid>
+            </SplitView.Content>
+        </SplitView>
     </Grid>
 </Page>

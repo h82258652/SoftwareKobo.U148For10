@@ -16,14 +16,18 @@
     </Page.Transitions>
     <Page.BottomAppBar>
         <CommandBar>
-            <AppBarButton Label="评论" Click="AppBarButton_Click">
+            <AppBarButton Label="评论"
+                          Click="AppBarButton_Click">
                 <AppBarButton.Icon>
-                    <SymbolIcon Symbol="Comment"></SymbolIcon>
+                    <FontIcon>
+                        
+                    </FontIcon>
                 </AppBarButton.Icon>
             </AppBarButton>
         </CommandBar>
     </Page.BottomAppBar>
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <WebView x:Name="v" extensions:WebViewExtensions.Html="{Binding Path=Article.Content}"></WebView>
+        <WebView x:Name="v"
+                 extensions:WebViewExtensions.Html="{Binding Path=Article.Content}"></WebView>
     </Grid>
 </Page>

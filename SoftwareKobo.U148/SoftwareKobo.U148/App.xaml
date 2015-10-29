@@ -6,6 +6,11 @@
                       xmlns:vm="using:SoftwareKobo.U148.ViewModels"
                       RequestedTheme="Light">
     <toolkit:Bootstrapper.Resources>
-        <vm:ViewModelLocator x:Key="Locator" />
+        <ResourceDictionary>
+            <vm:ViewModelLocator x:Key="Locator" />
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Styles/AppStyle.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </toolkit:Bootstrapper.Resources>
 </toolkit:Bootstrapper>
