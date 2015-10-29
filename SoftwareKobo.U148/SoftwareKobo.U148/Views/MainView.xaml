@@ -11,6 +11,7 @@
       xmlns:win2d="using:Microsoft.Graphics.Canvas.UI.Xaml"
       xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
       xmlns:core="using:Microsoft.Xaml.Interactions.Core"
+      xmlns:media="using:Microsoft.Xaml.Interactions.Media"
       xmlns:conv="using:SoftwareKobo.UniversalToolkit.Converters"
       mc:Ignorable="d"
       x:Name="page"
@@ -21,6 +22,17 @@
         <localConv:FeedCategoryNameConverter x:Key="FeedCategoryNameConverter" />
     </Page.Resources>
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <controls:FullWindowPopup.AttachedPopup>
+            <controls:FullWindowPopup x:Name="about">
+                <interactivity:Interaction.Behaviors>
+                    <core:EventTriggerBehavior EventName="Opened"></core:EventTriggerBehavior>
+                </interactivity:Interaction.Behaviors>
+                <Border>
+                    <localControls:AboutControl HorizontalAlignment="Center"
+                                                VerticalAlignment="Center" />
+                </Border>
+            </controls:FullWindowPopup>
+        </controls:FullWindowPopup.AttachedPopup>
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup>
                 <VisualState x:Name="Snapped">
@@ -116,7 +128,8 @@
                                         </interactivity:Interaction.Behaviors>
                                     </controls:HamburgerItem>
                                     <controls:HamburgerItem Foreground="WhiteSmoke"
-                                                            Text="关于">
+                                                            Text="关于"
+                                                            Click="HamburgerItem_Click">
                                         <controls:HamburgerItem.Icon>
                                             <FontIcon FontFamily="Segoe MDL2 Assets"
                                                       Glyph="&#xE946;" />
