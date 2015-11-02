@@ -10,6 +10,7 @@ namespace SoftwareKobo.U148.ViewModels
             #region 注册服务。
 
             this.Register<IFeedService, FeedService>();
+            this.Register<ICommentService, CommentService>();
 
             #endregion 注册服务。
 

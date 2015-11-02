@@ -1,5 +1,6 @@
 ﻿using SoftwareKobo.U148.DataModels;
 using SoftwareKobo.U148.Models;
+using SoftwareKobo.U148.Services;
 using SoftwareKobo.UniversalToolkit.Extensions;
 using SoftwareKobo.UniversalToolkit.Mvvm;
 using System.Collections.Generic;
@@ -14,11 +15,11 @@ namespace SoftwareKobo.U148.ViewModels
 
         private DelegateCommand<FeedCollection> _refreshCommand;
 
-        public MainViewModel()
+        public MainViewModel(IFeedService feedService)
         {
             foreach (FeedCategory category in EnumExtensions.GetValues<FeedCategory>())
             {
-                this._categories[category] = new FeedCollection(category);
+                this._categories[category] = new FeedCollection(feedService, category);
             }
         }
 
@@ -38,7 +39,10 @@ namespace SoftwareKobo.U148.ViewModels
                 {
                     this._detailCommand = new DelegateCommand<Feed>(feed =>
                     {
-                        this.SendToView(feed);
+                        if (feed != null)
+                        {
+                            this.SendToView(feed);
+                        }
                     });
                 }
                 return this._detailCommand;
@@ -61,6 +65,6 @@ namespace SoftwareKobo.U148.ViewModels
                 }
                 return this._refreshCommand;
             }
-        }        
+        }
     }
 }

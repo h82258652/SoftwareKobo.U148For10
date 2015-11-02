@@ -81,10 +81,5 @@ namespace SoftwareKobo.U148.Views
                 this.canvas = null;
             }
         }
-
-        private void HamburgerItem_Click(object sender, RoutedEventArgs e)
-        {
-            about.IsOpen = true;
-        }
     }
 }

@@ -5,6 +5,10 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:extensions="using:SoftwareKobo.UniversalToolkit.Extensions"
+      xmlns:localConv="using:SoftwareKobo.U148.Converters"
+      xmlns:controls="using:SoftwareKobo.UniversalToolkit.Controls"
+      xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
+      xmlns:core="using:Microsoft.Xaml.Interactions.Core"
       mc:Ignorable="d"
       DataContext="{Binding Source={StaticResource Locator},Path=Detail}">
     <Page.Transitions>
@@ -14,16 +18,33 @@
             </NavigationThemeTransition>
         </TransitionCollection>
     </Page.Transitions>
+    <Page.Resources>
+        <localConv:CommentReviewCountConverter x:Key="CommentReviewCountConverter" />
+    </Page.Resources>
     <Page.BottomAppBar>
         <CommandBar>
-            <AppBarButton Label="评论"
-                          Click="AppBarButton_Click">
-                <AppBarButton.Icon>
-                    <FontIcon>
-                        
-                    </FontIcon>
-                </AppBarButton.Icon>
-            </AppBarButton>
+            <controls:AppBarButtonEx Label="评论">
+                <Grid>
+                    <FontIcon Glyph="&#xE8BD;"
+                              FontFamily="Segoe MDL2 Assets"
+                              HorizontalAlignment="Center"
+                              VerticalAlignment="Center" />
+                    <TextBlock Text="{Binding Path=Feed.CountReview,Converter={StaticResource CommentReviewCountConverter}}"
+                               FontSize="9"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               RenderTransformOrigin="0.5,0.5">
+                        <TextBlock.RenderTransform>
+                            <TranslateTransform Y="-2" />
+                        </TextBlock.RenderTransform></TextBlock>
+                </Grid>
+                <interactivity:Interaction.Behaviors>
+                    <core:EventTriggerBehavior EventName="Click">
+                        <core:NavigateToPageAction TargetPage="SoftwareKobo.U148.Views.CommentView"
+                                                   Parameter="{Binding Path=Feed}" />
+                    </core:EventTriggerBehavior>
+                </interactivity:Interaction.Behaviors>
+            </controls:AppBarButtonEx>
         </CommandBar>
     </Page.BottomAppBar>
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">

@@ -22,17 +22,6 @@
         <localConv:FeedCategoryNameConverter x:Key="FeedCategoryNameConverter" />
     </Page.Resources>
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <controls:FullWindowPopup.AttachedPopup>
-            <controls:FullWindowPopup x:Name="about">
-                <interactivity:Interaction.Behaviors>
-                    <core:EventTriggerBehavior EventName="Opened"></core:EventTriggerBehavior>
-                </interactivity:Interaction.Behaviors>
-                <Border>
-                    <localControls:AboutControl HorizontalAlignment="Center"
-                                                VerticalAlignment="Center" />
-                </Border>
-            </controls:FullWindowPopup>
-        </controls:FullWindowPopup.AttachedPopup>
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup>
                 <VisualState x:Name="Snapped">
@@ -77,10 +66,12 @@
                                         IsChecked="{Binding ElementName=menu,Path=IsPaneOpen,Mode=TwoWay}"
                                         Content="有意思吧" />
             </Border>
-            <!--<AutoSuggestBox Grid.Column="2"
+            <AutoSuggestBox Grid.Column="2"
                             VerticalAlignment="Center"
                             PlaceholderText="搜索"
-                            Width="200"></AutoSuggestBox>-->
+                            Width="250"
+                            QueryIcon="Find"
+                            Margin="0,0,8,0"></AutoSuggestBox>
         </Grid>
         <SplitView x:Name="menu"
                    Grid.Row="1">
@@ -100,43 +91,70 @@
                                 <RowDefinition Height="*" />
                                 <RowDefinition Height="Auto" />
                             </Grid.RowDefinitions>
-                            <Grid Grid.Row="2">
-                                <StackPanel Orientation="Vertical">
-                                    <Rectangle Height="1">
-                                        <Rectangle.Fill>
-                                            <LinearGradientBrush StartPoint="0,0.5"
-                                                                 EndPoint="1,0.5">
-                                                <GradientStop Color="WhiteSmoke"
-                                                              Offset="0" />
-                                                <GradientStop Color="Transparent"
-                                                              Offset="1" />
-                                            </LinearGradientBrush>
-                                        </Rectangle.Fill>
-                                    </Rectangle>
-                                    <controls:HamburgerItem Foreground="WhiteSmoke"
-                                                            Text="设置">
-                                        <controls:HamburgerItem.Icon>
-                                            <SymbolIcon Symbol="Setting" />
-                                        </controls:HamburgerItem.Icon>
-                                        <interactivity:Interaction.Behaviors>
-                                            <core:EventTriggerBehavior EventName="Click">
-                                                <core:ChangePropertyAction TargetObject="{Binding ElementName=menu}"
-                                                                           PropertyName="IsPaneOpen"
-                                                                           Value="False" />
-                                                <core:NavigateToPageAction TargetPage="SoftwareKobo.U148.Views.SettingView" />
-                                            </core:EventTriggerBehavior>
-                                        </interactivity:Interaction.Behaviors>
-                                    </controls:HamburgerItem>
-                                    <controls:HamburgerItem Foreground="WhiteSmoke"
-                                                            Text="关于"
-                                                            Click="HamburgerItem_Click">
-                                        <controls:HamburgerItem.Icon>
-                                            <FontIcon FontFamily="Segoe MDL2 Assets"
-                                                      Glyph="&#xE946;" />
-                                        </controls:HamburgerItem.Icon>
-                                    </controls:HamburgerItem>
-                                </StackPanel>
-                            </Grid>
+                            <StackPanel Grid.Row="0"
+                                        Orientation="Vertical">
+                                <controls:CircleImage></controls:CircleImage>
+                                <controls:HamburgerItem Foreground="WhiteSmoke"
+                                                        Text="登录"
+                                                        Icon="Contact">
+                                    <interactivity:Interaction.Behaviors>
+                                        <core:EventTriggerBehavior EventName="Click">
+                                            <core:ChangePropertyAction TargetObject="{Binding ElementName=menu}"
+                                                                       PropertyName="IsPaneOpen"
+                                                                       Value="False" />
+                                            <core:NavigateToPageAction TargetPage="SoftwareKobo.U148.Views.LoginView" />
+                                        </core:EventTriggerBehavior>
+                                    </interactivity:Interaction.Behaviors>
+                                </controls:HamburgerItem>
+                                <controls:HamburgerItem Foreground="WhiteSmoke"
+                                                        Text="收藏">
+                                    <controls:HamburgerItem.Icon>
+                                        <FontIcon FontFamily="Segoe MDL2 Assets"
+                                                  Glyph="&#xEB51;"></FontIcon>
+                                    </controls:HamburgerItem.Icon>
+                                </controls:HamburgerItem>
+                            </StackPanel>
+                            <StackPanel Grid.Row="2"
+                                        Orientation="Vertical">
+                                <Rectangle Height="1">
+                                    <Rectangle.Fill>
+                                        <LinearGradientBrush StartPoint="0,0.5"
+                                                             EndPoint="1,0.5">
+                                            <GradientStop Color="WhiteSmoke"
+                                                          Offset="0" />
+                                            <GradientStop Color="Transparent"
+                                                          Offset="1" />
+                                        </LinearGradientBrush>
+                                    </Rectangle.Fill>
+                                </Rectangle>
+                                <controls:HamburgerItem Foreground="WhiteSmoke"
+                                                        Text="设置"
+                                                        Icon="Setting">
+                                    <interactivity:Interaction.Behaviors>
+                                        <core:EventTriggerBehavior EventName="Click">
+                                            <core:ChangePropertyAction TargetObject="{Binding ElementName=menu}"
+                                                                       PropertyName="IsPaneOpen"
+                                                                       Value="False" />
+                                            <core:NavigateToPageAction TargetPage="SoftwareKobo.U148.Views.SettingView" />
+                                        </core:EventTriggerBehavior>
+                                    </interactivity:Interaction.Behaviors>
+                                </controls:HamburgerItem>
+                                <controls:HamburgerItem Foreground="WhiteSmoke"
+                                                        Text="关于">
+                                    <controls:HamburgerItem.Icon>
+                                        <FontIcon FontFamily="Segoe MDL2 Assets"
+                                                  Glyph="&#xE946;" />
+                                    </controls:HamburgerItem.Icon>
+                                    <interactivity:Interaction.Behaviors>
+                                        <core:EventTriggerBehavior EventName="Click">
+                                            <core:ChangePropertyAction TargetObject="{Binding ElementName=menu}"
+                                                                       PropertyName="IsPaneOpen"
+                                                                       Value="False" />
+                                            <core:NavigateToPageAction TargetPage="SoftwareKobo.U148.Views.AboutView" />
+                                        </core:EventTriggerBehavior>
+                                    </interactivity:Interaction.Behaviors>
+                                </controls:HamburgerItem>
+                            </StackPanel>
                         </Grid>
                     </ScrollViewer>
                 </Grid>

@@ -1,4 +1,5 @@
-﻿using SoftwareKobo.UniversalToolkit.Storage;
+﻿using SoftwareKobo.U148.Models;
+using SoftwareKobo.UniversalToolkit.Storage;
 
 namespace SoftwareKobo.U148.Datas
 {
@@ -21,6 +22,12 @@ namespace SoftwareKobo.U148.Datas
             {
                 ApplicationLocalSettings.Write(nameof(ShowDetailInNewWindow), value);
             }
+        }
+
+        public static UserInfo UserInfo
+        {
+            get;
+            set;
         }
     }
 }

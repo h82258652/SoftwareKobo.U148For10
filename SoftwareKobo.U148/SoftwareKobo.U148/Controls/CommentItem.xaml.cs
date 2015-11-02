@@ -23,5 +23,10 @@ namespace SoftwareKobo.U148.Controls
         {
             this.InitializeComponent();
         }
+
+        private void icon_ImageFailed(object sender, ExceptionRoutedEventArgs e)
+        {
+
+        }
     }
 }

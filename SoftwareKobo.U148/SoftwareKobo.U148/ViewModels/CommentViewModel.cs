@@ -1,14 +1,26 @@
-﻿using System.Runtime.CompilerServices;
-using SoftwareKobo.U148.DataModels;
-using SoftwareKobo.UniversalToolkit.Mvvm;
-using Windows.UI.Xaml;
+﻿using SoftwareKobo.U148.DataModels;
 using SoftwareKobo.U148.Models;
+using SoftwareKobo.U148.Services;
+using SoftwareKobo.UniversalToolkit.Mvvm;
+using System;
 
 namespace SoftwareKobo.U148.ViewModels
 {
     public class CommentViewModel : ViewModelBase
     {
+        private readonly ICommentService _service;
+
         private CommentCollection _comments;
+
+        public CommentViewModel(ICommentService service)
+        {
+            if (service == null)
+            {
+                throw new ArgumentNullException(nameof(service));
+            }
+
+            this._service = service;
+        }
 
         public CommentCollection Comments
         {
@@ -22,11 +34,12 @@ namespace SoftwareKobo.U148.ViewModels
             }
         }
 
-        protected override void ReceiveFromView( dynamic parameter)
+        protected override void ReceiveFromView(dynamic parameter)
         {
-            if (parameter is Feed)
+            Feed feed = parameter as Feed;
+            if (feed != null)
             {
-                this.Comments = new CommentCollection(parameter);
+                this.Comments = new CommentCollection(this._service, feed);
             }
         }
     }

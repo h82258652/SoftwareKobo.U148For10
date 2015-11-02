@@ -12,26 +12,32 @@ namespace SoftwareKobo.U148.DataSources
     {
         private readonly Feed _feed;
 
+        private readonly ICommentService _service;
+
         private int _currentPage = 0;
 
-        public CommentSource(Feed feed)
+        public CommentSource(ICommentService service, Feed feed)
         {
+            if (service == null)
+            {
+                throw new ArgumentNullException(nameof(service));
+            }
             if (feed == null)
             {
                 throw new ArgumentNullException(nameof(feed));
             }
 
+            this._service = service;
             this._feed = feed;
         }
 
         protected override async Task LoadMoreItemsAsync(ICollection<Comment> collection, uint suggestLoadCount)
         {
-            CommentService service = new CommentService();
             try
             {
                 // 读取下一页数据。
                 int nextPage = this._currentPage + 1;
-                ResultBase<ResultList<Comment>> result = await service.GetCommentsAsync(this._feed, nextPage);
+                ResultBase<ResultList<Comment>> result = await this._service.GetCommentsAsync(this._feed, nextPage);
                 if (result.Code == 0)// 请求成功。
                 {
                     ResultList<Comment> resultList = result.Data;

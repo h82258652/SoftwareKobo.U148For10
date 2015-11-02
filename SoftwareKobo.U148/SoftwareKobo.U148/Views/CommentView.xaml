@@ -8,6 +8,11 @@
       xmlns:controls="using:SoftwareKobo.U148.Controls"
       mc:Ignorable="d"
       DataContext="{Binding Source={StaticResource Locator},Path=Comment}">
+    <Page.Transitions>
+        <TransitionCollection>
+            <PaneThemeTransition Edge="Bottom" />
+        </TransitionCollection>
+    </Page.Transitions>
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <ListView ItemsSource="{Binding Path=Comments}"
                   SelectionMode="None"

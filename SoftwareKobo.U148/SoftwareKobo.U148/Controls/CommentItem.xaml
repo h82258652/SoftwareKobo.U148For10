@@ -7,6 +7,7 @@
              xmlns:models="using:SoftwareKobo.U148.Models"
              xmlns:extensions="using:SoftwareKobo.UniversalToolkit.Extensions"
              xmlns:localConv="using:SoftwareKobo.U148.Converters"
+             xmlns:controls="using:SoftwareKobo.UniversalToolkit.Controls"
              xmlns:conv="using:SoftwareKobo.UniversalToolkit.Converters"
              mc:Ignorable="d"
              d:DesignHeight="300"
@@ -53,7 +54,7 @@
                Stretch="UniformToFill"
                VerticalAlignment="Top"
                Width="48"
-               Height="48"></Image>
+               Height="48" />
         <StackPanel Grid.Column="1"
                     Margin="10,0,0,0"
                     Orientation="Vertical">
@@ -64,8 +65,8 @@
                            Margin="10,0,0,0" />
             </StackPanel>
             <TextBlock Text="{Binding Path=Contents,Converter={StaticResource ResourceKey=HtmlToTextConverter}}"
-                       Margin="0,5,0,0" 
-                       TextWrapping="Wrap"/>
+                       Margin="0,5,0,0"
+                       TextWrapping="Wrap" />
         </StackPanel>
     </Grid>
 </UserControl>

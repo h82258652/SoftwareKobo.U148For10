@@ -1,13 +1,27 @@
 ﻿using SoftwareKobo.U148.Models;
 using SoftwareKobo.U148.Services;
 using SoftwareKobo.UniversalToolkit.Mvvm;
-using Windows.UI.Xaml;
+using System;
 
 namespace SoftwareKobo.U148.ViewModels
 {
     public class DetailViewModel : ViewModelBase
     {
+        private readonly IFeedService _service;
+
         private Article _article;
+
+        private Feed _feed;
+
+        public DetailViewModel(IFeedService service)
+        {
+            if (service == null)
+            {
+                throw new ArgumentNullException(nameof(service));
+            }
+
+            this._service = service;
+        }
 
         public Article Article
         {
@@ -20,27 +34,6 @@ namespace SoftwareKobo.U148.ViewModels
                 this.Set(ref this._article, value);
             }
         }
-        
-        protected override void ReceiveFromView( dynamic parameter)
-        {
-            if (parameter is Feed)
-            {
-                this.Feed = parameter;
-                LoadArticleAsync(parameter);
-            }
-        }
-
-        private async void LoadArticleAsync(Feed feed)
-        {
-            FeedService service = new FeedService();
-            ResultBase<Article> result = await service.GetArticleAsync(feed);
-            if (result.Code == 0)
-            {
-                this.Article = result.Data;
-            }
-        }
-
-        private Feed _feed;
 
         public Feed Feed
         {
@@ -54,19 +47,22 @@ namespace SoftwareKobo.U148.ViewModels
             }
         }
 
-        private DelegateCommand _viewCommentCommand;
-
-        public DelegateCommand ViewCommentCommand
+        protected override void ReceiveFromView(dynamic parameter)
         {
-            get
+            Feed feed = parameter as Feed;
+            if (feed != null)
             {
-                if (this._viewCommentCommand == null)
-                {
-                    this._viewCommentCommand = new DelegateCommand(() =>
-                    {
-                    });
-                }
-                return this._viewCommentCommand;
+                this.Feed = feed;
+                this.LoadArticleAsync(feed);
+            }
+        }
+
+        private async void LoadArticleAsync(Feed feed)
+        {
+            ResultBase<Article> result = await this._service.GetArticleAsync(feed);
+            if (result.Code == 0)
+            {
+                this.Article = result.Data;
             }
         }
     }
