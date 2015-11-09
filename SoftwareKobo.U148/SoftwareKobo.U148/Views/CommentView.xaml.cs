@@ -1,4 +1,5 @@
-﻿using SoftwareKobo.U148.Models;
+﻿using SoftwareKobo.U148.Controls;
+using SoftwareKobo.U148.Models;
 using SoftwareKobo.UniversalToolkit.Helpers;
 using SoftwareKobo.UniversalToolkit.Mvvm;
 using Windows.UI.Xaml.Controls;
@@ -39,6 +40,6 @@ namespace SoftwareKobo.U148.Views
             {
                 this.SendToViewModel(parameter);
             }
-        }
+        }        
     }
 }

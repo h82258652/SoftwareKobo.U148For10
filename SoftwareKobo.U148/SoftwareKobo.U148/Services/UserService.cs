@@ -37,7 +37,7 @@ namespace SoftwareKobo.U148.Services
             string json;
             using (HttpClient client = new HttpClient())
             {
-                using (IHttpContent httpContent = new HttpFormUrlEncodedContent(null))
+                using (IHttpContent httpContent = new HttpFormUrlEncodedContent(postData))
                 {
                     HttpResponseMessage response = await client.PostAsync(new Uri(LOGIN_TEMPLATE), httpContent);
                     json = await response.Content.ReadAsStringAsync();

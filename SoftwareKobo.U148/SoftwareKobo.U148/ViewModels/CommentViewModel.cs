@@ -1,4 +1,6 @@
-﻿using SoftwareKobo.U148.DataModels;
+﻿using SoftwareKobo.U148.Controls;
+using SoftwareKobo.U148.DataModels;
+using SoftwareKobo.U148.Datas;
 using SoftwareKobo.U148.Models;
 using SoftwareKobo.U148.Services;
 using SoftwareKobo.UniversalToolkit.Mvvm;
@@ -34,13 +36,55 @@ namespace SoftwareKobo.U148.ViewModels
             }
         }
 
+        private DelegateCommand<CommentItemReviewEventArgs> _commentReviewCommand;
+
+        public DelegateCommand<CommentItemReviewEventArgs> CommentReviewCommand
+        {
+            get
+            {
+                if (this._commentReviewCommand == null)
+                {
+                    this._commentReviewCommand = new DelegateCommand<CommentItemReviewEventArgs>(args =>
+                    {
+                        this.SendComment(args.Content, args.Comment);
+                    });
+                }
+                return this._commentReviewCommand;
+            }
+        }
+
+        private Feed _feed;
+
         protected override void ReceiveFromView(dynamic parameter)
         {
             Feed feed = parameter as Feed;
             if (feed != null)
             {
-                this.Comments = new CommentCollection(this._service, feed);
+                this._feed = feed;
+                this.Comments = new CommentCollection(this._service, this._feed);
             }
+        }
+
+        public bool IsLogined
+        {
+            get
+            {
+                return AppSettings.Instance.UserInfo != null;
+            }
+        }
+
+        private async void SendComment(string content, Comment comment = null)
+        {
+            return;
+            this.SendToView("sending");
+
+            SendCommentResult result = await _service.SendCommentAsync(this._feed, (UserInfo)AppSettings.Instance.UserInfo, content, AppSettings.Instance.SimulateDevice, comment);
+            if (result.Code == 0)
+            {
+
+            }
+
+            this.SendToView("sended");
         }
     }
 }

@@ -16,8 +16,13 @@
     <UserControl.Resources>
         <localConv:HtmlToTextConverter x:Key="HtmlToTextConverter" />
         <conv:StringFormatConverter x:Key="TimeFormatConverter" />
+        <conv:StringFormatConverter x:Key="ReviewPlaceholderTextConverter" />
+        <conv:BooleanToVisibilityConverter x:Key="ReviewVisibilityConverter" />
+        <localConv:IsNullOrEmptyConverter x:Key="ReviewButtonEnabledConverter"
+                                          IsInversed="True" />
     </UserControl.Resources>
-    <Grid Padding="10">
+    <Grid Padding="10"
+          Background="Transparent">
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup>
                 <VisualState x:Name="narrow">
@@ -67,6 +72,18 @@
             <TextBlock Text="{Binding Path=Contents,Converter={StaticResource ResourceKey=HtmlToTextConverter}}"
                        Margin="0,5,0,0"
                        TextWrapping="Wrap" />
+            <StackPanel x:Name="reviewRect"
+                        Visibility="Collapsed">
+                <TextBox x:Name="txtReview"
+                         Margin="0,5,0,0"
+                         AcceptsReturn="True"
+                         TextWrapping="Wrap" PlaceholderText="{Binding Path=User.NickName,Converter={StaticResource ReviewPlaceholderTextConverter},ConverterParameter='{}回复：{0}'}"></TextBox>
+                <Button x:Name="btnReview"
+                        IsEnabled="{Binding ElementName=txtReview,Path=Text,Converter={StaticResource ReviewButtonEnabledConverter}}"
+                        HorizontalAlignment="Right"
+                        Content="回复"
+                        Click="BtnReview_Click" />
+            </StackPanel>
         </StackPanel>
     </Grid>
 </UserControl>

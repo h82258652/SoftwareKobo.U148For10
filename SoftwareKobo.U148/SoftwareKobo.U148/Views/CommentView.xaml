@@ -6,6 +6,9 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:dataModels="using:SoftwareKobo.U148.DataModels"
       xmlns:controls="using:SoftwareKobo.U148.Controls"
+      xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
+      xmlns:core="using:Microsoft.Xaml.Interactions.Core"
+      x:Name="page"
       mc:Ignorable="d"
       DataContext="{Binding Source={StaticResource Locator},Path=Comment}">
     <Page.Transitions>
@@ -13,6 +16,36 @@
             <PaneThemeTransition Edge="Bottom" />
         </TransitionCollection>
     </Page.Transitions>
+    <Page.BottomAppBar>
+        <CommandBar>
+            <AppBarButton Icon="LeaveChat"
+                          Label="写评论">
+                <AppBarButton.Flyout>
+                    <Flyout Placement="Full">
+                        <Flyout.FlyoutPresenterStyle>
+                            <Style TargetType="FlyoutPresenter">
+                                <Setter Property="MaxHeight"
+                                        Value="300" />
+                            </Style>
+                        </Flyout.FlyoutPresenterStyle>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <TextBox AcceptsReturn="True"
+                                     TextWrapping="Wrap"></TextBox>
+                            <Button Content="发送"
+                                    Grid.Row="1"
+                                    Margin="0,12,0,0"
+                                    HorizontalAlignment="Center"
+                                    Width="100"></Button>
+                        </Grid>
+                    </Flyout>
+                </AppBarButton.Flyout>
+            </AppBarButton>
+        </CommandBar>
+    </Page.BottomAppBar>
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <ListView ItemsSource="{Binding Path=Comments}"
                   SelectionMode="None"
@@ -20,7 +53,13 @@
                   Background="#F0F0F0">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <controls:CommentItem />
+                    <controls:CommentItem>
+                        <interactivity:Interaction.Behaviors>
+                            <core:EventTriggerBehavior EventName="Review">
+                                <core:InvokeCommandAction Command="{Binding ElementName=page,Path=DataContext.CommentReviewCommand}" />
+                            </core:EventTriggerBehavior>
+                        </interactivity:Interaction.Behaviors>
+                    </controls:CommentItem>
                 </DataTemplate>
             </ListView.ItemTemplate>
             <ListView.ItemContainerStyle>

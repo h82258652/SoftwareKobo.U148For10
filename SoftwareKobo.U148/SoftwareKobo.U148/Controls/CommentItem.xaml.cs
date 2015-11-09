@@ -1,19 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
+﻿using SoftwareKobo.U148.Datas;
+using SoftwareKobo.U148.Models;
+using System;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Navigation;
-
-// The User Control item template is documented at http://go.microsoft.com/fwlink/?LinkId=234236
 
 namespace SoftwareKobo.U148.Controls
 {
@@ -22,11 +12,44 @@ namespace SoftwareKobo.U148.Controls
         public CommentItem()
         {
             this.InitializeComponent();
+            this.PointerReleased += CommentItem_PointerReleased;
         }
 
-        private void icon_ImageFailed(object sender, ExceptionRoutedEventArgs e)
-        {
+        public event EventHandler<CommentItemReviewEventArgs> Review;
 
+        public Comment Comment
+        {
+            get
+            {
+                return (Comment)this.DataContext;
+            }
+        }
+
+        private void BtnReview_Click(object sender, RoutedEventArgs e)
+        {
+            if (this.Comment == null || string.IsNullOrEmpty(txtReview.Text))
+            {
+                return;
+            }
+            if (this.Review != null)
+            {
+                this.Review(this, new CommentItemReviewEventArgs(this.Comment, txtReview.Text));
+            }
+        }
+
+        private void CommentItem_PointerReleased(object sender, PointerRoutedEventArgs e)
+        {
+            if (AppSettings.Instance.UserInfo != null)
+            {
+                if (reviewRect.Visibility == Visibility.Visible)
+                {
+                    reviewRect.Visibility = Visibility.Collapsed;
+                }
+                else
+                {
+                    reviewRect.Visibility = Visibility.Visible;
+                }
+            }
         }
     }
 }

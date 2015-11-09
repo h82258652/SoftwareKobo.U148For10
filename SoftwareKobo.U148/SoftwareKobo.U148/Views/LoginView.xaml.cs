@@ -1,42 +1,46 @@
-﻿using SoftwareKobo.UniversalToolkit.Mvvm;
+﻿using SoftwareKobo.U148.Datas;
+using SoftwareKobo.UniversalToolkit.Helpers;
+using SoftwareKobo.UniversalToolkit.Mvvm;
 using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
+using System.Threading.Tasks;
+using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
-
-using SoftwareKobo.UniversalToolkit.Helpers;
-
-// “空白页”项模板在 http://go.microsoft.com/fwlink/?LinkId=234238 上提供
 
 namespace SoftwareKobo.U148.Views
 {
-    /// <summary>
-    /// 可用于自身或导航至 Frame 内部的空白页。
-    /// </summary>
-    public sealed partial class LoginView : Page,IView
+    public sealed partial class LoginView : Page, IView
     {
+        private bool _isLogining;
+
+        private TaskCompletionSource<Tuple<string, bool, string>> _loginTcs;
+
         public LoginView()
         {
             this.InitializeComponent();
         }
 
-        protected override void OnNavigatedTo(NavigationEventArgs e)
+        private bool IsLogining
         {
-            base.OnNavigatedTo(e);
+            get
+            {
+                return this._isLogining;
+            }
+            set
+            {
+                this._isLogining = value;
+                this.loginingMask.Visibility = value ? Visibility.Visible : Visibility.Collapsed;
+            }
+        }
 
-            Messenger.Register(this);
-
-            this.Frame.RegisterNavigateBack();
+        public void ReceiveFromViewModel(dynamic parameter)
+        {
+            Tuple<string, bool, string> package = parameter as Tuple<string, bool, string>;
+            if (package != null && package.Item1 == "loginFinish" && this._loginTcs != null)
+            {
+                this._loginTcs.SetResult(package);
+            }
         }
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)
@@ -48,8 +52,52 @@ namespace SoftwareKobo.U148.Views
             this.Frame.UnregisterNavigateBack();
         }
 
-        public void ReceiveFromViewModel(dynamic parameter)
+        protected override void OnNavigatedTo(NavigationEventArgs e)
         {
+            base.OnNavigatedTo(e);
+
+            Messenger.Register(this);
+
+            this.Frame.RegisterNavigateBack(() =>
+            {
+                this.GoBack();
+            });
+        }
+
+        private async void BtnLogin_Click(object sender, RoutedEventArgs e)
+        {
+            this.IsLogining = true;
+            this._loginTcs = new TaskCompletionSource<Tuple<string, bool, string>>();
+            this.SendToViewModel(Tuple.Create<string, string>("login", null));
+            var result = await _loginTcs.Task;
+            if (result.Item2)
+            {
+                await new MessageDialog("登录成功").ShowAsync();
+                this.IsLogining = false;
+                this.GoBack();
+            }
+            else
+            {
+                await new MessageDialog(result.Item3).ShowAsync();
+                this.IsLogining = false;
+            }
+        }
+
+        private void GoBack()
+        {
+            if (this.Frame.CanGoBack && this._isLogining == false)
+            {
+                this.Frame.GoBack();
+            }
+        }
+
+        private void PasswordBox_PasswordChanged(object sender, RoutedEventArgs e)
+        {
+            PasswordBox passwordBox = sender as PasswordBox;
+            if (passwordBox != null)
+            {
+                this.SendToViewModel(Tuple.Create("password", passwordBox.Password));
+            }
         }
     }
 }

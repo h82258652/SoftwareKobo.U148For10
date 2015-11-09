@@ -20,6 +20,9 @@
     <Page.Resources>
         <conv:ItemClickEventArgsConverter x:Key="ItemClickEventArgsConverter" />
         <localConv:FeedCategoryNameConverter x:Key="FeedCategoryNameConverter" />
+        <conv:BooleanToVisibilityConverter x:Key="IsLoginedConverter" />
+        <conv:BooleanToVisibilityConverter x:Key="IsNotLoginedConverter"
+                                           IsInversed="True" />
     </Page.Resources>
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <VisualStateManager.VisualStateGroups>
@@ -93,10 +96,18 @@
                             </Grid.RowDefinitions>
                             <StackPanel Grid.Row="0"
                                         Orientation="Vertical">
-                                <controls:CircleImage></controls:CircleImage>
+                                <controls:CircleImage Source="{Binding Path=UserInfo.Icon}"
+                                                      Height="72"
+                                                      Width="72"
+                                                      Visibility="{Binding Path=IsLogined,Converter={StaticResource IsLoginedConverter}}" />
+                                <TextBlock TextAlignment="Center"
+                                           Text="{Binding Path=UserInfo.NickName}"
+                                           Foreground="#005737"
+                                           Visibility="{Binding Path=IsLogined,Converter={StaticResource IsLoginedConverter}}" />
                                 <controls:HamburgerItem Foreground="WhiteSmoke"
                                                         Text="登录"
-                                                        Icon="Contact">
+                                                        Icon="Contact"
+                                                        Visibility="{Binding Path=IsLogined,Converter={StaticResource IsNotLoginedConverter}}">
                                     <interactivity:Interaction.Behaviors>
                                         <core:EventTriggerBehavior EventName="Click">
                                             <core:ChangePropertyAction TargetObject="{Binding ElementName=menu}"
@@ -107,11 +118,26 @@
                                     </interactivity:Interaction.Behaviors>
                                 </controls:HamburgerItem>
                                 <controls:HamburgerItem Foreground="WhiteSmoke"
-                                                        Text="收藏">
+                                                        Text="收藏"
+                                                        Visibility="{Binding Path=IsLogined,Converter={StaticResource IsLoginedConverter}}">
                                     <controls:HamburgerItem.Icon>
                                         <FontIcon FontFamily="Segoe MDL2 Assets"
-                                                  Glyph="&#xEB51;"></FontIcon>
+                                                  Glyph="&#xEB51;" />
                                     </controls:HamburgerItem.Icon>
+                                </controls:HamburgerItem>
+                                <controls:HamburgerItem Foreground="WhiteSmoke"
+                                                        Text="登出"
+                                                        Visibility="{Binding Path=IsLogined,Converter={StaticResource IsLoginedConverter}}">
+                                    <controls:HamburgerItem.Icon>
+                                        <FontIcon FontFamily="Segoe MDL2 Assets"
+                                                  Glyph="&#xE8DE;" />
+                                    </controls:HamburgerItem.Icon>
+                                    <interactivity:Interaction.Behaviors>
+                                        <core:EventTriggerBehavior EventName="Click">
+                                            <core:ChangePropertyAction TargetObject="{Binding ElementName=menu}" PropertyName="IsPaneOpen" Value="False"/>
+                                            <core:InvokeCommandAction Command="{Binding Path=LogoutCommand}"/>
+                                        </core:EventTriggerBehavior>
+                                    </interactivity:Interaction.Behaviors>
                                 </controls:HamburgerItem>
                             </StackPanel>
                             <StackPanel Grid.Row="2"

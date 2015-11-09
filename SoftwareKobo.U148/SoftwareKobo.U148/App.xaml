@@ -7,7 +7,7 @@
                       RequestedTheme="Light">
     <toolkit:Bootstrapper.Resources>
         <ResourceDictionary>
-            <vm:ViewModelLocator x:Key="Locator" />
+            <vm:ViewModelLocator x:Key="Locator" />            
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="/Styles/AppStyle.xaml" />
             </ResourceDictionary.MergedDictionaries>

@@ -27,7 +27,7 @@ namespace SoftwareKobo.U148.Views
         {
             if (parameter is Feed)
             {
-                if (AppSettings.ShowDetailInNewWindow == false)
+                if (AppSettings.Instance.ShowDetailInNewWindow == false)
                 {
                     this.Frame.Navigate(typeof(DetailView), parameter);
                 }
@@ -50,6 +50,8 @@ namespace SoftwareKobo.U148.Views
             base.OnNavigatedTo(e);
 
             Messenger.Register(this);
+
+            this.SendToViewModel("navigated");
         }
 
         private void Canvas_CreateResources(CanvasControl sender, CanvasCreateResourcesEventArgs args)

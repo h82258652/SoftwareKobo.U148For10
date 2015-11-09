@@ -9,11 +9,11 @@ namespace SoftwareKobo.U148.ViewModels
         {
             get
             {
-                return AppSettings.ShowDetailInNewWindow;
+                return AppSettings.Instance.ShowDetailInNewWindow;
             }
             set
             {
-                AppSettings.ShowDetailInNewWindow = value;
+                AppSettings.Instance.ShowDetailInNewWindow = value;
                 this.RaisePropertyChanged(nameof(ShowDetailInNewWindow));
             }
         }
