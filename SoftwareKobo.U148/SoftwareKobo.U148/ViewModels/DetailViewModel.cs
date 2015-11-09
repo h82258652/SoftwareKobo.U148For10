@@ -59,10 +59,16 @@ namespace SoftwareKobo.U148.ViewModels
 
         private async void LoadArticleAsync(Feed feed)
         {
-            ResultBase<Article> result = await this._service.GetArticleAsync(feed);
-            if (result.Code == 0)
+            try
             {
-                this.Article = result.Data;
+                ResultBase<Article> result = await this._service.GetArticleAsync(feed);
+                if (result.Code == 0)
+                {
+                    this.Article = result.Data;
+                }
+            }
+            catch
+            {
             }
         }
     }

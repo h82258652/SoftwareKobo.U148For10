@@ -11,6 +11,7 @@ namespace SoftwareKobo.U148.Views
         public DetailView()
         {
             this.InitializeComponent();
+            this.NavigationCacheMode = NavigationCacheMode.Required;
         }
 
         public void ReceiveFromViewModel(dynamic parameter)

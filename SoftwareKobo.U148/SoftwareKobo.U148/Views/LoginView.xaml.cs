@@ -85,7 +85,7 @@ namespace SoftwareKobo.U148.Views
 
         private void GoBack()
         {
-            if (this.Frame.CanGoBack && this._isLogining == false)
+            if (this.Frame.CanGoBack && this.IsLogining == false)
             {
                 this.Frame.GoBack();
             }

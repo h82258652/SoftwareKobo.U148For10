@@ -27,6 +27,7 @@ namespace SoftwareKobo.U148.Controls
 
         private void BtnReview_Click(object sender, RoutedEventArgs e)
         {
+            reviewRect.Visibility = Visibility.Collapsed;
             if (this.Comment == null || string.IsNullOrEmpty(txtReview.Text))
             {
                 return;

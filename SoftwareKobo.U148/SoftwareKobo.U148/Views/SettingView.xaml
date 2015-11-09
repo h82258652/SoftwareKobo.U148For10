@@ -14,7 +14,12 @@
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <StackPanel Orientation="Vertical">
             <ToggleSwitch Header="在新窗口打开内容"
-                          IsOn="{Binding Path=ShowDetailInNewWindow,Mode=TwoWay}"></ToggleSwitch>
+                          IsOn="{Binding Path=ShowDetailInNewWindow,Mode=TwoWay}"
+                          Margin="10,10,10,0" />
+            <ComboBox Margin="10,10,10,0"
+                      Header="模拟设备"
+                      ItemsSource="{Binding Path=SimulateDevices}"
+                      SelectedItem="{Binding Path=SimulateDevice,Mode=TwoWay}" />
             <Button HorizontalAlignment="Stretch"
                     Content="当前缓存(xxx.xxKB)"></Button>
             <Button HorizontalAlignment="Stretch"

@@ -26,6 +26,7 @@ namespace SoftwareKobo.U148.Services
             }
 
             string url = string.Format(GET_COMMENT_TEMPLATE, feed.Id, page);
+            url = url + "?t=" + DateTime.Now.Ticks;
             using (HttpClient client = new HttpClient())
             {
                 return await client.GetJsonAsync<ResultBase<ResultList<Comment>>>(new Uri(url));

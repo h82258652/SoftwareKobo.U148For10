@@ -5,6 +5,7 @@ using SoftwareKobo.U148.Models;
 using SoftwareKobo.U148.Services;
 using SoftwareKobo.UniversalToolkit.Mvvm;
 using System;
+using System.Diagnostics;
 
 namespace SoftwareKobo.U148.ViewModels
 {
@@ -33,6 +34,40 @@ namespace SoftwareKobo.U148.ViewModels
             private set
             {
                 this.Set(ref this._comments, value);
+            }
+        }
+
+        private DelegateCommand<string> _sendCommentCommand;
+
+        public DelegateCommand<string> SendCommentCommand
+        {
+            get
+            {
+                if (this._sendCommentCommand == null)
+                {
+                    this._sendCommentCommand = new DelegateCommand<string>(query =>
+                    {
+                        this.SendComment(query);
+                    });
+                }
+                return this._sendCommentCommand;
+            }
+        }
+
+        private DelegateCommand _refreshCommand;
+
+        public DelegateCommand RefreshCommand
+        {
+            get
+            {
+                if (this._refreshCommand == null)
+                {
+                    this._refreshCommand = new DelegateCommand(() =>
+                    {
+                        this.Comments.Refresh();
+                    });
+                }
+                return this._refreshCommand;
             }
         }
 
@@ -75,16 +110,30 @@ namespace SoftwareKobo.U148.ViewModels
 
         private async void SendComment(string content, Comment comment = null)
         {
-            return;
-            this.SendToView("sending");
+            Tuple<string, string> sending = Tuple.Create<string, string>("sending", null);
+            this.SendToView(sending);
 
-            SendCommentResult result = await _service.SendCommentAsync(this._feed, (UserInfo)AppSettings.Instance.UserInfo, content, AppSettings.Instance.SimulateDevice, comment);
-            if (result.Code == 0)
+            string message;
+            try
             {
-
+                SendCommentResult result = await this._service.SendCommentAsync(this._feed, (UserInfo)AppSettings.Instance.UserInfo, content, AppSettings.Instance.SimulateDevice, comment);
+                if (result.Code == 0)
+                {
+                    message = "发送成功！";
+                    this.Comments.Refresh();
+                }
+                else
+                {
+                    message = result.Message;
+                }
+            }
+            catch
+            {
+                message = "网络连接失败！";
             }
 
-            this.SendToView("sended");
+            Tuple<string, string> sended = Tuple.Create<string, string>("sended", message);
+            this.SendToView(sended);
         }
     }
 }

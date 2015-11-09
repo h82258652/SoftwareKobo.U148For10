@@ -83,5 +83,13 @@ namespace SoftwareKobo.U148.Views
                 this.canvas = null;
             }
         }
+
+        private void AutoSuggestBox_QuerySubmitted(AutoSuggestBox sender, AutoSuggestBoxQuerySubmittedEventArgs args)
+        {
+            if (string.IsNullOrEmpty(args.QueryText) == false)
+            {
+                this.Frame.Navigate(typeof(SearchView));
+            }
+        }
     }
 }

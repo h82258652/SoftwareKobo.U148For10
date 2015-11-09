@@ -13,6 +13,7 @@ namespace SoftwareKobo.U148.ViewModels
 
             this.Register<IFeedService, FeedService>();
             this.Register<ICommentService, CommentService>();
+            this.Register<ISearchService, SearchService>();
             this.Register<IUserService, UserService>();
 
             #endregion 注册服务。
@@ -24,6 +25,7 @@ namespace SoftwareKobo.U148.ViewModels
             this.Register<CommentViewModel>();
             this.Register<SettingViewModel>();
             this.Register<LoginViewModel>();
+            this.Register<SearchViewModel>();
 
             #endregion 注册 ViewModel。
 
@@ -78,11 +80,11 @@ namespace SoftwareKobo.U148.ViewModels
             }
         }
 
-        public ICommentService CommentService
+        public SearchViewModel Search
         {
             get
             {
-                return this.GetInstance<CommentService>();
+                return this.GetInstance<SearchViewModel>();
             }
         }
     }

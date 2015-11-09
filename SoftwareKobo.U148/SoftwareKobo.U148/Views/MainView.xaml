@@ -74,7 +74,8 @@
                             PlaceholderText="搜索"
                             Width="250"
                             QueryIcon="Find"
-                            Margin="0,0,8,0"></AutoSuggestBox>
+                            Margin="0,0,8,0"
+                            QuerySubmitted="AutoSuggestBox_QuerySubmitted"></AutoSuggestBox>
         </Grid>
         <SplitView x:Name="menu"
                    Grid.Row="1">
@@ -134,8 +135,10 @@
                                     </controls:HamburgerItem.Icon>
                                     <interactivity:Interaction.Behaviors>
                                         <core:EventTriggerBehavior EventName="Click">
-                                            <core:ChangePropertyAction TargetObject="{Binding ElementName=menu}" PropertyName="IsPaneOpen" Value="False"/>
-                                            <core:InvokeCommandAction Command="{Binding Path=LogoutCommand}"/>
+                                            <core:ChangePropertyAction TargetObject="{Binding ElementName=menu}"
+                                                                       PropertyName="IsPaneOpen"
+                                                                       Value="False" />
+                                            <core:InvokeCommandAction Command="{Binding Path=LogoutCommand}" />
                                         </core:EventTriggerBehavior>
                                     </interactivity:Interaction.Behaviors>
                                 </controls:HamburgerItem>
