@@ -7,6 +7,7 @@
       xmlns:controls="using:SoftwareKobo.UniversalToolkit.Controls"
       xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
       xmlns:core="using:Microsoft.Xaml.Interactions.Core"
+      xmlns:conv="using:SoftwareKobo.UniversalToolkit.Converters"
       mc:Ignorable="d"
       DataContext="{Binding Source={StaticResource Locator},Path=Login}">
     <Page.Transitions>
@@ -14,6 +15,9 @@
             <PaneThemeTransition Edge="Bottom" />
         </TransitionCollection>
     </Page.Transitions>
+    <Page.Resources>
+        <conv:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+    </Page.Resources>
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Grid Background="#E5E5E5">
             <StackPanel Orientation="Vertical"
@@ -37,7 +41,7 @@
                     <Rectangle Height="1"
                                Fill="Gray" />
                     <TextBlock Foreground="Red"
-                               Text="{Binding Path=Errors[Email]}"></TextBlock>
+                               Text="{Binding Path=Errors[Email]}" />
                 </StackPanel>
                 <StackPanel Orientation="Vertical">
                     <Grid Margin="0,10,0,0">
@@ -53,7 +57,7 @@
                                       PlaceholderText="密码"
                                       BorderThickness="0"
                                       VerticalAlignment="Center"
-                                      PasswordChanged="PasswordBox_PasswordChanged"></PasswordBox>
+                                      Password="{Binding Path=Password,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
                     </Grid>
                     <Rectangle Height="1"
                                Fill="Gray" />
@@ -72,13 +76,13 @@
                 <AppBarButton HorizontalAlignment="Center"
                               Label="登录"
                               Icon="Accept"
-                              IsEnabled="{Binding Path=Info.IsValid}"
-                              Click="BtnLogin_Click" />
+                              IsEnabled="{Binding Path=IsValid}"
+                              Command="{Binding Path=LoginCommand}" />
             </Grid>
         </Grid>
         <Grid x:Name="loginingMask"
               Background="#80000000"
-              Visibility="Collapsed">
+              Visibility="{Binding Path=IsLogining,Converter={StaticResource BooleanToVisibilityConverter}}">
             <StackPanel VerticalAlignment="Center">
                 <TextBlock Text="正在登录"
                            TextAlignment="Center"
