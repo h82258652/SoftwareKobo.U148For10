@@ -1,4 +1,5 @@
-﻿using SoftwareKobo.U148.Models;
+﻿using SoftwareKobo.U148.Extensions;
+using SoftwareKobo.U148.Models;
 using SoftwareKobo.UniversalToolkit.Helpers;
 using SoftwareKobo.UniversalToolkit.Mvvm;
 using Windows.UI.Xaml.Controls;
@@ -14,8 +15,15 @@ namespace SoftwareKobo.U148.Views
             this.NavigationCacheMode = NavigationCacheMode.Required;
         }
 
-        public void ReceiveFromViewModel(dynamic parameter)
+        public async void ReceiveFromViewModel(dynamic parameter)
         {
+            Article article = parameter as Article;
+            if (article != null)
+            {
+                webView.Navigate(new System.Uri("ms-appx-web:///Web/Views/app.html"));
+                await webView.WaitForDOMContentLoadedAsync();
+                await webView.SetContentAsync(article.Content);
+            }
         }
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)

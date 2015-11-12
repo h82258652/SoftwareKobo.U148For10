@@ -4,7 +4,7 @@
       xmlns:local="using:SoftwareKobo.U148.Views"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-      xmlns:extensions="using:SoftwareKobo.UniversalToolkit.Extensions"
+      xmlns:extensions="using:SoftwareKobo.U148.Extensions"
       xmlns:localConv="using:SoftwareKobo.U148.Converters"
       xmlns:controls="using:SoftwareKobo.UniversalToolkit.Controls"
       xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
@@ -20,6 +20,7 @@
     </Page.Transitions>
     <Page.Resources>
         <localConv:CommentReviewCountConverter x:Key="CommentReviewCountConverter" />
+        <localConv:DetailHtmlConverter x:Key="DetailHtmlConverter" />
     </Page.Resources>
     <Page.BottomAppBar>
         <CommandBar>
@@ -48,7 +49,6 @@
         </CommandBar>
     </Page.BottomAppBar>
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <WebView x:Name="v"
-                 extensions:WebViewExtensions.Html="{Binding Path=Article.Content}"></WebView>
+        <WebView x:Name="webView"></WebView>
     </Grid>
 </Page>

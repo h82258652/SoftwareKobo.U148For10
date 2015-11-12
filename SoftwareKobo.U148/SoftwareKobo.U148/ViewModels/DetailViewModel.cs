@@ -13,6 +13,20 @@ namespace SoftwareKobo.U148.ViewModels
 
         private Feed _feed;
 
+        private bool _isLoading;
+
+        public bool IsLoading
+        {
+            get
+            {
+                return this._isLoading;
+            }
+            set
+            {
+                this.Set(ref this._isLoading, value);
+            }
+        }
+
         public DetailViewModel(IFeedService service)
         {
             if (service == null)
@@ -59,17 +73,20 @@ namespace SoftwareKobo.U148.ViewModels
 
         private async void LoadArticleAsync(Feed feed)
         {
+            this.IsLoading = true;
             try
             {
                 ResultBase<Article> result = await this._service.GetArticleAsync(feed);
                 if (result.Code == 0)
                 {
                     this.Article = result.Data;
+                    this.SendToView(this.Article);
                 }
             }
             catch
             {
             }
+            this.IsLoading = false;
         }
     }
 }

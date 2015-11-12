@@ -109,6 +109,7 @@
     </Compile>
     <Compile Include="Controls\ItemClickEventHandler.cs" />
     <Compile Include="Converters\CommentReviewCountConverter.cs" />
+    <Compile Include="Converters\DetailHtmlConverter.cs" />
     <Compile Include="Converters\FeedCategoryNameConverter.cs" />
     <Compile Include="Converters\HtmlToTextConverter.cs" />
     <Compile Include="Converters\IsNullOrEmptyConverter.cs" />
@@ -118,6 +119,7 @@
     <Compile Include="DataSources\CommentSource.cs" />
     <Compile Include="DataSources\FeedSource.cs" />
     <Compile Include="Datas\AppSettings.cs" />
+    <Compile Include="Extensions\WebViewExtensions.cs" />
     <Compile Include="Models\Article.cs" />
     <Compile Include="Models\Comment.cs" />
     <Compile Include="Models\CommentUser.cs" />
@@ -185,6 +187,9 @@
     <Content Include="Assets\Square44x44Logo.targetsize-24_altform-unplated.png" />
     <Content Include="Assets\StoreLogo.png" />
     <Content Include="Assets\Wide310x150Logo.scale-200.png" />
+    <Content Include="Web\Content\app.css" />
+    <Content Include="Web\Scripts\app.js" />
+    <Content Include="Web\Views\app.html" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
