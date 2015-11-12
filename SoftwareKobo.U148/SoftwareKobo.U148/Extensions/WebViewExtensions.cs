@@ -7,9 +7,9 @@ namespace SoftwareKobo.U148.Extensions
 {
     public static class WebViewExtensions
     {
-        public static async Task SetContentAsync(this WebView webView, string content)
+        public static async Task<string> InvokeScriptAsync(this WebView webView, string scriptName, params string[] arguments)
         {
-            await webView.InvokeScriptAsync("setContent", new string[] { content });
+            return await webView.InvokeScriptAsync(scriptName, arguments);
         }
 
         public static Task WaitForDOMContentLoadedAsync(this WebView webView)

@@ -22,7 +22,7 @@ namespace SoftwareKobo.U148.Views
             {
                 webView.Navigate(new System.Uri("ms-appx-web:///Web/Views/app.html"));
                 await webView.WaitForDOMContentLoadedAsync();
-                await webView.SetContentAsync(article.Content);
+                await webView.InvokeScriptAsync("setContent", article.Content);
             }
         }
 
