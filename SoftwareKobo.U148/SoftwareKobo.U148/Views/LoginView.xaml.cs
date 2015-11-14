@@ -1,9 +1,13 @@
 ﻿using SoftwareKobo.UniversalToolkit.Helpers;
 using SoftwareKobo.UniversalToolkit.Mvvm;
 using System;
+using Windows.System;
 using Windows.UI.Popups;
 using Windows.UI.Xaml;
+using Windows.UI.Xaml.Automation.Peers;
+using Windows.UI.Xaml.Automation.Provider;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Navigation;
 
 namespace SoftwareKobo.U148.Views
@@ -61,6 +65,28 @@ namespace SoftwareKobo.U148.Views
             if (this.Frame.CanGoBack && this.loginingMask.Visibility != Visibility.Visible)
             {
                 this.Frame.GoBack();
+            }
+        }
+
+        private void TxtEmail_KeyDown(object sender, KeyRoutedEventArgs e)
+        {
+            if (e.Key == VirtualKey.Enter)
+            {
+                e.Handled = true;
+                txtPassword.Focus(FocusState.Programmatic);
+            }
+        }
+
+        private void TxtPassword_KeyDown(object sender, KeyRoutedEventArgs e)
+        {
+            if (e.Key == VirtualKey.Enter)
+            {
+                e.Handled = true;
+
+                btnLogin.Focus(FocusState.Programmatic);
+                ButtonAutomationPeer buttonPeer = new ButtonAutomationPeer(btnLogin);
+                IInvokeProvider invokeProvider = buttonPeer.GetPattern(PatternInterface.Invoke) as IInvokeProvider;
+                invokeProvider.Invoke();
             }
         }
     }

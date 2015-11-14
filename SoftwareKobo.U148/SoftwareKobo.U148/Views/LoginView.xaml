@@ -9,7 +9,8 @@
       xmlns:core="using:Microsoft.Xaml.Interactions.Core"
       xmlns:conv="using:SoftwareKobo.UniversalToolkit.Converters"
       mc:Ignorable="d"
-      DataContext="{Binding Source={StaticResource Locator},Path=Login}">
+      DataContext="{Binding Source={StaticResource Locator},Path=Login}"
+      RequestedTheme="{Binding Source={StaticResource Settings},Path=ThemeMode}">
     <Page.Transitions>
         <TransitionCollection>
             <PaneThemeTransition Edge="Bottom" />
@@ -18,8 +19,8 @@
     <Page.Resources>
         <conv:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
     </Page.Resources>
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <Grid Background="#E5E5E5">
+    <Grid Background="{ThemeResource AppBackgroundBrush}">
+        <Grid>
             <StackPanel Orientation="Vertical"
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center"
@@ -32,11 +33,14 @@
                         </Grid.ColumnDefinitions>
                         <SymbolIcon Grid.Column="0"
                                     Symbol="Contact" />
-                        <controls:TextBoxEx Grid.Column="1"
+                        <controls:TextBoxEx x:Name="txtEmail"
+                                            Grid.Column="1"
                                             PlaceholderText="邮箱"
                                             BorderThickness="0"
                                             VerticalAlignment="Center"
-                                            Text="{Binding Path=Email,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
+                                            Text="{Binding Path=Email,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                            InputScope="EmailNameOrAddress"
+                                            KeyDown="TxtEmail_KeyDown" />
                     </Grid>
                     <Rectangle Height="1"
                                Fill="Gray" />
@@ -53,11 +57,14 @@
                                   Glyph="&#xE1F6;"
                                   FontFamily="Segoe MDL2 Assets"
                                   VerticalAlignment="Center" />
-                        <PasswordBox  Grid.Column="1"
-                                      PlaceholderText="密码"
-                                      BorderThickness="0"
-                                      VerticalAlignment="Center"
-                                      Password="{Binding Path=Password,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
+                        <PasswordBox x:Name="txtPassword"
+                                     Grid.Column="1"
+                                     PlaceholderText="密码"
+                                     BorderThickness="0"
+                                     VerticalAlignment="Center"
+                                     Password="{Binding Path=Password,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                     InputScope="Password"
+                                     KeyDown="TxtPassword_KeyDown" />
                     </Grid>
                     <Rectangle Height="1"
                                Fill="Gray" />
@@ -72,8 +79,9 @@
             </StackPanel>
             <Grid HorizontalAlignment="Stretch"
                   VerticalAlignment="Bottom"
-                  Background="Orange">
-                <AppBarButton HorizontalAlignment="Center"
+                  Background="{ThemeResource AccentBrush}">
+                <AppBarButton x:Name="btnLogin"
+                              HorizontalAlignment="Center"
                               Label="登录"
                               Icon="Accept"
                               IsEnabled="{Binding Path=IsValid}"

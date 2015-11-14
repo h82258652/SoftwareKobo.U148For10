@@ -16,6 +16,7 @@
       mc:Ignorable="d"
       x:Name="page"
       DataContext="{Binding Source={StaticResource Locator},Path=Main}"
+      RequestedTheme="{Binding Source={StaticResource Settings},Path=ThemeMode}"
       Unloaded="Page_Unloaded">
     <Page.Resources>
         <conv:ItemClickEventArgsConverter x:Key="ItemClickEventArgsConverter" />
@@ -23,12 +24,18 @@
         <conv:BooleanToVisibilityConverter x:Key="IsLoginedConverter" />
         <conv:BooleanToVisibilityConverter x:Key="IsNotLoginedConverter"
                                            IsInversed="True" />
+        <localConv:SwitchThemeModeVisibilityConverter x:Key="SwitchThemeModeVisibilityConverter" />
     </Page.Resources>
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Grid Background="{ThemeResource AppBackgroundBrush}">
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup>
                 <VisualState x:Name="Snapped">
-                    <VisualState.Setters></VisualState.Setters>
+                    <VisualState.Setters>
+                        <Setter Target="menu.OpenPaneLength"
+                                Value="250" />
+                        <Setter Target="txtSearch.Width"
+                                Value="150" />
+                    </VisualState.Setters>
                     <VisualState.StateTriggers>
                         <AdaptiveTrigger MinWindowWidth="0" />
                     </VisualState.StateTriggers>
@@ -58,7 +65,7 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <Grid Grid.Row="0"
-              Background="Orange">
+              Background="{ThemeResource AccentBrush}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="*" />
@@ -69,13 +76,14 @@
                                         IsChecked="{Binding ElementName=menu,Path=IsPaneOpen,Mode=TwoWay}"
                                         Content="有意思吧" />
             </Border>
-            <AutoSuggestBox Grid.Column="2"
+            <AutoSuggestBox x:Name="txtSearch"
+                            Grid.Column="2"
                             VerticalAlignment="Center"
-                            PlaceholderText="搜索"
                             Width="250"
+                            PlaceholderText="搜索"
                             QueryIcon="Find"
-                            Margin="0,0,8,0"
-                            QuerySubmitted="AutoSuggestBox_QuerySubmitted"></AutoSuggestBox>
+                            Margin="8,0,8,0"
+                            QuerySubmitted="TxtSearch_QuerySubmitted"></AutoSuggestBox>
         </Grid>
         <SplitView x:Name="menu"
                    Grid.Row="1">
@@ -118,14 +126,22 @@
                                         </core:EventTriggerBehavior>
                                     </interactivity:Interaction.Behaviors>
                                 </controls:HamburgerItem>
-                                <controls:HamburgerItem Foreground="WhiteSmoke"
+                                <!--<controls:HamburgerItem Foreground="WhiteSmoke"
                                                         Text="收藏"
                                                         Visibility="{Binding Path=IsLogined,Converter={StaticResource IsLoginedConverter}}">
                                     <controls:HamburgerItem.Icon>
                                         <FontIcon FontFamily="Segoe MDL2 Assets"
                                                   Glyph="&#xEB51;" />
                                     </controls:HamburgerItem.Icon>
-                                </controls:HamburgerItem>
+                                    <interactivity:Interaction.Behaviors>
+                                        <core:EventTriggerBehavior EventName="Click">
+                                            <core:ChangePropertyAction TargetObject="{Binding ElementName=menu}"
+                                                                       PropertyName="IsPaneOpen"
+                                                                       Value="False" />
+                                            <core:NavigateToPageAction TargetPage="SoftwareKobo.U148.Views.FavouriteView" />
+                                        </core:EventTriggerBehavior>
+                                    </interactivity:Interaction.Behaviors>
+                                </controls:HamburgerItem>-->
                                 <controls:HamburgerItem Foreground="WhiteSmoke"
                                                         Text="登出"
                                                         Visibility="{Binding Path=IsLogined,Converter={StaticResource IsLoginedConverter}}">
@@ -156,6 +172,44 @@
                                         </LinearGradientBrush>
                                     </Rectangle.Fill>
                                 </Rectangle>
+                                <controls:HamburgerItem Foreground="WhiteSmoke"
+                                                        Text="日间"
+                                                        Visibility="{Binding Source={StaticResource Settings},Path=ThemeMode,Converter={StaticResource SwitchThemeModeVisibilityConverter},ConverterParameter='SwitchLight'}">
+                                    <controls:HamburgerItem.Icon>
+                                        <PathIcon HorizontalAlignment="Center"
+                                                  VerticalAlignment="Center"
+                                                  Data="M8.90937519073486,17.3831119537354L9.96875,17.4456119537354 11.0281257629395,17.3831119537354 11.0281257629395,18.878734588623 10.7321100234985,19.6183433532715 9.96875,19.9374847412109 9.22882843017578,19.6415481567383 8.90937519073486,18.878734588623 8.90937519073486,17.3831119537354z M14.5168743133545,15.8881130218506L15.2649993896484,17.1962375640869 15.3581247329712,17.9828758239746 14.890625,18.6293601989746 14.1042966842651,18.7227973937988 13.4581260681152,18.2556114196777 12.710000038147,16.9468631744385 14.5168743133545,15.8881130218506z M5.29562473297119,15.7631130218506L7.04062509536743,16.8224868774414 6.23062515258789,18.1306114196777 5.58390617370605,18.5980319976807 4.7975001335144,18.5043601989746 4.330078125,17.8581886291504 4.42374992370605,17.0718612670898 5.29562473297119,15.7631130218506z M16.8843746185303,12.7724914550781L18.2556247711182,13.5824890136719 18.7460155487061,14.2289733886719 18.6293754577637,15.0156126022339 17.9826564788818,15.5060033798218 17.1962509155273,15.3893623352051 15.8256244659424,14.6418647766113 16.8843746185303,12.7724914550781z M3.05312514305115,12.6481151580811L4.05000019073486,14.4549884796143 2.67875003814697,15.2024879455566 1.8924218416214,15.2959251403809 1.24625027179718,14.8287391662598 1.18375015258789,14.0496768951416 1.68187499046326,13.4581146240234 3.05312514305115,12.6481151580811z M17.3206253051758,8.90936756134033L18.9406242370605,8.90936756134033 19.6805458068848,9.20538330078125 20,9.96874237060547 19.7039833068848,10.7086639404297 18.9406242370605,11.0281171798706 17.3831253051758,11.0281171798706 17.4456253051758,10.0937423706055 17.3206253051758,8.90936756134033z M1.05937480926514,8.90936756134033L2.67875003814697,8.90936756134033 2.61687517166138,10.0312423706055 2.67875003814697,10.9656162261963 1.05937480926514,10.9656162261963 0.296015590429306,10.7008514404297 0,9.96874237060547 0.296015590429306,9.22882080078125 1.05937480926514,8.90936756134033z M17.7568740844727,4.54812145233154L18.6912498474121,5.04687118530273 18.7849216461182,5.83327674865723 18.3175010681152,6.4799952507019 16.8843746185303,7.28999423980713 15.8874998092651,5.48312139511108 17.3206253051758,4.67312145233154 17.7568740844727,4.54812145233154z M2.24312520027161,4.48624658584595L2.74125003814697,4.61062145233154 4.17437505722046,5.42062091827393 3.11500024795532,7.22749423980713 1.68187499046326,6.41749477386475 1.23835945129395,5.77101135253906 1.30812525749207,4.98437118530273 2.24312520027161,4.48624658584595z M9.96875,3.73812222480774L12.4241313934326,4.23072910308838 14.423828125,5.57616758346558 15.7692680358887,7.57586336135864 16.2618751525879,10.0312423706055 15.7692680358887,12.4862604141235 14.423828125,14.4857702255249 12.4241313934326,15.8311395645142 9.96875,16.3237361907959 7.51336908340454,15.8311395645142 5.513671875,14.4857702255249 4.16823244094849,12.4862604141235 3.67562508583069,10.0312423706055 4.16823244094849,7.57586336135864 5.513671875,5.57616758346558 7.51336908340454,4.23072910308838 9.96875,3.73812222480774z M14.5793743133545,1.24624907970428L14.6418752670288,1.24624907970428 15.1400003433228,1.3706237077713 15.607421875,2.01710748672485 15.5137500762939,2.80374765396118 14.6418752670288,4.23687171936035 12.8349990844727,3.17749738693237 13.7068748474121,1.80687367916107 14.5793743133545,1.24624907970428z M5.54500007629395,1.18374884128571L6.47937488555908,1.68249845504761 7.28937530517578,3.11499786376953 5.48250007629395,4.11187219619751 4.67249965667725,2.67937302589417 4.55593776702881,1.90023291110992 5.046875,1.30812406539917 5.54500007629395,1.18374884128571z M9.96875,0L10.7086725234985,0.296015501022339 11.0281257629395,1.05937421321869 11.0281257629395,2.74124813079834 9.96875,2.67937302589417 8.90937519073486,2.74124813079834 8.90937519073486,1.05937421321869 9.22882843017578,0.296015501022339 9.96875,0z" />
+                                    </controls:HamburgerItem.Icon>
+                                    <interactivity:Interaction.Behaviors>
+                                        <core:EventTriggerBehavior EventName="Click">
+                                            <core:ChangePropertyAction TargetObject="{Binding ElementName=menu}"
+                                                                       PropertyName="IsPaneOpen"
+                                                                       Value="False" />
+                                            <core:ChangePropertyAction TargetObject="{Binding Source={StaticResource Settings}}"
+                                                                       PropertyName="ThemeMode"
+                                                                       Value="Light" />
+                                        </core:EventTriggerBehavior>
+                                    </interactivity:Interaction.Behaviors>
+                                </controls:HamburgerItem>
+                                <controls:HamburgerItem Foreground="WhiteSmoke"
+                                                        Text="夜间"
+                                                        Visibility="{Binding Source={StaticResource Settings},Path=ThemeMode,Converter={StaticResource SwitchThemeModeVisibilityConverter},ConverterParameter='SwitchDark'}">
+                                    <controls:HamburgerItem.Icon>
+                                        <PathIcon HorizontalAlignment="Center"
+                                                  VerticalAlignment="Center"
+                                                  Data="M6.87499809265137,7.25L7.06249761581421,8.8125 8.43749809265137,9.56250095367432 6.99999761581421,10.1875009536743 6.68749809265137,11.6875 5.62499809265137,10.5625009536743 4.12499904632568,10.75 4.93749856948853,9.37500095367432 4.24999904632568,8.00000095367432 5.74999809265137,8.31250095367432 6.87499809265137,7.25z M2.12499904632568,5.56250047683716L2.24999952316284,6.75000095367432 3.31249904632568,7.31250047683716 2.18749952316284,7.81250047683716 1.99999928474426,9 1.18749976158142,8.12500095367432 0,8.25 0.625,7.18750047683716 0.0625002384185791,6.18750047683716 1.24999940395355,6.37500047683716 2.12499904632568,5.56250047683716z M7.99999761581421,0L8.37499713897705,0 10.3837862014771,0.204101577401161 12.2578086853027,0.789062559604645 15.4374952316284,2.93750023841858 17.5859317779541,6.11718797683716 18.1708927154541,7.99121189117432 18.3749942779541,10.0000009536743 18.1708927154541,12.0087900161743 17.5859317779541,13.8828134536743 15.4374952316284,17.0625 12.2578086853027,19.2109375 10.3837862014771,19.7958984375 8.37499713897705,20 4.75781106948853,19.3359375 1.74999952316284,17.5000019073486 3.70678615570068,17.2395038604736 5.52148294448853,16.623046875 8.57812213897705,14.46875 10.6269502639771,11.330078125 11.1818819046021,9.483154296875 11.3749971389771,7.50000047683716 11.1376914978027,5.32617235183716 10.4609336853027,3.32812523841858 9.39745807647705,1.54101574420929 7.99999761581421,0z" />
+                                    </controls:HamburgerItem.Icon>
+                                    <interactivity:Interaction.Behaviors>
+                                        <core:EventTriggerBehavior EventName="Click">
+                                            <core:ChangePropertyAction TargetObject="{Binding ElementName=menu}"
+                                                                       PropertyName="IsPaneOpen"
+                                                                       Value="False" />
+                                            <core:ChangePropertyAction TargetObject="{Binding Source={StaticResource Settings}}"
+                                                                       PropertyName="ThemeMode"
+                                                                       Value="Dark" />
+                                        </core:EventTriggerBehavior>
+                                    </interactivity:Interaction.Behaviors>
+                                </controls:HamburgerItem>
                                 <controls:HamburgerItem Foreground="WhiteSmoke"
                                                         Text="设置"
                                                         Icon="Setting">
@@ -197,7 +251,7 @@
                     <Pivot x:Name="pivot"
                            Grid.Row="0"
                            ItemsSource="{Binding Path=Categories}"
-                           Background="#E5E5E5">
+                           Background="{ThemeResource AppBackgroundBrush}">
                         <Pivot.HeaderTemplate>
                             <DataTemplate>
                                 <TextBlock Text="{Binding Path=Key,Converter={StaticResource ResourceKey=FeedCategoryNameConverter}}" />

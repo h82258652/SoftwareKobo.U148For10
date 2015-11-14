@@ -17,6 +17,10 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using System.Threading.Tasks;
+using SoftwareKobo.U148.Datas;
+using SoftwareKobo.UniversalToolkit.Helpers;
+using Windows.UI.ViewManagement;
 
 namespace SoftwareKobo.U148
 {
@@ -25,13 +29,22 @@ namespace SoftwareKobo.U148
         public App()
         {
             this.InitializeComponent();
+            this.RequestedTheme = AppSettings.Instance.ThemeMode == ElementTheme.Dark ? ApplicationTheme.Dark : ApplicationTheme.Light;
 
             this.DefaultNavigatePage = typeof(MainView);
 
 #if DEBUG
-            //this.DebugSettings.EnableFrameRateCounter = true;
+            this.DebugSettings.EnableFrameRateCounter = true;
             this.DebugSettings.EnableDisplayMemoryUsage();
 #endif
+        }
+        
+        protected override async Task OnPreStartAsync(IActivatedEventArgs args, AppStartInfo info)
+        {
+            if (StatusBarHelper.IsUseable)
+            {
+                await StatusBar.GetForCurrentView().HideAsync();
+            }
         }
     }
 

@@ -24,8 +24,10 @@ namespace SoftwareKobo.U148.ViewModels
             this.Register<DetailViewModel>();
             this.Register<CommentViewModel>();
             this.Register<SettingViewModel>();
-            this.Register<LoginViewModel>();
             this.Register<SearchViewModel>();
+            this.Register<LoginViewModel>();
+            this.Register<AboutViewModel>();
+            this.Register<FavouriteViewModel>();
 
             #endregion 注册 ViewModel。
 
@@ -64,6 +66,22 @@ namespace SoftwareKobo.U148.ViewModels
             }
         }
 
+        public FavouriteViewModel Favourite
+        {
+            get
+            {
+                return this.GetInstance<FavouriteViewModel>();
+            }
+        }
+
+        public AboutViewModel About
+        {
+            get
+            {
+                return this.GetInstance<AboutViewModel>();
+            }
+        }
+
         public MainViewModel Main
         {
             get
@@ -72,19 +90,19 @@ namespace SoftwareKobo.U148.ViewModels
             }
         }
 
-        public SettingViewModel Setting
-        {
-            get
-            {
-                return this.GetInstance<SettingViewModel>();
-            }
-        }
-
         public SearchViewModel Search
         {
             get
             {
                 return this.GetInstance<SearchViewModel>();
+            }
+        }
+
+        public SettingViewModel Setting
+        {
+            get
+            {
+                return this.GetInstance<SettingViewModel>();
             }
         }
     }

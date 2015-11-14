@@ -12,7 +12,7 @@ namespace SoftwareKobo.U148.Services
 
         private const string ARTICLE_TEMPLATE = "http://api.u148.net/json/article/{0}";
 
-        public async Task<ResultBase<ResultList<Feed>>> GetFeedListAsync(FeedCategory category, int page = 1)
+        public async Task<DataResultBase<ResultList<Feed>>> GetFeedListAsync(FeedCategory category, int page = 1)
         {
             if (Enum.IsDefined(typeof(FeedCategory), category) == false)
             {
@@ -26,11 +26,11 @@ namespace SoftwareKobo.U148.Services
             string url = string.Format(CATEGORY_LIST_TEMPLATE, (int)category, page);
             using (HttpClient client = new HttpClient())
             {
-                return await client.GetJsonAsync<ResultBase<ResultList<Feed>>>(new Uri(url));
+                return await client.GetJsonAsync<DataResultBase<ResultList<Feed>>>(new Uri(url));
             }
         }
 
-        public async Task<ResultBase<Article>> GetArticleAsync(Feed feed)
+        public async Task<DataResultBase<Article>> GetArticleAsync(Feed feed)
         {
             if (feed == null)
             {
@@ -40,7 +40,7 @@ namespace SoftwareKobo.U148.Services
             string url = string.Format(ARTICLE_TEMPLATE, feed.Id);
             using (HttpClient client = new HttpClient())
             {
-                return await client.GetJsonAsync<ResultBase<Article>>(new Uri(url));
+                return await client.GetJsonAsync<DataResultBase<Article>>(new Uri(url));
             }
         }
     }

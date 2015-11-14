@@ -5,7 +5,6 @@ using SoftwareKobo.U148.Models;
 using SoftwareKobo.U148.Services;
 using SoftwareKobo.UniversalToolkit.Mvvm;
 using System;
-using System.Diagnostics;
 
 namespace SoftwareKobo.U148.ViewModels
 {
@@ -13,7 +12,29 @@ namespace SoftwareKobo.U148.ViewModels
     {
         private readonly ICommentService _service;
 
+        private DelegateCommand<CommentItemReviewEventArgs> _commentReviewCommand;
+
+        private bool _isSending;
+
+        public bool IsSending
+        {
+            get
+            {
+                return this._isSending;
+            }
+            set
+            {
+                this.Set(ref this._isSending, value);
+            }
+        }
+
         private CommentCollection _comments;
+
+        private Feed _feed;
+
+        private DelegateCommand _refreshCommand;
+
+        private DelegateCommand<string> _sendCommentCommand;
 
         public CommentViewModel(ICommentService service)
         {
@@ -24,54 +45,6 @@ namespace SoftwareKobo.U148.ViewModels
 
             this._service = service;
         }
-
-        public CommentCollection Comments
-        {
-            get
-            {
-                return _comments;
-            }
-            private set
-            {
-                this.Set(ref this._comments, value);
-            }
-        }
-
-        private DelegateCommand<string> _sendCommentCommand;
-
-        public DelegateCommand<string> SendCommentCommand
-        {
-            get
-            {
-                if (this._sendCommentCommand == null)
-                {
-                    this._sendCommentCommand = new DelegateCommand<string>(query =>
-                    {
-                        this.SendComment(query);
-                    });
-                }
-                return this._sendCommentCommand;
-            }
-        }
-
-        private DelegateCommand _refreshCommand;
-
-        public DelegateCommand RefreshCommand
-        {
-            get
-            {
-                if (this._refreshCommand == null)
-                {
-                    this._refreshCommand = new DelegateCommand(() =>
-                    {
-                        this.Comments.Refresh();
-                    });
-                }
-                return this._refreshCommand;
-            }
-        }
-
-        private DelegateCommand<CommentItemReviewEventArgs> _commentReviewCommand;
 
         public DelegateCommand<CommentItemReviewEventArgs> CommentReviewCommand
         {
@@ -88,15 +61,15 @@ namespace SoftwareKobo.U148.ViewModels
             }
         }
 
-        private Feed _feed;
-
-        protected override void ReceiveFromView(dynamic parameter)
+        public CommentCollection Comments
         {
-            Feed feed = parameter as Feed;
-            if (feed != null)
+            get
             {
-                this._feed = feed;
-                this.Comments = new CommentCollection(this._service, this._feed);
+                return _comments;
+            }
+            private set
+            {
+                this.Set(ref this._comments, value);
             }
         }
 
@@ -108,15 +81,54 @@ namespace SoftwareKobo.U148.ViewModels
             }
         }
 
+        public DelegateCommand RefreshCommand
+        {
+            get
+            {
+                if (this._refreshCommand == null)
+                {
+                    this._refreshCommand = new DelegateCommand(() =>
+                    {
+                        this.Comments.Refresh();
+                    });
+                }
+                return this._refreshCommand;
+            }
+        }
+
+        public DelegateCommand<string> SendCommentCommand
+        {
+            get
+            {
+                if (this._sendCommentCommand == null)
+                {
+                    this._sendCommentCommand = new DelegateCommand<string>(query =>
+                    {
+                        this.SendComment(query);
+                    });
+                }
+                return this._sendCommentCommand;
+            }
+        }
+
+        protected override void ReceiveFromView(dynamic parameter)
+        {
+            Feed feed = parameter as Feed;
+            if (feed != null)
+            {
+                this._feed = feed;
+                this.Comments = new CommentCollection(this._service, this._feed);
+            }
+        }
+
         private async void SendComment(string content, Comment comment = null)
         {
-            Tuple<string, string> sending = Tuple.Create<string, string>("sending", null);
-            this.SendToView(sending);
-
+            this.IsSending = true;
+            
             string message;
             try
             {
-                SendCommentResult result = await this._service.SendCommentAsync(this._feed, (UserInfo)AppSettings.Instance.UserInfo, content, AppSettings.Instance.SimulateDevice, comment);
+                ResultBase result = await this._service.SendCommentAsync(this._feed, (UserInfo)AppSettings.Instance.UserInfo, content, AppSettings.Instance.SimulateDevice, comment);
                 if (result.Code == 0)
                 {
                     message = "发送成功！";
@@ -134,6 +146,8 @@ namespace SoftwareKobo.U148.ViewModels
 
             Tuple<string, string> sended = Tuple.Create<string, string>("sended", message);
             this.SendToView(sended);
+
+            this.IsSending = false;
         }
     }
 }

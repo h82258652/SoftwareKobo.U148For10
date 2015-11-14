@@ -4,10 +4,11 @@
                       xmlns:local="using:SoftwareKobo.U148"
                       xmlns:toolkit="using:SoftwareKobo.UniversalToolkit"
                       xmlns:vm="using:SoftwareKobo.U148.ViewModels"
-                      RequestedTheme="Light">
+                      xmlns:datas="using:SoftwareKobo.U148.Datas">
     <toolkit:Bootstrapper.Resources>
         <ResourceDictionary>
-            <vm:ViewModelLocator x:Key="Locator" />            
+            <vm:ViewModelLocator x:Key="Locator" />
+            <datas:AppSettings x:Key="Settings" />
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="/Styles/AppStyle.xaml" />
             </ResourceDictionary.MergedDictionaries>

@@ -4,11 +4,15 @@ using Microsoft.Graphics.Canvas.UI;
 using Microsoft.Graphics.Canvas.UI.Xaml;
 using SoftwareKobo.U148.Datas;
 using SoftwareKobo.U148.Models;
+using SoftwareKobo.UniversalToolkit.Helpers;
 using SoftwareKobo.UniversalToolkit.Mvvm;
 using System;
 using System.Threading.Tasks;
+using Windows.UI;
+using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
 namespace SoftwareKobo.U148.Views
@@ -84,11 +88,11 @@ namespace SoftwareKobo.U148.Views
             }
         }
 
-        private void AutoSuggestBox_QuerySubmitted(AutoSuggestBox sender, AutoSuggestBoxQuerySubmittedEventArgs args)
+        private void TxtSearch_QuerySubmitted(AutoSuggestBox sender, AutoSuggestBoxQuerySubmittedEventArgs args)
         {
             if (string.IsNullOrEmpty(args.QueryText) == false)
             {
-                this.Frame.Navigate(typeof(SearchView));
+                this.Frame.Navigate(typeof(SearchView), sender.Text);
             }
         }
     }

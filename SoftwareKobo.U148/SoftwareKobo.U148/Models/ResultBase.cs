@@ -3,7 +3,7 @@
 namespace SoftwareKobo.U148.Models
 {
     [JsonObject]
-    public class ResultBase<T>
+    public class ResultBase
     {
         [JsonProperty("code")]
         public int Code
@@ -14,13 +14,6 @@ namespace SoftwareKobo.U148.Models
 
         [JsonProperty("msg")]
         public string Message
-        {
-            get;
-            set;
-        }
-
-        [JsonProperty("data")]
-        public T Data
         {
             get;
             set;

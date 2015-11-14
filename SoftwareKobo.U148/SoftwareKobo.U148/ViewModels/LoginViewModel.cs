@@ -68,9 +68,17 @@ namespace SoftwareKobo.U148.ViewModels
                         bool isSuccess = false;
                         string message = string.Empty;
 
+                        DataResultBase<UserInfo> result = null;
                         try
                         {
-                            ResultBase<UserInfo> result = await this._service.LoginAsync(this.Email, this.Password);
+                            result = await this._service.LoginAsync(this.Email, this.Password);
+                        }
+                        catch
+                        {
+                        }
+
+                        if (result !=null)
+                        {
                             if (result.Code == 0)
                             {
                                 AppSettings.Instance.UserInfo = result.Data;
@@ -84,12 +92,12 @@ namespace SoftwareKobo.U148.ViewModels
                                 message = result.Message;
                             }
                         }
-                        catch
+                        else
                         {
                             isSuccess = false;
-                            message = "网络连接失败。";
+                            message = "网络连接失败";
                         }
-
+                        
                         Tuple<string, bool, string> package = Tuple.Create("loginFinish", isSuccess, message);
                         this.SendToView(package);
 

@@ -38,7 +38,7 @@ namespace SoftwareKobo.U148.DataSources
             {
                 // 读取下一页数据。
                 int nextPage = this._currentPage + 1;
-                ResultBase<ResultList<Feed>> result = await this._service.GetFeedListAsync(this._category, nextPage);
+                DataResultBase<ResultList<Feed>> result = await this._service.GetFeedListAsync(this._category, nextPage);
                 if (result.Code == 0)// 请求成功。
                 {
                     ResultList<Feed> resultList = result.Data;

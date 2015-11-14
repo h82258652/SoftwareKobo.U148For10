@@ -37,7 +37,7 @@ namespace SoftwareKobo.U148.DataSources
             {
                 // 读取下一页数据。
                 int nextPage = this._currentPage + 1;
-                ResultBase<ResultList<Comment>> result = await this._service.GetCommentsAsync(this._feed, nextPage);
+                DataResultBase<ResultList<Comment>> result = await this._service.GetCommentsAsync(this._feed, nextPage);
                 if (result.Code == 0)// 请求成功。
                 {
                     ResultList<Comment> resultList = result.Data;

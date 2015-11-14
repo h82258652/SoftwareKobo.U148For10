@@ -12,28 +12,30 @@
       xmlns:conv="using:SoftwareKobo.UniversalToolkit.Converters"
       x:Name="page"
       mc:Ignorable="d"
-      DataContext="{Binding Source={StaticResource Locator},Path=Comment}">
+      DataContext="{Binding Source={StaticResource Locator},Path=Comment}"
+      RequestedTheme="{Binding Source={StaticResource Settings},Path=ThemeMode}">
     <Page.Transitions>
         <TransitionCollection>
             <PaneThemeTransition Edge="Bottom" />
         </TransitionCollection>
     </Page.Transitions>
     <Page.Resources>
-        <localConv:IsNullOrEmptyConverter x:Key="ReviewButtonEnabledConverter"
-                                          IsInversed="True" />
-        <conv:BooleanToVisibilityConverter x:Key="AppBarVisibilityConverter" />
+        <conv:IsNullOrEmptyConverter x:Key="ReviewButtonEnabledConverter"
+                                     IsInversed="True" />
+        <conv:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
     </Page.Resources>
     <Page.BottomAppBar>
-        <CommandBar Visibility="{Binding Path=IsLogined,Converter={StaticResource AppBarVisibilityConverter}}">
+        <CommandBar>
             <AppBarButton Icon="LeaveChat"
-                          Label="写评论">
+                          Label="写评论"
+                          Visibility="{Binding Path=IsLogined,Converter={StaticResource BooleanToVisibilityConverter}}">
                 <AppBarButton.Flyout>
                     <Flyout x:Name="flyout"
                             Placement="Full">
                         <Flyout.FlyoutPresenterStyle>
                             <Style TargetType="FlyoutPresenter">
                                 <Setter Property="MaxHeight"
-                                        Value="300" />
+                                        Value="200" />
                             </Style>
                         </Flyout.FlyoutPresenterStyle>
                         <Grid>
@@ -43,7 +45,8 @@
                             </Grid.RowDefinitions>
                             <TextBox x:Name="txtReview"
                                      AcceptsReturn="True"
-                                     TextWrapping="Wrap"></TextBox>
+                                     TextWrapping="Wrap"
+                                     PlaceholderText="编写评论" />
                             <Button Content="发送"
                                     Grid.Row="1"
                                     Margin="0,12,0,0"
@@ -62,11 +65,11 @@
                           Command="{Binding Path=RefreshCommand}" />
         </CommandBar>
     </Page.BottomAppBar>
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Grid Background="{ThemeResource AppBackgroundBrush}">
         <ListView ItemsSource="{Binding Path=Comments}"
                   SelectionMode="None"
                   IsItemClickEnabled="True"
-                  Background="#F0F0F0">
+                  Background="{ThemeResource AppBackgroundBrush}">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <controls:CommentItem>
@@ -84,16 +87,12 @@
                             Value="Stretch" />
                     <Setter Property="Padding"
                             Value="0" />
-                    <Setter Property="BorderBrush"
-                            Value="#E3E3E3" />
-                    <Setter Property="BorderThickness"
-                            Value="0,0,0,1" />
                 </Style>
             </ListView.ItemContainerStyle>
         </ListView>
         <Grid x:Name="sendingMask"
               Background="#80000000"
-              Visibility="Collapsed">
+              Visibility="{Binding Path=IsSending,Converter={StaticResource BooleanToVisibilityConverter}}">
             <StackPanel VerticalAlignment="Center">
                 <TextBlock Text="正在发送"
                            TextAlignment="Center"

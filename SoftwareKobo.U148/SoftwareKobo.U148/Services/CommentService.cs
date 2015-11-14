@@ -14,7 +14,7 @@ namespace SoftwareKobo.U148.Services
 
         private const string SEND_COMMENT_TEMPLATE = @"http://api.u148.net/json/comment";
 
-        public async Task<ResultBase<ResultList<Comment>>> GetCommentsAsync(Feed feed, int page = 1)
+        public async Task<DataResultBase<ResultList<Comment>>> GetCommentsAsync(Feed feed, int page = 1)
         {
             if (feed == null)
             {
@@ -29,11 +29,11 @@ namespace SoftwareKobo.U148.Services
             url = url + "?t=" + DateTime.Now.Ticks;
             using (HttpClient client = new HttpClient())
             {
-                return await client.GetJsonAsync<ResultBase<ResultList<Comment>>>(new Uri(url));
+                return await client.GetJsonAsync<DataResultBase<ResultList<Comment>>>(new Uri(url));
             }
         }
 
-        public async Task<SendCommentResult> SendCommentAsync(Feed feed, UserInfo userInfo, string content, SimulateDevice device = SimulateDevice.Android, Comment reviewComment = null)
+        public async Task<ResultBase> SendCommentAsync(Feed feed, UserInfo userInfo, string content, SimulateDevice device = SimulateDevice.Android, Comment reviewComment = null)
         {
             if (feed == null)
             {
@@ -84,7 +84,7 @@ namespace SoftwareKobo.U148.Services
                 }
             }
 
-            return JsonConvert.DeserializeObject<SendCommentResult>(json);
+            return JsonConvert.DeserializeObject<ResultBase>(json);
         }
     }
 }

@@ -1,18 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
+﻿using SoftwareKobo.UniversalToolkit.Helpers;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
-using SoftwareKobo.UniversalToolkit.Helpers;
 
 // “空白页”项模板在 http://go.microsoft.com/fwlink/?LinkId=234238 上提供
 
@@ -26,6 +15,7 @@ namespace SoftwareKobo.U148.Views
         public SettingView()
         {
             this.InitializeComponent();
+            this.tshShowDetailInNewWindow.Visibility = HardwareButtonsHelper.IsUseable ? Visibility.Collapsed : Visibility.Visible;
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)

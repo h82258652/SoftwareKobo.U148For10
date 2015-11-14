@@ -1,5 +1,6 @@
 ﻿using SoftwareKobo.UniversalToolkit.Controls;
 using System;
+using System.Linq;
 using Windows.Foundation;
 using Windows.UI.Core;
 using Windows.UI.Xaml;

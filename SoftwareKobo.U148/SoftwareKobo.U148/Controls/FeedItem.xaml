@@ -32,48 +32,9 @@
                     </VisualState.StateTriggers>
                 </VisualState>
                 <VisualState x:Name="Square">
-                    <VisualState.Setters></VisualState.Setters>
-                    <VisualState.StateTriggers>
-                        <AdaptiveTrigger MinWindowWidth="720" />
-                    </VisualState.StateTriggers>
-                </VisualState>
-                <VisualState x:Name="Wide">
-                    <VisualState.Setters></VisualState.Setters>
-                    <VisualState.StateTriggers>
-                        <AdaptiveTrigger MinWindowWidth="900" />
-                    </VisualState.StateTriggers>
-                </VisualState>
-                <!--<VisualState x:Name="narrow">
                     <VisualState.Setters>
-                        <Setter Target="title.(Grid.Column)"
-                                Value="1" />
-                        <Setter Target="title.(Grid.ColumnSpan)"
-                                Value="1" />
-                        <Setter Target="title.Margin"
-                                Value="10,0,0,0" />
-                        <Setter Target="thumbnail.(Grid.Row)"
-                                Value="0" />
-                        <Setter Target="thumbnail.(Grid.RowSpan)"
-                                Value="2" />
-                        <Setter Target="thumbnail.Margin"
-                                Value="0" />
-                        <Setter Target="thumbnail.Width"
-                                Value="100" />
-                        <Setter Target="thumbnail.Height"
-                                Value="75" />
-                        <Setter Target="summary.FontSize"
-                                Value="15" />
-                        <Setter Target="summary.MaxLines"
-                                Value="2" />
-                    </VisualState.Setters>
-                    <VisualState.StateTriggers>
-                        <AdaptiveTrigger MinWindowWidth="0" />
-                    </VisualState.StateTriggers>
-                </VisualState>
-                <VisualState x:Name="wide">
-                    <VisualState.Setters>
-                        <Setter Target="root.MaxWidth"
-                                Value="635" />
+                        <Setter Target="root.Width"
+                                Value="355" />
                         <Setter Target="title.(Grid.Column)"
                                 Value="0" />
                         <Setter Target="title.(Grid.ColumnSpan)"
@@ -81,7 +42,7 @@
                         <Setter Target="title.Margin"
                                 Value="0" />
                         <Setter Target="title.FontSize"
-                                Value="30" />
+                                Value="18" />
                         <Setter Target="thumbnail.(Grid.Row)"
                                 Value="1" />
                         <Setter Target="thumbnail.(Grid.RowSpan)"
@@ -89,18 +50,47 @@
                         <Setter Target="thumbnail.Margin"
                                 Value="0,5,0,0" />
                         <Setter Target="thumbnail.Width"
-                                Value="300" />
+                                Value="150" />
                         <Setter Target="thumbnail.Height"
+                                Value="112.5" />
+                        <Setter Target="summary.MaxLines"
+                                Value="3" />
+                    </VisualState.Setters>
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="720" />
+                    </VisualState.StateTriggers>
+                </VisualState>
+                <VisualState x:Name="Wide">
+                    <VisualState.Setters>
+                        <Setter Target="root.Width"
+                                Value="445" />
+                        <Setter Target="root.Height"
                                 Value="200" />
-                        <Setter Target="summary.FontSize"
-                                Value="20" />
+                        <Setter Target="title.(Grid.Column)"
+                                Value="0" />
+                        <Setter Target="title.(Grid.ColumnSpan)"
+                                Value="2" />
+                        <Setter Target="title.Margin"
+                                Value="0" />
+                        <Setter Target="title.FontSize"
+                                Value="21" />
+                        <Setter Target="thumbnail.(Grid.Row)"
+                                Value="1" />
+                        <Setter Target="thumbnail.(Grid.RowSpan)"
+                                Value="1" />
+                        <Setter Target="thumbnail.Margin"
+                                Value="0,5,0,0" />
+                        <Setter Target="thumbnail.Width"
+                                Value="200" />
+                        <Setter Target="thumbnail.Height"
+                                Value="150" />
                         <Setter Target="summary.MaxLines"
                                 Value="5" />
                     </VisualState.Setters>
                     <VisualState.StateTriggers>
-                        <AdaptiveTrigger MinWindowWidth="1280" />
+                        <AdaptiveTrigger MinWindowWidth="900" />
                     </VisualState.StateTriggers>
-                </VisualState>-->
+                </VisualState>
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
         <Grid.ColumnDefinitions>
@@ -125,7 +115,7 @@
                    Grid.ColumnSpan="1"
                    Grid.Row="0"
                    Margin="10,0,0,0"
-                   TextTrimming="CharacterEllipsis"><Span Foreground="Orange"><Run Text="[" /><Run Text="{Binding Path=Category,Converter={StaticResource ResourceKey=FeedCategoryNameConverter}}" /><Run Text="]" /></Span>
+                   TextTrimming="CharacterEllipsis"><Span Foreground="{ThemeResource AccentBrush}"><Run Text="[" /><Run Text="{Binding Path=Category,Converter={StaticResource ResourceKey=FeedCategoryNameConverter}}" /><Run Text="]" /></Span>
             <Run Text="{Binding Path=Title}" /></TextBlock>
         <Grid Grid.Column="1"
               Grid.Row="1"

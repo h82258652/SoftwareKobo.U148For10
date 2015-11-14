@@ -5,8 +5,8 @@ namespace SoftwareKobo.U148.Services
 {
     public interface IFeedService
     {
-        Task<ResultBase<ResultList<Feed>>> GetFeedListAsync(FeedCategory category, int page = 1);
+        Task<DataResultBase<ResultList<Feed>>> GetFeedListAsync(FeedCategory category, int page = 1);
 
-        Task<ResultBase<Article>> GetArticleAsync(Feed feed);
+        Task<DataResultBase<Article>> GetArticleAsync(Feed feed);
     }
 }

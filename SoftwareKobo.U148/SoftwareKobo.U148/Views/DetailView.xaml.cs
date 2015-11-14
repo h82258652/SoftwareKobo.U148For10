@@ -1,7 +1,16 @@
-﻿using SoftwareKobo.U148.Extensions;
+﻿using SoftwareKobo.U148.Datas;
+using SoftwareKobo.U148.Extensions;
 using SoftwareKobo.U148.Models;
 using SoftwareKobo.UniversalToolkit.Helpers;
 using SoftwareKobo.UniversalToolkit.Mvvm;
+using System;
+using System.Threading.Tasks;
+using Windows.ApplicationModel.Core;
+using Windows.Foundation;
+using Windows.Phone.UI.Input;
+using Windows.UI.Core;
+using Windows.UI.ViewManagement;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 
@@ -9,6 +18,8 @@ namespace SoftwareKobo.U148.Views
 {
     public sealed partial class DetailView : Page, IView
     {
+        private TaskCompletionSource<object> _domReadyTcs;
+
         public DetailView()
         {
             this.InitializeComponent();
@@ -20,8 +31,8 @@ namespace SoftwareKobo.U148.Views
             Article article = parameter as Article;
             if (article != null)
             {
-                webView.Navigate(new System.Uri("ms-appx-web:///Web/Views/app.html"));
-                await webView.WaitForDOMContentLoadedAsync();
+                await this._domReadyTcs.Task;
+                await webView.InvokeScriptAsync("setThemeMode", AppSettings.Instance.ThemeMode.ToString());
                 await webView.InvokeScriptAsync("setContent", article.Content);
             }
         }
@@ -35,6 +46,8 @@ namespace SoftwareKobo.U148.Views
             this.Frame.UnregisterNavigateBack();
         }
 
+        private ApplicationView _window;
+
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
@@ -46,10 +59,23 @@ namespace SoftwareKobo.U148.Views
                 this.Frame.RegisterNavigateBack();
             }
 
-            Feed parameter = e.Parameter as Feed;
-            if (parameter != null)
+            if (e.NavigationMode != NavigationMode.Back)
             {
-                this.SendToViewModel(parameter);
+                this._domReadyTcs = new TaskCompletionSource<object>();
+                TypedEventHandler<WebView, WebViewDOMContentLoadedEventArgs> handler = null;
+                handler = (sender, args) =>
+                {
+                    webView.DOMContentLoaded -= handler;
+                    this._domReadyTcs.SetResult(null);
+                };
+                webView.DOMContentLoaded += handler;
+                webView.Navigate(new Uri("ms-appx-web:///Web/Views/app.html"));
+
+                Feed parameter = e.Parameter as Feed;
+                if (parameter != null)
+                {
+                    this.SendToViewModel(parameter);
+                }
             }
         }
     }

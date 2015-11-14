@@ -76,7 +76,7 @@ namespace SoftwareKobo.U148.ViewModels
             this.IsLoading = true;
             try
             {
-                ResultBase<Article> result = await this._service.GetArticleAsync(feed);
+                DataResultBase<Article> result = await this._service.GetArticleAsync(feed);
                 if (result.Code == 0)
                 {
                     this.Article = result.Data;

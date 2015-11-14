@@ -6,6 +6,7 @@ using SoftwareKobo.UniversalToolkit.Extensions;
 using SoftwareKobo.UniversalToolkit.Mvvm;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Windows.UI.Popups;
 
 namespace SoftwareKobo.U148.ViewModels

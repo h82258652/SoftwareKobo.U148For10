@@ -3,6 +3,10 @@ using SoftwareKobo.U148.Services;
 using SoftwareKobo.UniversalToolkit.Helpers;
 using SoftwareKobo.UniversalToolkit.Mvvm;
 using SoftwareKobo.UniversalToolkit.Storage;
+using Windows.UI;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Media;
 
 namespace SoftwareKobo.U148.Datas
 {
@@ -10,19 +14,16 @@ namespace SoftwareKobo.U148.Datas
     {
         private static AppSettings _instance;
 
-        private AppSettings()
+        public AppSettings()
         {
+            _instance = this;
         }
 
         public static AppSettings Instance
         {
             get
             {
-                if (_instance == null)
-                {
-                    _instance = new AppSettings();
-                }
-                return _instance;
+                return _instance ?? new AppSettings();
             }
         }
 
@@ -30,13 +31,18 @@ namespace SoftwareKobo.U148.Datas
         {
             get
             {
+                if (HardwareButtonsHelper.IsUseable)
+                {
+                    return false;
+                }
+
                 if (ApplicationLocalSettings.Exists(nameof(ShowDetailInNewWindow)))
                 {
                     return ApplicationLocalSettings.Read<bool>(nameof(ShowDetailInNewWindow));
                 }
                 else
                 {
-                    return DeviceFamilyHelper.IsDesktop ? true : false;
+                    return false;
                 }
             }
             set
@@ -56,12 +62,38 @@ namespace SoftwareKobo.U148.Datas
                 }
                 else
                 {
-                    return Services.SimulateDevice.Android;
+                    return SimulateDevice.Android;
                 }
             }
             set
             {
                 ApplicationLocalSettings.Write(nameof(SimulateDevice), value);
+                this.RaisePropertyChanged();
+            }
+        }
+
+        public ElementTheme ThemeMode
+        {
+            get
+            {
+                if (ApplicationLocalSettings.Exists(nameof(ThemeMode)))
+                {
+                    return ApplicationLocalSettings.Read<ElementTheme>(nameof(ThemeMode));
+                }
+                else
+                {
+                    return ElementTheme.Light;
+                }
+            }
+            set
+            {
+                ApplicationLocalSettings.Write(nameof(ThemeMode), value);
+                Frame rootFrame = Window.Current.Content as Frame;
+                if (rootFrame != null)
+                {
+                    rootFrame.Background = new SolidColorBrush(value == ElementTheme.Dark ? Colors.Black : Colors.White);
+                }
+                this.RaisePropertyChanged();
             }
         }
 

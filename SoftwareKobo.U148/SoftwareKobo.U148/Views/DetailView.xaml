@@ -10,7 +10,8 @@
       xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
       xmlns:core="using:Microsoft.Xaml.Interactions.Core"
       mc:Ignorable="d"
-      DataContext="{Binding Source={StaticResource Locator},Path=Detail}">
+      DataContext="{Binding Source={StaticResource Locator},Path=Detail}"
+      RequestedTheme="{Binding Source={StaticResource Settings},Path=ThemeMode}">
     <Page.Transitions>
         <TransitionCollection>
             <NavigationThemeTransition>
@@ -20,7 +21,6 @@
     </Page.Transitions>
     <Page.Resources>
         <localConv:CommentReviewCountConverter x:Key="CommentReviewCountConverter" />
-        <localConv:DetailHtmlConverter x:Key="DetailHtmlConverter" />
     </Page.Resources>
     <Page.BottomAppBar>
         <CommandBar>
@@ -48,7 +48,8 @@
             </controls:AppBarButtonEx>
         </CommandBar>
     </Page.BottomAppBar>
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <WebView x:Name="webView"></WebView>
+    <Grid Background="{ThemeResource AppBackgroundBrush}">
+        <WebView x:Name="webView"
+                 DefaultBackgroundColor="Transparent"></WebView>
     </Grid>
 </Page>

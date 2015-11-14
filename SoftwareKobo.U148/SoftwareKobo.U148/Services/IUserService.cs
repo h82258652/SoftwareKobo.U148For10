@@ -5,6 +5,6 @@ namespace SoftwareKobo.U148.Services
 {
     public interface IUserService
     {
-        Task<ResultBase<UserInfo>> LoginAsync(string email, string password);
+        Task<DataResultBase<UserInfo>> LoginAsync(string email, string password);
     }
 }

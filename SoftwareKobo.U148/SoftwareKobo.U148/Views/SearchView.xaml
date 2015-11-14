@@ -4,14 +4,36 @@
       xmlns:local="using:SoftwareKobo.U148.Views"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:controls="using:SoftwareKobo.U148.Controls"
       mc:Ignorable="d"
-      DataContext="{Binding Source={StaticResource Locator},Path=Search}">
+      DataContext="{Binding Source={StaticResource Locator},Path=Search}"
+      RequestedTheme="{Binding Source={StaticResource Settings},Path=ThemeMode}">
     <Page.Transitions>
         <TransitionCollection>
             <EdgeUIThemeTransition Edge="Right" />
         </TransitionCollection>
     </Page.Transitions>
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <AutoSuggestBox></AutoSuggestBox>
+    <Grid Background="{ThemeResource AppBackgroundBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="48" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0"
+              Background="{ThemeResource AccentBrush}">
+            <AutoSuggestBox PlaceholderText="搜索"
+                            QueryIcon="Find"
+                            Margin="8"
+                            QuerySubmitted="AutoSuggestBox_QuerySubmitted"></AutoSuggestBox>
+        </Grid>
+        <Grid Grid.Row="1">
+            <ListView SelectionMode="None"
+                      IsItemClickEnabled="True">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <controls:FeedItem></controls:FeedItem>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Grid>
     </Grid>
 </Page>

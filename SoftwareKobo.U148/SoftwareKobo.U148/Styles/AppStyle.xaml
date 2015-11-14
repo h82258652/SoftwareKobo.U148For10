@@ -1,13 +1,38 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:local="using:SoftwareKobo.U148.Styles">
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <ResourceDictionary.ThemeDictionaries>
+        <ResourceDictionary x:Key="Light">
+            <SolidColorBrush x:Key="AccentBrush"
+                             Color="#FF9900" />
+            <SolidColorBrush x:Key="AppBackgroundBrush"
+                             Color="#E5E5E5" />
+            <SolidColorBrush x:Key="ItemBackgroundBrush"
+                             Color="#F0F0F0" />
+            <SolidColorBrush x:Key="SystemControlForegroundBaseHighBrush"
+                             Color="#333" />
+            <SolidColorBrush x:Key="SystemControlForegroundBaseMediumBrush"
+                             Color="#333" />
+        </ResourceDictionary>
+        <ResourceDictionary x:Key="Dark">
+            <SolidColorBrush x:Key="AccentBrush"
+                             Color="#B26B00" />
+            <SolidColorBrush x:Key="AppBackgroundBrush"
+                             Color="#222" />
+            <SolidColorBrush x:Key="ItemBackgroundBrush"
+                             Color="#333" />
+            <SolidColorBrush x:Key="SystemControlForegroundBaseHighBrush"
+                             Color="#AAA" />
+            <SolidColorBrush x:Key="SystemControlForegroundBaseMediumBrush"
+                             Color="#999" />
+        </ResourceDictionary>
+    </ResourceDictionary.ThemeDictionaries>
     <Style TargetType="AppBar">
         <Setter Property="Background"
-                Value="Orange" />
+                Value="{ThemeResource AccentBrush}" />
     </Style>
     <Style TargetType="CommandBar">
         <Setter Property="Background"
-                Value="Orange" />
+                Value="{ThemeResource AccentBrush}" />
     </Style>
     <Style TargetType="PasswordBox">
         <Setter Property="Background"
@@ -139,11 +164,6 @@
                                                                        Storyboard.TargetProperty="BorderBrush">
                                             <DiscreteObjectKeyFrame KeyTime="0"
                                                                     Value="{ThemeResource SystemControlHighlightAccentBrush}" />
-                                        </ObjectAnimationUsingKeyFrames>
-                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentElement"
-                                                                       Storyboard.TargetProperty="Foreground">
-                                            <DiscreteObjectKeyFrame KeyTime="0"
-                                                                    Value="{ThemeResource SystemControlForegroundChromeBlackHighBrush}" />
                                         </ObjectAnimationUsingKeyFrames>
                                     </Storyboard>
                                 </VisualState>

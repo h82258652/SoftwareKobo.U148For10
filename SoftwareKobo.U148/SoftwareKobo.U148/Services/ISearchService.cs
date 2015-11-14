@@ -5,6 +5,6 @@ namespace SoftwareKobo.U148.Services
 {
     public interface ISearchService
     {
-        Task<ResultBase<ResultList<Feed>>> GetSearchResultsAsync(string keyword, int page = 1);
+        Task<DataResultBase<ResultList<Feed>>> GetSearchResultsAsync(string keyword, int page = 1);
     }
 }

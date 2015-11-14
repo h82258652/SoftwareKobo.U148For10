@@ -31,7 +31,8 @@
                 </DataTemplate>
             </controls:AdaptiveCollectionView.ItemTemplate>
             <controls:AdaptiveCollectionView.ItemContainerStyle>
-                <Style TargetType="controls:AdaptiveCollectionViewItem">
+                <Style TargetType="controls:AdaptiveCollectionViewItem"
+                       x:Name="itemStyle">
                     <Setter Property="HorizontalContentAlignment"
                             Value="Stretch" />
                     <Setter Property="VerticalContentAlignment"
@@ -39,11 +40,7 @@
                     <Setter Property="Padding"
                             Value="0" />
                     <Setter Property="Background"
-                            Value="#F0F0F0" />
-                    <Setter Property="BorderBrush"
-                            Value="#E3E3E3" />
-                    <Setter Property="BorderThickness"
-                            Value="0,0,0,1" />
+                            Value="{ThemeResource ItemBackgroundBrush}" />
                 </Style>
             </controls:AdaptiveCollectionView.ItemContainerStyle>
             <controls:AdaptiveCollectionView.ItemContainerTransitions>
