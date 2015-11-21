@@ -59,7 +59,7 @@
                       Grid.Row="0"
                       AdType="Banner"
                       ApplicationKey="4fd64ae0ccd8d54db0dd45d8ac733fb7"
-                      VerticalAlignment="Top" />
+                      VerticalAlignment="Top" AdClick="Ad_Click" />
         <WebView x:Name="webView"
                  Grid.Row="1"
                  DefaultBackgroundColor="Transparent" />

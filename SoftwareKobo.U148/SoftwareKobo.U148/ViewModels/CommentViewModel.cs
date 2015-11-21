@@ -135,26 +135,30 @@ namespace SoftwareKobo.U148.ViewModels
         {
             this.IsSending = true;
 
+            bool isSuccess = false;
             string message;
             try
             {
                 ResultBase result = await this._service.SendCommentAsync(this.Feed, (UserInfo)AppSettings.Instance.UserInfo, content, AppSettings.Instance.SimulateDevice, comment);
                 if (result.Code == 0)
                 {
+                    isSuccess = true;
                     message = "发送成功！";
                     this.Comments.Refresh();
                 }
                 else
                 {
+                    isSuccess = false;
                     message = result.Message;
                 }
             }
             catch
             {
+                isSuccess = false;
                 message = "网络连接失败！";
             }
 
-            Tuple<string, string> sended = Tuple.Create<string, string>("sended", message);
+            Tuple<string, bool, string> sended = Tuple.Create<string, bool, string>("sended", isSuccess, message);
             this.SendToView(sended);
 
             this.IsSending = false;

@@ -1,4 +1,5 @@
-﻿using JYAnalyticsUniversal;
+﻿using JiuYouAdUniversal.Models;
+using JYAnalyticsUniversal;
 using SoftwareKobo.U148.Datas;
 using SoftwareKobo.U148.Extensions;
 using SoftwareKobo.U148.Models;
@@ -87,6 +88,15 @@ namespace SoftwareKobo.U148.Views
             if (AppSettings.Instance.LastClickAdTime + TimeSpan.FromHours(12) < DateTime.Now)
             {
                 this.FindName("ad");
+            }
+        }
+
+        private void Ad_Click(object sender, AdClickEventArgs e)
+        {
+            if (e.clickResult == "1")
+            {
+                AppSettings.Instance.LastClickAdTime = DateTime.Now;
+                ad.Visibility = Visibility.Collapsed;
             }
         }
     }

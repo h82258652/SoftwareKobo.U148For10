@@ -7,6 +7,7 @@ using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Navigation;
 using JYAnalyticsUniversal;
+using SoftwareKobo.U148.Controls;
 
 namespace SoftwareKobo.U148.Views
 {
@@ -19,12 +20,23 @@ namespace SoftwareKobo.U148.Views
 
         public async void ReceiveFromViewModel(dynamic parameter)
         {
-            Tuple<string, string> command = parameter as Tuple<string, string>;
+            Tuple<string, bool, string> command = parameter as Tuple<string, bool, string>;
             if (command != null)
             {
                 if (command.Item1 == "sended")
                 {
-                    await new MessageDialog(command.Item2).ShowAsync();
+                    if (command.Item2)
+                    {
+                        await new MessageDialog(command.Item3).ShowAsync();
+                        if (_lastSendTextBox != null)
+                        {
+                            _lastSendTextBox.Text = string.Empty;
+                        }
+                    }
+                    else
+                    {
+                        await new MessageDialog(command.Item3).ShowAsync();
+                    }
                 }
             }
         }
@@ -63,9 +75,17 @@ namespace SoftwareKobo.U148.Views
             }
         }
 
+        private TextBox _lastSendTextBox;
+
         private void BtnSendComment_Click(object sender, RoutedEventArgs e)
         {
+            _lastSendTextBox = txtReview;
             flyout.Hide();
+        }
+
+        private void CommentItem_Review(object sender, CommentItemReviewEventArgs e)
+        {
+            _lastSendTextBox = e.TextBox;
         }
     }
 }

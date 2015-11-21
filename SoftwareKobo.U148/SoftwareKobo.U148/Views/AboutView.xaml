@@ -33,5 +33,10 @@
                            FontSize="16" />
             </StackPanel>
         </StackPanel>
+        <TextBlock Text="友情提示：成功点击广告一次，12小时内不再显示。"
+                   VerticalAlignment="Bottom"
+                   TextAlignment="Center"
+                   TextWrapping="Wrap"
+                   Margin="5"></TextBlock>
     </Grid>
 </Page>

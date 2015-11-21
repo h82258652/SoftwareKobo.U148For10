@@ -34,7 +34,7 @@ namespace SoftwareKobo.U148.Controls
             }
             if (this.Review != null)
             {
-                this.Review(this, new CommentItemReviewEventArgs(this.Comment, txtReview.Text));
+                this.Review(this, new CommentItemReviewEventArgs(this.Comment, txtReview.Text, txtReview));
             }
         }
 

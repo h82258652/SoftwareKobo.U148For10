@@ -74,7 +74,7 @@
                   Background="{ThemeResource AppBackgroundBrush}">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <controls:CommentItem>
+                    <controls:CommentItem Review="CommentItem_Review">
                         <interactivity:Interaction.Behaviors>
                             <core:EventTriggerBehavior EventName="Review">
                                 <core:InvokeCommandAction Command="{Binding ElementName=page,Path=DataContext.CommentReviewCommand}" />

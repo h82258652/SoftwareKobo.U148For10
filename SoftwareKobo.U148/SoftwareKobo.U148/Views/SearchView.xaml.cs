@@ -12,6 +12,7 @@ namespace SoftwareKobo.U148.Views
         public SearchView()
         {
             this.InitializeComponent();
+            this.NavigationCacheMode = NavigationCacheMode.Required;
         }
 
         public void ReceiveFromViewModel(dynamic parameter)
@@ -26,11 +27,14 @@ namespace SoftwareKobo.U148.Views
 
             this.Frame.RegisterNavigateBack();
 
-            string query = e.Parameter as string;
-            if (string.IsNullOrEmpty(query) == false)
+            if (e.NavigationMode != NavigationMode.Back)
             {
-                txtSearch.Text = query;
-                this.SendToViewModel(query);
+                string query = e.Parameter as string;
+                if (string.IsNullOrEmpty(query) == false)
+                {
+                    txtSearch.Text = query;
+                    this.SendToViewModel(query);
+                }
             }
         }
 

@@ -37,9 +37,12 @@ namespace SoftwareKobo.U148
 #if DEBUG
             this.DebugSettings.EnableFrameRateCounter = true;
             this.DebugSettings.EnableDisplayMemoryUsage();
+
+            // 调试广告。
+            AppSettings.Instance.LastClickAdTime = DateTime.MinValue;
 #endif
         }
-        
+
         protected override async Task OnPreStartAsync(IActivatedEventArgs args, AppStartInfo info)
         {
             await JYAnalytics.StartTrackAsync("4fd64ae0ccd8d54db0dd45d8ac733fb7");
