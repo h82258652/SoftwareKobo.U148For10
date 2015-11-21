@@ -9,9 +9,10 @@
       xmlns:controls="using:SoftwareKobo.UniversalToolkit.Controls"
       xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
       xmlns:core="using:Microsoft.Xaml.Interactions.Core"
+      xmlns:ad="using:JiuYouAdUniversal"
       mc:Ignorable="d"
       DataContext="{Binding Source={StaticResource Locator},Path=Detail}"
-      RequestedTheme="{Binding Source={StaticResource Settings},Path=ThemeMode}">
+      RequestedTheme="{Binding Source={StaticResource Settings},Path=ThemeMode}" Loaded="DetailView_Loaded">
     <Page.Transitions>
         <TransitionCollection>
             <NavigationThemeTransition>
@@ -49,7 +50,18 @@
         </CommandBar>
     </Page.BottomAppBar>
     <Grid Background="{ThemeResource AppBackgroundBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <ad:AdControl x:Name="ad"
+                      x:DeferLoadStrategy="Lazy"
+                      Grid.Row="0"
+                      AdType="Banner"
+                      ApplicationKey="4fd64ae0ccd8d54db0dd45d8ac733fb7"
+                      VerticalAlignment="Top" />
         <WebView x:Name="webView"
-                 DefaultBackgroundColor="Transparent"></WebView>
+                 Grid.Row="1"
+                 DefaultBackgroundColor="Transparent" />
     </Grid>
 </Page>

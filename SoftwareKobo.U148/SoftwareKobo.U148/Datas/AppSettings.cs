@@ -3,6 +3,7 @@ using SoftwareKobo.U148.Services;
 using SoftwareKobo.UniversalToolkit.Helpers;
 using SoftwareKobo.UniversalToolkit.Mvvm;
 using SoftwareKobo.UniversalToolkit.Storage;
+using System;
 using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -113,6 +114,26 @@ namespace SoftwareKobo.U148.Datas
             set
             {
                 ApplicationLocalSettings.Write(nameof(UserInfo), value);
+                this.RaisePropertyChanged();
+            }
+        }
+
+        public DateTime LastClickAdTime
+        {
+            get
+            {
+                if (ApplicationLocalSettings.Exists(nameof(LastClickAdTime)))
+                {
+                    return ApplicationLocalSettings.Read<DateTime>(nameof(LastClickAdTime));
+                }
+                else
+                {
+                    return DateTime.MinValue;
+                }
+            }
+            set
+            {
+                ApplicationLocalSettings.Write(nameof(LastClickAdTime), value);
                 this.RaisePropertyChanged();
             }
         }

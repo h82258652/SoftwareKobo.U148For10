@@ -21,6 +21,7 @@ using System.Threading.Tasks;
 using SoftwareKobo.U148.Datas;
 using SoftwareKobo.UniversalToolkit.Helpers;
 using Windows.UI.ViewManagement;
+using JYAnalyticsUniversal;
 
 namespace SoftwareKobo.U148
 {
@@ -41,10 +42,17 @@ namespace SoftwareKobo.U148
         
         protected override async Task OnPreStartAsync(IActivatedEventArgs args, AppStartInfo info)
         {
+            await JYAnalytics.StartTrackAsync("4fd64ae0ccd8d54db0dd45d8ac733fb7");
+
             if (StatusBarHelper.IsUseable)
             {
                 await StatusBar.GetForCurrentView().HideAsync();
             }
+        }
+
+        protected override async Task OnSuspendingAsync(object sender, SuspendingEventArgs e)
+        {
+            await JYAnalytics.EndTrackAsync();
         }
     }
 

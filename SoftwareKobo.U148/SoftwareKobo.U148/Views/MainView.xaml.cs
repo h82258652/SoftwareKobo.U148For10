@@ -1,18 +1,18 @@
-﻿using Microsoft.Graphics.Canvas;
+﻿using JYAnalyticsUniversal;
+using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Effects;
 using Microsoft.Graphics.Canvas.UI;
 using Microsoft.Graphics.Canvas.UI.Xaml;
 using SoftwareKobo.U148.Datas;
 using SoftwareKobo.U148.Models;
-using SoftwareKobo.UniversalToolkit.Helpers;
 using SoftwareKobo.UniversalToolkit.Mvvm;
+using SoftwareKobo.UniversalToolkit.Services.LauncherServices;
 using System;
 using System.Threading.Tasks;
-using Windows.UI;
-using Windows.UI.ViewManagement;
+using Windows.ApplicationModel.Email;
+using Windows.System;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
 namespace SoftwareKobo.U148.Views
@@ -46,12 +46,16 @@ namespace SoftwareKobo.U148.Views
         {
             base.OnNavigatedFrom(e);
 
+            JYAnalytics.TrackPageEnd(nameof(MainView));
+
             Messenger.Unregister(this);
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
+
+            JYAnalytics.TrackPageStart(nameof(MainView));
 
             Messenger.Register(this);
 
@@ -94,6 +98,18 @@ namespace SoftwareKobo.U148.Views
             {
                 this.Frame.Navigate(typeof(SearchView), sender.Text);
             }
+        }
+
+        private async void BtnReview_Click(object sender, RoutedEventArgs e)
+        {
+            StoreService service = new StoreService();
+            await service.OpenCurrentAppReviewPageAsync();
+        }
+
+        private async void BtnFeedback_Click(object sender, RoutedEventArgs e)
+        {
+            string uri = "mailto:h82258652@hotmail.com?subject=Windows 10 有意思吧反馈";
+            await Launcher.LaunchUriAsync(new Uri(uri));
         }
     }
 }

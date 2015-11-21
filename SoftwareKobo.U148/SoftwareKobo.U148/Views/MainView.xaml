@@ -223,6 +223,35 @@
                                     </interactivity:Interaction.Behaviors>
                                 </controls:HamburgerItem>
                                 <controls:HamburgerItem Foreground="WhiteSmoke"
+                                                        Text="点赞"
+                                                        Click="BtnReview_Click">
+                                    <controls:HamburgerItem.Icon>
+                                        <FontIcon FontFamily="Segoe MDL2 Assets"
+                                                  Glyph="&#xE006;" />
+                                    </controls:HamburgerItem.Icon>
+                                    <interactivity:Interaction.Behaviors>
+                                        <core:EventTriggerBehavior EventName="Click">
+                                            <core:ChangePropertyAction TargetObject="{Binding ElementName=menu}"
+                                                                       PropertyName="IsPaneOpen"
+                                                                       Value="False" />
+                                        </core:EventTriggerBehavior>
+                                    </interactivity:Interaction.Behaviors>
+                                </controls:HamburgerItem>
+                                <controls:HamburgerItem Foreground="WhiteSmoke"
+                                                        Text="反馈"
+                                                        Click="BtnFeedback_Click">
+                                    <controls:HamburgerItem.Icon>
+                                        <SymbolIcon Symbol="Mail" />
+                                    </controls:HamburgerItem.Icon>
+                                    <interactivity:Interaction.Behaviors>
+                                        <core:EventTriggerBehavior EventName="Click">
+                                            <core:ChangePropertyAction TargetObject="{Binding ElementName=menu}"
+                                                                       PropertyName="IsPaneOpen"
+                                                                       Value="False" />
+                                        </core:EventTriggerBehavior>
+                                    </interactivity:Interaction.Behaviors>
+                                </controls:HamburgerItem>
+                                <controls:HamburgerItem Foreground="WhiteSmoke"
                                                         Text="关于">
                                     <controls:HamburgerItem.Icon>
                                         <FontIcon FontFamily="Segoe MDL2 Assets"

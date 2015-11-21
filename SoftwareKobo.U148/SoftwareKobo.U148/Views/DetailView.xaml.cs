@@ -1,4 +1,5 @@
-﻿using SoftwareKobo.U148.Datas;
+﻿using JYAnalyticsUniversal;
+using SoftwareKobo.U148.Datas;
 using SoftwareKobo.U148.Extensions;
 using SoftwareKobo.U148.Models;
 using SoftwareKobo.UniversalToolkit.Helpers;
@@ -41,16 +42,18 @@ namespace SoftwareKobo.U148.Views
         {
             base.OnNavigatedFrom(e);
 
+            JYAnalytics.TrackPageEnd(nameof(DetailView));
+
             Messenger.Unregister(this);
 
             this.Frame.UnregisterNavigateBack();
         }
 
-        private ApplicationView _window;
-
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
+
+            JYAnalytics.TrackPageStart(nameof(DetailView));
 
             Messenger.Register(this);
 
@@ -76,6 +79,14 @@ namespace SoftwareKobo.U148.Views
                 {
                     this.SendToViewModel(parameter);
                 }
+            }
+        }
+
+        private void DetailView_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (AppSettings.Instance.LastClickAdTime + TimeSpan.FromHours(12) < DateTime.Now)
+            {
+                this.FindName("ad");
             }
         }
     }

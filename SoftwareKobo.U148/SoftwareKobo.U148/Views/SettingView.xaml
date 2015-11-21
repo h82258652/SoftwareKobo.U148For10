@@ -15,14 +15,28 @@
     <Grid Background="{ThemeResource AppBackgroundBrush}">
         <StackPanel Orientation="Vertical">
             <ToggleSwitch x:Name="tshShowDetailInNewWindow"
-                          Header="在新窗口打开内容"
                           IsOn="{Binding Path=ShowDetailInNewWindow,Mode=TwoWay}"
-                          Margin="10,10,10,0" />
-            <ComboBox Header="模拟设备"
-                      ItemsSource="{Binding Path=SimulateDevices}"
+                          Margin="10,10,10,0">
+                <ToggleSwitch.Header>
+                    <StackPanel>
+                        <TextBlock Text="在新窗口打开内容" />
+                        <TextBlock Text="——实验性功能"
+                                   FontSize="10" />
+                    </StackPanel>
+                </ToggleSwitch.Header>
+            </ToggleSwitch>
+            <ComboBox ItemsSource="{Binding Path=SimulateDevices}"
                       SelectedItem="{Binding Path=SimulateDevice,Mode=TwoWay}"
                       Margin="10,10,10,0"
-                      Width="150" />
+                      Width="150">
+                <ComboBox.Header>
+                    <StackPanel>
+                        <TextBlock Text="模拟设备" />
+                        <TextBlock Text="——发送评论时使用"
+                                   FontSize="10" />
+                    </StackPanel>
+                </ComboBox.Header>
+            </ComboBox>
         </StackPanel>
     </Grid>
 </Page>

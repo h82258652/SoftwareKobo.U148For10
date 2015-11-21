@@ -11,6 +11,22 @@
           "lib/portable-net4+sl5+netcore45+wpa81+wp8/Microsoft.Practices.ServiceLocation.dll": {}
         }
       },
+      "JYAdControl/2.3.6": {
+        "compile": {
+          "lib/netcore451/JiuYouAdUniversal.dll": {}
+        },
+        "runtime": {
+          "lib/netcore451/JiuYouAdUniversal.dll": {}
+        }
+      },
+      "JyAnalytics/1.0.10": {
+        "compile": {
+          "lib/netcore451/JYAnalyticsUniversal.dll": {}
+        },
+        "runtime": {
+          "lib/netcore451/JYAnalyticsUniversal.dll": {}
+        }
+      },
       "Microsoft.CSharp/4.0.0": {
         "dependencies": {
           "System.Collections": "[4.0.10, )",
@@ -1561,7 +1577,7 @@
           "lib/netcore50/System.Xml.XmlSerializer.dll": {}
         }
       },
-      "Win2D.uwp/1.7.0": {
+      "Win2D.uwp/1.8.0": {
         "compile": {
           "lib/uap10.0/Microsoft.Graphics.Canvas.winmd": {},
           "lib/uap10.0/Workaround1200257.dll": {}
@@ -1579,6 +1595,22 @@
         },
         "runtime": {
           "lib/portable-net4+sl5+netcore45+wpa81+wp8/Microsoft.Practices.ServiceLocation.dll": {}
+        }
+      },
+      "JYAdControl/2.3.6": {
+        "compile": {
+          "lib/netcore451/JiuYouAdUniversal.dll": {}
+        },
+        "runtime": {
+          "lib/netcore451/JiuYouAdUniversal.dll": {}
+        }
+      },
+      "JyAnalytics/1.0.10": {
+        "compile": {
+          "lib/netcore451/JYAnalyticsUniversal.dll": {}
+        },
+        "runtime": {
+          "lib/netcore451/JYAnalyticsUniversal.dll": {}
         }
       },
       "Microsoft.CSharp/4.0.0": {
@@ -3221,7 +3253,7 @@
           "lib/netcore50/System.Xml.XmlSerializer.dll": {}
         }
       },
-      "Win2D.uwp/1.7.0": {
+      "Win2D.uwp/1.8.0": {
         "compile": {
           "lib/uap10.0/Microsoft.Graphics.Canvas.winmd": {},
           "lib/uap10.0/Workaround1200257.dll": {}
@@ -3242,6 +3274,22 @@
         },
         "runtime": {
           "lib/portable-net4+sl5+netcore45+wpa81+wp8/Microsoft.Practices.ServiceLocation.dll": {}
+        }
+      },
+      "JYAdControl/2.3.6": {
+        "compile": {
+          "lib/netcore451/JiuYouAdUniversal.dll": {}
+        },
+        "runtime": {
+          "lib/netcore451/JiuYouAdUniversal.dll": {}
+        }
+      },
+      "JyAnalytics/1.0.10": {
+        "compile": {
+          "lib/netcore451/JYAnalyticsUniversal.dll": {}
+        },
+        "runtime": {
+          "lib/netcore451/JYAnalyticsUniversal.dll": {}
         }
       },
       "Microsoft.CSharp/4.0.0": {
@@ -4856,7 +4904,7 @@
           "runtimes/win8-aot/lib/netcore50/System.Xml.XmlSerializer.dll": {}
         }
       },
-      "Win2D.uwp/1.7.0": {
+      "Win2D.uwp/1.8.0": {
         "compile": {
           "lib/uap10.0/Microsoft.Graphics.Canvas.winmd": {},
           "lib/uap10.0/Workaround1200257.dll": {}
@@ -4877,6 +4925,22 @@
         },
         "runtime": {
           "lib/portable-net4+sl5+netcore45+wpa81+wp8/Microsoft.Practices.ServiceLocation.dll": {}
+        }
+      },
+      "JYAdControl/2.3.6": {
+        "compile": {
+          "lib/netcore451/JiuYouAdUniversal.dll": {}
+        },
+        "runtime": {
+          "lib/netcore451/JiuYouAdUniversal.dll": {}
+        }
+      },
+      "JyAnalytics/1.0.10": {
+        "compile": {
+          "lib/netcore451/JYAnalyticsUniversal.dll": {}
+        },
+        "runtime": {
+          "lib/netcore451/JYAnalyticsUniversal.dll": {}
         }
       },
       "Microsoft.CSharp/4.0.0": {
@@ -6524,7 +6588,7 @@
           "lib/netcore50/System.Xml.XmlSerializer.dll": {}
         }
       },
-      "Win2D.uwp/1.7.0": {
+      "Win2D.uwp/1.8.0": {
         "compile": {
           "lib/uap10.0/Microsoft.Graphics.Canvas.winmd": {},
           "lib/uap10.0/Workaround1200257.dll": {}
@@ -6545,6 +6609,22 @@
         },
         "runtime": {
           "lib/portable-net4+sl5+netcore45+wpa81+wp8/Microsoft.Practices.ServiceLocation.dll": {}
+        }
+      },
+      "JYAdControl/2.3.6": {
+        "compile": {
+          "lib/netcore451/JiuYouAdUniversal.dll": {}
+        },
+        "runtime": {
+          "lib/netcore451/JiuYouAdUniversal.dll": {}
+        }
+      },
+      "JyAnalytics/1.0.10": {
+        "compile": {
+          "lib/netcore451/JYAnalyticsUniversal.dll": {}
+        },
+        "runtime": {
+          "lib/netcore451/JYAnalyticsUniversal.dll": {}
         }
       },
       "Microsoft.CSharp/4.0.0": {
@@ -8159,7 +8239,7 @@
           "runtimes/win8-aot/lib/netcore50/System.Xml.XmlSerializer.dll": {}
         }
       },
-      "Win2D.uwp/1.7.0": {
+      "Win2D.uwp/1.8.0": {
         "compile": {
           "lib/uap10.0/Microsoft.Graphics.Canvas.winmd": {},
           "lib/uap10.0/Workaround1200257.dll": {}
@@ -8180,6 +8260,22 @@
         },
         "runtime": {
           "lib/portable-net4+sl5+netcore45+wpa81+wp8/Microsoft.Practices.ServiceLocation.dll": {}
+        }
+      },
+      "JYAdControl/2.3.6": {
+        "compile": {
+          "lib/netcore451/JiuYouAdUniversal.dll": {}
+        },
+        "runtime": {
+          "lib/netcore451/JiuYouAdUniversal.dll": {}
+        }
+      },
+      "JyAnalytics/1.0.10": {
+        "compile": {
+          "lib/netcore451/JYAnalyticsUniversal.dll": {}
+        },
+        "runtime": {
+          "lib/netcore451/JYAnalyticsUniversal.dll": {}
         }
       },
       "Microsoft.CSharp/4.0.0": {
@@ -9827,7 +9923,7 @@
           "lib/netcore50/System.Xml.XmlSerializer.dll": {}
         }
       },
-      "Win2D.uwp/1.7.0": {
+      "Win2D.uwp/1.8.0": {
         "compile": {
           "lib/uap10.0/Microsoft.Graphics.Canvas.winmd": {},
           "lib/uap10.0/Workaround1200257.dll": {}
@@ -9848,6 +9944,22 @@
         },
         "runtime": {
           "lib/portable-net4+sl5+netcore45+wpa81+wp8/Microsoft.Practices.ServiceLocation.dll": {}
+        }
+      },
+      "JYAdControl/2.3.6": {
+        "compile": {
+          "lib/netcore451/JiuYouAdUniversal.dll": {}
+        },
+        "runtime": {
+          "lib/netcore451/JiuYouAdUniversal.dll": {}
+        }
+      },
+      "JyAnalytics/1.0.10": {
+        "compile": {
+          "lib/netcore451/JYAnalyticsUniversal.dll": {}
+        },
+        "runtime": {
+          "lib/netcore451/JYAnalyticsUniversal.dll": {}
         }
       },
       "Microsoft.CSharp/4.0.0": {
@@ -11462,7 +11574,7 @@
           "runtimes/win8-aot/lib/netcore50/System.Xml.XmlSerializer.dll": {}
         }
       },
-      "Win2D.uwp/1.7.0": {
+      "Win2D.uwp/1.8.0": {
         "compile": {
           "lib/uap10.0/Microsoft.Graphics.Canvas.winmd": {},
           "lib/uap10.0/Workaround1200257.dll": {}
@@ -11491,6 +11603,42 @@
         "lib/portable-net4+sl5+netcore45+wpa81+wp8/Microsoft.Practices.ServiceLocation.XML",
         "package/services/metadata/core-properties/8a82b9e5a63a439481bfa8d4ec335002.psmdcp",
         "package/services/metadata/core-properties/99be0c88b2fd41c8b07c42071005ee47.psmdcp"
+      ]
+    },
+    "JYAdControl/2.3.6": {
+      "sha512": "7fZErIwcARffZ0IgTkw0EcwJV9JbkWiqhM+6V//ab8tOZPID83QnczMKM4XUibrAK/RP8wZflhk1Ljkypdz+uw==",
+      "type": "Package",
+      "files": [
+        "[Content_Types].xml",
+        "_rels/.rels",
+        "JYAdControl.nuspec",
+        "lib/netcore451/JiuYouAdUniversal.dll",
+        "lib/netcore451/JiuYouAdUniversal.pri",
+        "lib/netcore451/JiuYouAdUniversal/JiuYouAdUniversal.xr.xml",
+        "lib/netcore451/JiuYouAdUniversal/Themes/Generic.xbf",
+        "lib/wpa81/JiuYouAdUniversal.dll",
+        "lib/wpa81/JiuYouAdUniversal.pri",
+        "lib/wpa81/JiuYouAdUniversal/JiuYouAdUniversal.xr.xml",
+        "lib/wpa81/JiuYouAdUniversal/Themes/Generic.xbf",
+        "package/services/metadata/core-properties/98e71493ab354567b7fa8c7dbd95f969.psmdcp"
+      ]
+    },
+    "JyAnalytics/1.0.10": {
+      "sha512": "8bEZLDRtYLgBJ0lasekEvxyDUKOhALaWAHvEUj3QSUJ9WtZ/x63h/+gRUKrDcVRF0TG1GVJ09+TCfeJRMjTe/w==",
+      "type": "Package",
+      "files": [
+        "[Content_Types].xml",
+        "_rels/.rels",
+        "JyAnalytics.nuspec",
+        "lib/netcore451/JYAnalyticsUniversal.dll",
+        "lib/netcore451/JYAnalyticsUniversal.pri",
+        "lib/netcore451/JYAnalyticsUniversal.xml",
+        "lib/WP8/JYAnalyticsSdk.dll",
+        "lib/WP8/JYAnalyticsSdk.xml",
+        "lib/wpa81/JYAnalyticsUniversal.dll",
+        "lib/wpa81/JYAnalyticsUniversal.pri",
+        "lib/wpa81/JYAnalyticsUniversal.xml",
+        "package/services/metadata/core-properties/a9b4c8302f8f445cbaa44902e1678183.psmdcp"
       ]
     },
     "Microsoft.CSharp/4.0.0": {
@@ -14889,8 +15037,8 @@
         "System.Xml.XmlSerializer.nuspec"
       ]
     },
-    "Win2D.uwp/1.7.0": {
-      "sha512": "q1/BSLPlwzAjh96AOLM0y+qELWn/+hHcUvELNqELf1fX6zFfSAp7eRFamOXuazTDvPKzr0YeQ8J5ErE8oYkRBA==",
+    "Win2D.uwp/1.8.0": {
+      "sha512": "hO3GhbQWuqYRuWv62oDnS/WV46ZMUaPGcjuPuW3rdNW+HaqdOFP68iC2fSXM8V17vHWjWxQbcSz4rzonJtjj2A==",
       "type": "Package",
       "files": [
         "[Content_Types].xml",
@@ -14902,7 +15050,7 @@
         "lib/uap10.0/Microsoft.Graphics.Canvas.winmd",
         "lib/uap10.0/Microsoft.Graphics.Canvas.xml",
         "lib/uap10.0/Workaround1200257.dll",
-        "package/services/metadata/core-properties/804e31f876b743ed933710f3069c4090.psmdcp",
+        "package/services/metadata/core-properties/e43b16ef47044b9fb1c67e8f28c4bede.psmdcp",
         "runtimes/win10-arm/native/Microsoft.Graphics.Canvas.dll",
         "runtimes/win10-x64/native/Microsoft.Graphics.Canvas.dll",
         "runtimes/win10-x86/native/Microsoft.Graphics.Canvas.dll",
@@ -14913,10 +15061,12 @@
   },
   "projectFileDependencyGroups": {
     "": [
+      "JYAdControl >= 2.3.6",
+      "JyAnalytics >= 1.0.10",
       "Microsoft.NETCore.UniversalWindowsPlatform >= 5.0.0",
       "Newtonsoft.Json >= 7.0.1",
       "PlatformSpecific.Analyzer >= 1.0.5",
-      "Win2D.uwp >= 1.7.0"
+      "Win2D.uwp >= 1.8.0"
     ],
     "UAP,Version=v10.0": []
   }

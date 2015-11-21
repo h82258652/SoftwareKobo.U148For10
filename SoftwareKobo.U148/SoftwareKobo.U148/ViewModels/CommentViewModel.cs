@@ -14,23 +14,9 @@ namespace SoftwareKobo.U148.ViewModels
 
         private DelegateCommand<CommentItemReviewEventArgs> _commentReviewCommand;
 
-        private bool _isSending;
-
-        public bool IsSending
-        {
-            get
-            {
-                return this._isSending;
-            }
-            set
-            {
-                this.Set(ref this._isSending, value);
-            }
-        }
-
         private CommentCollection _comments;
-
         private Feed _feed;
+        private bool _isSending;
 
         private DelegateCommand _refreshCommand;
 
@@ -73,11 +59,36 @@ namespace SoftwareKobo.U148.ViewModels
             }
         }
 
+        public Feed Feed
+        {
+            get
+            {
+                return this._feed;
+            }
+            set
+            {
+                this.Set(ref this._feed, value);
+                this.Comments = new CommentCollection(this._service, value);
+            }
+        }
+
         public bool IsLogined
         {
             get
             {
                 return AppSettings.Instance.UserInfo != null;
+            }
+        }
+
+        public bool IsSending
+        {
+            get
+            {
+                return this._isSending;
+            }
+            set
+            {
+                this.Set(ref this._isSending, value);
             }
         }
 
@@ -116,19 +127,18 @@ namespace SoftwareKobo.U148.ViewModels
             Feed feed = parameter as Feed;
             if (feed != null)
             {
-                this._feed = feed;
-                this.Comments = new CommentCollection(this._service, this._feed);
+                this.Feed = feed;
             }
         }
 
         private async void SendComment(string content, Comment comment = null)
         {
             this.IsSending = true;
-            
+
             string message;
             try
             {
-                ResultBase result = await this._service.SendCommentAsync(this._feed, (UserInfo)AppSettings.Instance.UserInfo, content, AppSettings.Instance.SimulateDevice, comment);
+                ResultBase result = await this._service.SendCommentAsync(this.Feed, (UserInfo)AppSettings.Instance.UserInfo, content, AppSettings.Instance.SimulateDevice, comment);
                 if (result.Code == 0)
                 {
                     message = "发送成功！";

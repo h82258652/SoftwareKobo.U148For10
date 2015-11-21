@@ -1,19 +1,9 @@
-﻿using SoftwareKobo.UniversalToolkit.Mvvm;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
-using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Navigation;
+﻿using SoftwareKobo.U148.Datas;
+using SoftwareKobo.U148.Models;
 using SoftwareKobo.UniversalToolkit.Helpers;
+using SoftwareKobo.UniversalToolkit.Mvvm;
+using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Navigation;
 
 namespace SoftwareKobo.U148.Views
 {
@@ -35,6 +25,13 @@ namespace SoftwareKobo.U148.Views
             Messenger.Register(this);
 
             this.Frame.RegisterNavigateBack();
+
+            string query = e.Parameter as string;
+            if (string.IsNullOrEmpty(query) == false)
+            {
+                txtSearch.Text = query;
+                this.SendToViewModel(query);
+            }
         }
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)
@@ -46,9 +43,20 @@ namespace SoftwareKobo.U148.Views
             this.Frame.UnregisterNavigateBack();
         }
 
-        private void AutoSuggestBox_QuerySubmitted(AutoSuggestBox sender, AutoSuggestBoxQuerySubmittedEventArgs args)
+        private async void ListView_ItemClick(object sender, ItemClickEventArgs e)
         {
-
+            Feed feed = e.ClickedItem as Feed;
+            if (feed != null)
+            {
+                if (AppSettings.Instance.ShowDetailInNewWindow == false)
+                {
+                    this.Frame.Navigate(typeof(DetailView), feed);
+                }
+                else
+                {
+                    await App.Current.ShowNewWindowAsync(typeof(DetailView), feed);
+                }
+            }
         }
     }
 }

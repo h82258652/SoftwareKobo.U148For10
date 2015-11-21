@@ -13,7 +13,7 @@ namespace SoftwareKobo.U148.ViewModels
 {
     public class MainViewModel : ViewModelBase
     {
-        private Dictionary<FeedCategory, FeedCollection> _categories = new Dictionary<FeedCategory, FeedCollection>();
+        private readonly Dictionary<FeedCategory, FeedCollection> _categories = new Dictionary<FeedCategory, FeedCollection>();
 
         private DelegateCommand<Feed> _detailCommand;
 

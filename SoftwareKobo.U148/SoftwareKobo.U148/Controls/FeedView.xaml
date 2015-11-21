@@ -31,8 +31,7 @@
                 </DataTemplate>
             </controls:AdaptiveCollectionView.ItemTemplate>
             <controls:AdaptiveCollectionView.ItemContainerStyle>
-                <Style TargetType="controls:AdaptiveCollectionViewItem"
-                       x:Name="itemStyle">
+                <Style TargetType="controls:AdaptiveCollectionViewItem">
                     <Setter Property="HorizontalContentAlignment"
                             Value="Stretch" />
                     <Setter Property="VerticalContentAlignment"

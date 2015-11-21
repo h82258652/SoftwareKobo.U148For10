@@ -1,5 +1,7 @@
 ﻿{
   "dependencies": {
+    "JYAdControl": "2.3.6",
+    "JyAnalytics": "1.0.10",
     "Microsoft.NETCore.UniversalWindowsPlatform": "5.0.0",
     "Newtonsoft.Json": "7.0.1",
     "PlatformSpecific.Analyzer": "1.0.5",

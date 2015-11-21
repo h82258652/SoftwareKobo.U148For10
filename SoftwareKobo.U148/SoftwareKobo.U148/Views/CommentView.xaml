@@ -23,6 +23,8 @@
         <conv:IsNullOrEmptyConverter x:Key="ReviewButtonEnabledConverter"
                                      IsInversed="True" />
         <conv:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+        <localConv:Int32ToVisibilityConverter x:Key="NoCommentVisibilityConverter"
+                                              IsInversed="True" />
     </Page.Resources>
     <Page.BottomAppBar>
         <CommandBar>
@@ -90,6 +92,16 @@
                 </Style>
             </ListView.ItemContainerStyle>
         </ListView>
+        <Grid Visibility="{Binding Path=Feed.CountReview,Converter={StaticResource NoCommentVisibilityConverter}}">
+            <StackPanel HorizontalAlignment="Center"
+                        VerticalAlignment="Center">
+                <Image Source="/Assets/nocomment.png"
+                       Width="150"
+                       Height="150" />
+                <TextBlock Text="还没有评论呢？要不来发一条？"
+                           TextAlignment="Center" />
+            </StackPanel>
+        </Grid>
         <Grid x:Name="sendingMask"
               Background="#80000000"
               Visibility="{Binding Path=IsSending,Converter={StaticResource BooleanToVisibilityConverter}}">

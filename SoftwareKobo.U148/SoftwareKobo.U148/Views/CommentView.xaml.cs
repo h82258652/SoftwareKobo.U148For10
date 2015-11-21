@@ -6,6 +6,7 @@ using Windows.UI.Popups;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Navigation;
+using JYAnalyticsUniversal;
 
 namespace SoftwareKobo.U148.Views
 {
@@ -32,6 +33,8 @@ namespace SoftwareKobo.U148.Views
         {
             base.OnNavigatedFrom(e);
 
+            JYAnalytics.TrackPageEnd(nameof(CommentView));
+
             Messenger.Unregister(this);
 
             this.Frame.UnregisterNavigateBack();
@@ -40,6 +43,8 @@ namespace SoftwareKobo.U148.Views
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
+
+            JYAnalytics.TrackPageStart(nameof(CommentView));
 
             Messenger.Register(this);
 

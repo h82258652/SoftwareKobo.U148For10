@@ -8,27 +8,31 @@ using System.Threading.Tasks;
 
 namespace SoftwareKobo.U148.DataSources
 {
-    public class FeedSource : IncrementalItemSourceBase<Feed>
+    public class SearchedFeedSource : IncrementalItemSourceBase<Feed>
     {
-        private readonly FeedCategory _category;
+        private readonly string _keyword;
 
-        private readonly IFeedService _service;
+        private readonly ISearchService _service;
 
         private int _currentPage = 0;
 
-        public FeedSource(IFeedService service, FeedCategory category)
+        public SearchedFeedSource(ISearchService service, string keyword)
         {
             if (service == null)
             {
                 throw new ArgumentNullException(nameof(service));
             }
-            if (Enum.IsDefined(typeof(FeedCategory), category) == false)
+            if (keyword == null)
             {
-                throw new ArgumentException("feed category is not defined.", nameof(category));
+                throw new ArgumentNullException(nameof(keyword));
+            }
+            if (keyword.Length <= 0)
+            {
+                throw new ArgumentException("keyword must be not empty.", nameof(keyword));
             }
 
             this._service = service;
-            this._category = category;
+            this._keyword = keyword;
         }
 
         protected override async Task LoadMoreItemsAsync(ICollection<Feed> collection, uint suggestLoadCount)
@@ -37,7 +41,7 @@ namespace SoftwareKobo.U148.DataSources
             {
                 // 读取下一页数据。
                 int nextPage = this._currentPage + 1;
-                DataResultBase<ResultList<Feed>> result = await this._service.GetFeedListAsync(this._category, nextPage);
+                DataResultBase<ResultList<Feed>> result = await this._service.GetSearchResultsAsync(this._keyword, nextPage);
                 if (result.Code == 0)// 请求成功。
                 {
                     ResultList<Feed> resultList = result.Data;

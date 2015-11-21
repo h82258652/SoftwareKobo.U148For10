@@ -4,10 +4,16 @@
       xmlns:local="using:SoftwareKobo.U148.Views"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-      xmlns:controls="using:SoftwareKobo.U148.Controls"
+      xmlns:localControls="using:SoftwareKobo.U148.Controls"
+      xmlns:conv="using:SoftwareKobo.UniversalToolkit.Converters"
+      xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
+      xmlns:core="using:Microsoft.Xaml.Interactions.Core"
       mc:Ignorable="d"
       DataContext="{Binding Source={StaticResource Locator},Path=Search}"
       RequestedTheme="{Binding Source={StaticResource Settings},Path=ThemeMode}">
+    <Page.Resources>
+        <conv:ItemClickEventArgsConverter x:Key="ItemClickEventArgsConverter" />
+    </Page.Resources>
     <Page.Transitions>
         <TransitionCollection>
             <EdgeUIThemeTransition Edge="Right" />
@@ -20,19 +26,47 @@
         </Grid.RowDefinitions>
         <Grid Grid.Row="0"
               Background="{ThemeResource AccentBrush}">
-            <AutoSuggestBox PlaceholderText="搜索"
+            <AutoSuggestBox x:Name="txtSearch"
+                            PlaceholderText="搜索"
                             QueryIcon="Find"
-                            Margin="8"
-                            QuerySubmitted="AutoSuggestBox_QuerySubmitted"></AutoSuggestBox>
+                            Margin="8">
+                <interactivity:Interaction.Behaviors>
+                    <core:EventTriggerBehavior EventName="QuerySubmitted">
+                        <core:InvokeCommandAction Command="{Binding Path=SearchCommand}"
+                                                  CommandParameter="{Binding ElementName=txtSearch,Path=Text}" />
+                    </core:EventTriggerBehavior>
+                </interactivity:Interaction.Behaviors>
+            </AutoSuggestBox>
         </Grid>
         <Grid Grid.Row="1">
-            <ListView SelectionMode="None"
-                      IsItemClickEnabled="True">
+            <ListView ItemsSource="{Binding SearchedResults}"
+                      SelectionMode="None"
+                      IsItemClickEnabled="True"
+                      ItemClick="ListView_ItemClick">
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <controls:FeedItem></controls:FeedItem>
+                        <localControls:FeedItem />
                     </DataTemplate>
                 </ListView.ItemTemplate>
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="ListViewItem">
+                        <Setter Property="HorizontalContentAlignment"
+                                Value="Stretch" />
+                        <Setter Property="VerticalContentAlignment"
+                                Value="Stretch" />
+                        <Setter Property="Padding"
+                                Value="0" />
+                        <Setter Property="Background"
+                                Value="{ThemeResource ItemBackgroundBrush}" />
+                        <Setter Property="Margin"
+                                Value="0,0,0,4" />
+                    </Style>
+                </ListView.ItemContainerStyle>
+                <ListView.ItemContainerTransitions>
+                    <TransitionCollection>
+                        <AddDeleteThemeTransition />
+                    </TransitionCollection>
+                </ListView.ItemContainerTransitions>
             </ListView>
         </Grid>
     </Grid>

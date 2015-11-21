@@ -12,5 +12,26 @@
             <EdgeUIThemeTransition Edge="Right" />
         </TransitionCollection>
     </Page.Transitions>
-    <Grid Background="{ThemeResource AppBackgroundBrush}"></Grid>
+    <Grid Background="{ThemeResource AppBackgroundBrush}">
+        <StackPanel HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Orientation="Vertical">
+            <Image Stretch="None"
+                   Source="/Assets/logo.gif"
+                   HorizontalAlignment="Center" />
+            <StackPanel Margin="10,20,10,10">
+                <TextBlock Text="U148（有意思吧）"
+                           TextAlignment="Center"
+                           FontSize="16" />
+                <TextBlock Text="Windows 10 第三方客户端"
+                           TextAlignment="Center"
+                           FontSize="16" />
+            </StackPanel>
+            <StackPanel>
+                <TextBlock Text="作者：h82258652"
+                           TextAlignment="Center"
+                           FontSize="16" />
+            </StackPanel>
+        </StackPanel>
+    </Grid>
 </Page>
