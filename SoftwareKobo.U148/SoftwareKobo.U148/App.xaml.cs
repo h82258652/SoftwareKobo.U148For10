@@ -22,6 +22,7 @@ using SoftwareKobo.U148.Datas;
 using SoftwareKobo.UniversalToolkit.Helpers;
 using Windows.UI.ViewManagement;
 using JYAnalyticsUniversal;
+using System.Diagnostics;
 
 namespace SoftwareKobo.U148
 {
@@ -50,6 +51,11 @@ namespace SoftwareKobo.U148
             if (StatusBarHelper.IsUseable)
             {
                 await StatusBar.GetForCurrentView().HideAsync();
+            }
+
+            if (RootFrame != null)
+            {
+                info.NavigatePage = null;
             }
         }
 

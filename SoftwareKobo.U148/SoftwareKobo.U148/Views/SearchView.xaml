@@ -45,7 +45,7 @@
                       ItemClick="ListView_ItemClick">
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <localControls:FeedItem />
+                        <localControls:SearchFeedItem />
                     </DataTemplate>
                 </ListView.ItemTemplate>
                 <ListView.ItemContainerStyle>

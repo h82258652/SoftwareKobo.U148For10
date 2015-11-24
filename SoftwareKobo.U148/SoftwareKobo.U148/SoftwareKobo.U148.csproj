@@ -17,7 +17,11 @@
     <EnableDotNetNativeCompatibleProfile>true</EnableDotNetNativeCompatibleProfile>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{A5A43C5B-DE2A-4C0C-9213-0A381AF9435A};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-    <PackageCertificateKeyFile>SoftwareKobo.U148_TemporaryKey.pfx</PackageCertificateKeyFile>
+    <PackageCertificateKeyFile>SoftwareKobo.U148_StoreKey.pfx</PackageCertificateKeyFile>
+    <AppxAutoIncrementPackageRevision>True</AppxAutoIncrementPackageRevision>
+    <AppxBundlePlatforms>x86|x64|arm</AppxBundlePlatforms>
+    <AppxBundle>Always</AppxBundle>
+    <PackageCertificateThumbprint>54117F01A433A9C55751831E9301CBE53A0CD80D</PackageCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|ARM'">
     <DebugSymbols>true</DebugSymbols>
@@ -108,6 +112,9 @@
       <DependentUpon>FeedView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\ItemClickEventHandler.cs" />
+    <Compile Include="Controls\SearchFeedItem.xaml.cs">
+      <DependentUpon>SearchFeedItem.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Converters\CommentReviewCountConverter.cs" />
     <Compile Include="Converters\FeedCategoryNameConverter.cs" />
     <Compile Include="Converters\HtmlToTextConverter.cs" />
@@ -183,12 +190,14 @@
     <AppxManifest Include="Package.appxmanifest">
       <SubType>Designer</SubType>
     </AppxManifest>
+    <None Include="SoftwareKobo.U148_StoreKey.pfx" />
     <None Include="SoftwareKobo.U148_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\logo.gif" />
     <Content Include="Assets\menu_background.jpg" />
     <Content Include="Assets\nocomment.png" />
+    <None Include="Package.StoreAssociation.xml" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />
@@ -215,6 +224,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\FeedView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\SearchFeedItem.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
