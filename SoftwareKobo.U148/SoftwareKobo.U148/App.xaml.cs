@@ -28,6 +28,8 @@ namespace SoftwareKobo.U148
 {
     sealed partial class App : Bootstrapper
     {
+        const string JIUYOU_APPKEY = "4fd64ae0ccd8d54db0dd45d8ac733fb7";
+
         public App()
         {
             this.InitializeComponent();
@@ -46,7 +48,7 @@ namespace SoftwareKobo.U148
 
         protected override async Task OnPreStartAsync(IActivatedEventArgs args, AppStartInfo info)
         {
-            await JYAnalytics.StartTrackAsync("4fd64ae0ccd8d54db0dd45d8ac733fb7");
+            await JYAnalytics.StartTrackAsync(JIUYOU_APPKEY);
 
             if (StatusBarHelper.IsUseable)
             {
