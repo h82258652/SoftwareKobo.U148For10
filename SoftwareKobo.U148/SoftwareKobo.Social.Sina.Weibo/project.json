@@ -1,12 +1,8 @@
 ﻿{
   "dependencies": {
-    "Google.ProtocolBuffersLite": "2.4.1.555",
-    "JYAdControl": "2.3.6",
-    "JyAnalytics": "1.0.10",
+    "Microsoft.Net.Http": "2.2.29",
     "Microsoft.NETCore.UniversalWindowsPlatform": "5.0.0",
-    "Newtonsoft.Json": "7.0.1",
-    "PlatformSpecific.Analyzer": "1.0.5",
-    "Win2D.uwp": "1.8.0"
+    "Newtonsoft.Json": "7.0.1"
   },
   "frameworks": {
     "uap10.0": {}

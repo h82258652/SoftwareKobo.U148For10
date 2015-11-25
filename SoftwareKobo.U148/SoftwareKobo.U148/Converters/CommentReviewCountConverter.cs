@@ -14,8 +14,12 @@ namespace SoftwareKobo.U148.Converters
                 {
                     return "99+";
                 }
+                else if (i >= 0)
+                {
+                    return i;
+                }
             }
-            return value;
+            return "...";
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, string language)
