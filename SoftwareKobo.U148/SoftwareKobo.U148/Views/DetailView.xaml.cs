@@ -1,5 +1,6 @@
 ﻿using JiuYouAdUniversal.Models;
 using JYAnalyticsUniversal;
+using Porrey.Uwp.Ntp;
 using SoftwareKobo.U148.Datas;
 using SoftwareKobo.U148.Extensions;
 using SoftwareKobo.U148.Models;
@@ -83,19 +84,49 @@ namespace SoftwareKobo.U148.Views
             }
         }
 
-        private void DetailView_Loaded(object sender, RoutedEventArgs e)
+        private async void DetailView_Loaded(object sender, RoutedEventArgs e)
         {
-            if (AppSettings.Instance.LastClickAdTime + TimeSpan.FromHours(12) < DateTime.Now)
+            NtpClient client = new NtpClient();
+            try
             {
-                this.FindName("ad");
+                DateTime? time = await client.GetAsync(NTPSERVERS);
+                if (time.HasValue)
+                {
+                    if (AppSettings.Instance.LastClickAdTime + TimeSpan.FromHours(12) >= time.Value)
+                    {
+                        return;
+                    }
+                }
             }
+            catch
+            {
+            }
+            this.FindName("ad");
         }
 
-        private void Ad_Click(object sender, AdClickEventArgs e)
+        private static readonly string[] NTPSERVERS = new string[]
         {
+            "time.windows.com",
+            "time.nist.gov"
+        };
+
+        private async void Ad_Click(object sender, AdClickEventArgs e)
+        {
+
             if (e.clickResult == "1")
             {
-                AppSettings.Instance.LastClickAdTime = DateTime.Now;
+                NtpClient client = new NtpClient();
+                try
+                {
+                    DateTime? time = await client.GetAsync(NTPSERVERS);
+                    if (time.HasValue)
+                    {
+                        AppSettings.Instance.LastClickAdTime = time.Value;
+                    }
+                }
+                catch
+                {
+                }
                 ad.Visibility = Visibility.Collapsed;
             }
         }

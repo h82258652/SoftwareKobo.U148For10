@@ -12,7 +12,8 @@
       xmlns:ad="using:JiuYouAdUniversal"
       mc:Ignorable="d"
       DataContext="{Binding Source={StaticResource Locator},Path=Detail}"
-      RequestedTheme="{Binding Source={StaticResource Settings},Path=ThemeMode}" Loaded="DetailView_Loaded">
+      RequestedTheme="{Binding Source={StaticResource Settings},Path=ThemeMode}"
+      Loaded="DetailView_Loaded">
     <Page.Transitions>
         <TransitionCollection>
             <NavigationThemeTransition>
@@ -59,7 +60,8 @@
                       Grid.Row="0"
                       AdType="Banner"
                       ApplicationKey="4fd64ae0ccd8d54db0dd45d8ac733fb7"
-                      VerticalAlignment="Top" AdClick="Ad_Click" />
+                      VerticalAlignment="Top"
+                      AdClick="Ad_Click" />
         <WebView x:Name="webView"
                  Grid.Row="1"
                  DefaultBackgroundColor="Transparent" />

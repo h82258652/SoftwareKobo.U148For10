@@ -1,6 +1,7 @@
 ﻿{
   "dependencies": {
     "Google.ProtocolBuffersLite": "2.4.1.555",
+    "IoT.Ntp": "1.0.0",
     "JYAdControl": "2.3.6",
     "JyAnalytics": "1.0.10",
     "Microsoft.NETCore.UniversalWindowsPlatform": "5.0.0",

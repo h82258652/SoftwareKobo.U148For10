@@ -21,6 +21,17 @@
           "lib/portable-net40+sl4+sl5+wp7+wp8+win8/Google.ProtocolBuffersLite.Serialization.dll": {}
         }
       },
+      "IoT.Ntp/1.0.0": {
+        "dependencies": {
+          "Microsoft.NETCore.UniversalWindowsPlatform": "[5.0.0, )"
+        },
+        "compile": {
+          "lib/netcore/Porrey.Uwp.Ntp.dll": {}
+        },
+        "runtime": {
+          "lib/netcore/Porrey.Uwp.Ntp.dll": {}
+        }
+      },
       "JYAdControl/2.3.6": {
         "compile": {
           "lib/netcore451/JiuYouAdUniversal.dll": {}
@@ -1641,6 +1652,17 @@
         "runtime": {
           "lib/portable-net40+sl4+sl5+wp7+wp8+win8/Google.ProtocolBuffersLite.dll": {},
           "lib/portable-net40+sl4+sl5+wp7+wp8+win8/Google.ProtocolBuffersLite.Serialization.dll": {}
+        }
+      },
+      "IoT.Ntp/1.0.0": {
+        "dependencies": {
+          "Microsoft.NETCore.UniversalWindowsPlatform": "[5.0.0, )"
+        },
+        "compile": {
+          "lib/netcore/Porrey.Uwp.Ntp.dll": {}
+        },
+        "runtime": {
+          "lib/netcore/Porrey.Uwp.Ntp.dll": {}
         }
       },
       "JYAdControl/2.3.6": {
@@ -3358,6 +3380,17 @@
           "lib/portable-net40+sl4+sl5+wp7+wp8+win8/Google.ProtocolBuffersLite.Serialization.dll": {}
         }
       },
+      "IoT.Ntp/1.0.0": {
+        "dependencies": {
+          "Microsoft.NETCore.UniversalWindowsPlatform": "[5.0.0, )"
+        },
+        "compile": {
+          "lib/netcore/Porrey.Uwp.Ntp.dll": {}
+        },
+        "runtime": {
+          "lib/netcore/Porrey.Uwp.Ntp.dll": {}
+        }
+      },
       "JYAdControl/2.3.6": {
         "compile": {
           "lib/netcore451/JiuYouAdUniversal.dll": {}
@@ -5043,6 +5076,17 @@
         "runtime": {
           "lib/portable-net40+sl4+sl5+wp7+wp8+win8/Google.ProtocolBuffersLite.dll": {},
           "lib/portable-net40+sl4+sl5+wp7+wp8+win8/Google.ProtocolBuffersLite.Serialization.dll": {}
+        }
+      },
+      "IoT.Ntp/1.0.0": {
+        "dependencies": {
+          "Microsoft.NETCore.UniversalWindowsPlatform": "[5.0.0, )"
+        },
+        "compile": {
+          "lib/netcore/Porrey.Uwp.Ntp.dll": {}
+        },
+        "runtime": {
+          "lib/netcore/Porrey.Uwp.Ntp.dll": {}
         }
       },
       "JYAdControl/2.3.6": {
@@ -6765,6 +6809,17 @@
           "lib/portable-net40+sl4+sl5+wp7+wp8+win8/Google.ProtocolBuffersLite.Serialization.dll": {}
         }
       },
+      "IoT.Ntp/1.0.0": {
+        "dependencies": {
+          "Microsoft.NETCore.UniversalWindowsPlatform": "[5.0.0, )"
+        },
+        "compile": {
+          "lib/netcore/Porrey.Uwp.Ntp.dll": {}
+        },
+        "runtime": {
+          "lib/netcore/Porrey.Uwp.Ntp.dll": {}
+        }
+      },
       "JYAdControl/2.3.6": {
         "compile": {
           "lib/netcore451/JiuYouAdUniversal.dll": {}
@@ -8450,6 +8505,17 @@
         "runtime": {
           "lib/portable-net40+sl4+sl5+wp7+wp8+win8/Google.ProtocolBuffersLite.dll": {},
           "lib/portable-net40+sl4+sl5+wp7+wp8+win8/Google.ProtocolBuffersLite.Serialization.dll": {}
+        }
+      },
+      "IoT.Ntp/1.0.0": {
+        "dependencies": {
+          "Microsoft.NETCore.UniversalWindowsPlatform": "[5.0.0, )"
+        },
+        "compile": {
+          "lib/netcore/Porrey.Uwp.Ntp.dll": {}
+        },
+        "runtime": {
+          "lib/netcore/Porrey.Uwp.Ntp.dll": {}
         }
       },
       "JYAdControl/2.3.6": {
@@ -10170,6 +10236,17 @@
         "runtime": {
           "lib/portable-net40+sl4+sl5+wp7+wp8+win8/Google.ProtocolBuffersLite.dll": {},
           "lib/portable-net40+sl4+sl5+wp7+wp8+win8/Google.ProtocolBuffersLite.Serialization.dll": {}
+        }
+      },
+      "IoT.Ntp/1.0.0": {
+        "dependencies": {
+          "Microsoft.NETCore.UniversalWindowsPlatform": "[5.0.0, )"
+        },
+        "compile": {
+          "lib/netcore/Porrey.Uwp.Ntp.dll": {}
+        },
+        "runtime": {
+          "lib/netcore/Porrey.Uwp.Ntp.dll": {}
         }
       },
       "JYAdControl/2.3.6": {
@@ -11916,6 +11993,17 @@
         "tools/ProtoGen.exe.config",
         "tools/ProtoMunge.exe",
         "tools/tutorial/addressbook.proto"
+      ]
+    },
+    "IoT.Ntp/1.0.0": {
+      "sha512": "zoQzuA/PDK0uHkMJlUHJYWQptKIelkRePhH9BSDtHL4dblbIqu5K+KbXRKE4Y9h4xMC6WFBmTxOta50PnBTfsw==",
+      "type": "Package",
+      "files": [
+        "[Content_Types].xml",
+        "_rels/.rels",
+        "IoT.Ntp.nuspec",
+        "lib/netcore/Porrey.Uwp.Ntp.dll",
+        "package/services/metadata/core-properties/eb41f49d85244490b8a01901eff9be6e.psmdcp"
       ]
     },
     "JYAdControl/2.3.6": {
@@ -15554,6 +15642,7 @@
   "projectFileDependencyGroups": {
     "": [
       "Google.ProtocolBuffersLite >= 2.4.1.555",
+      "IoT.Ntp >= 1.0.0",
       "JYAdControl >= 2.3.6",
       "JyAnalytics >= 1.0.10",
       "Microsoft.NETCore.UniversalWindowsPlatform >= 5.0.0",
