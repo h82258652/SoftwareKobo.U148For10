@@ -1,26 +1,47 @@
 ﻿using JiuYouAdUniversal.Models;
 using JYAnalyticsUniversal;
+using MicroMsg;
 using Porrey.Uwp.Ntp;
+using SoftwareKobo.Social.Sina.Weibo;
+using SoftwareKobo.Social.Sina.Weibo.Models;
 using SoftwareKobo.U148.Datas;
 using SoftwareKobo.U148.Extensions;
 using SoftwareKobo.U148.Models;
+using SoftwareKobo.UniversalToolkit.Extensions;
 using SoftwareKobo.UniversalToolkit.Helpers;
 using SoftwareKobo.UniversalToolkit.Mvvm;
 using System;
+using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading.Tasks;
-using Windows.ApplicationModel.Core;
 using Windows.Foundation;
-using Windows.Phone.UI.Input;
-using Windows.UI.Core;
-using Windows.UI.ViewManagement;
+using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Navigation;
+using Windows.Web.Http;
 
 namespace SoftwareKobo.U148.Views
 {
     public sealed partial class DetailView : Page, IView
     {
+        private bool _isExecuting;
+
+        public bool IsExecuting
+        {
+            get
+            {
+                return _isExecuting;
+            }
+            set
+            {
+                _isExecuting = value;
+                popup.IsOpen = false;
+                ExecutingMask.Visibility = value ? Visibility.Visible : Visibility.Collapsed;
+                appBar.Visibility = value ? Visibility.Collapsed : Visibility.Visible;
+            }
+        }
+
         private TaskCompletionSource<object> _domReadyTcs;
 
         public DetailView()
@@ -51,6 +72,8 @@ namespace SoftwareKobo.U148.Views
             this.Frame.UnregisterNavigateBack();
         }
 
+        private Feed _feed;
+
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
@@ -61,7 +84,13 @@ namespace SoftwareKobo.U148.Views
 
             if (this.Frame.CanGoBack)
             {
-                this.Frame.RegisterNavigateBack();
+                this.Frame.RegisterNavigateBack(() =>
+                {
+                    if (this.Frame.CanGoBack && this.IsExecuting == false)
+                    {
+                        this.Frame.GoBack();
+                    }
+                });
             }
 
             if (e.NavigationMode != NavigationMode.Back)
@@ -76,10 +105,11 @@ namespace SoftwareKobo.U148.Views
                 webView.DOMContentLoaded += handler;
                 webView.Navigate(new Uri("ms-appx-web:///Web/Views/app.html"));
 
-                Feed parameter = e.Parameter as Feed;
-                if (parameter != null)
+                Feed feed = e.Parameter as Feed;
+                if (feed != null)
                 {
-                    this.SendToViewModel(parameter);
+                    _feed = feed;
+                    this.SendToViewModel(feed);
                 }
             }
         }
@@ -112,7 +142,6 @@ namespace SoftwareKobo.U148.Views
 
         private async void Ad_Click(object sender, AdClickEventArgs e)
         {
-
             if (e.clickResult == "1")
             {
                 NtpClient client = new NtpClient();
@@ -129,6 +158,108 @@ namespace SoftwareKobo.U148.Views
                 }
                 ad.Visibility = Visibility.Collapsed;
             }
+        }
+
+        private void BtnShare_Click(object sender, RoutedEventArgs e)
+        {
+            popup.IsOpen = true;
+        }
+
+        private async void PnlWeibo_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            IsExecuting = true;
+
+            WeiboClient client = null;
+            try
+            {
+                client = await WeiboClient.CreateAsync();
+            }
+            catch
+            {
+                await new MessageDialog("授权失败").ShowAsyncEnqueue();
+                IsExecuting = false;
+                return;
+            }
+
+            byte[] thumbnail;
+            try
+            {
+                thumbnail = await GetThumbnailDataAsync();
+            }
+            catch
+            {
+                await new MessageDialog("网络连接错误").ShowAsyncEnqueue();
+                IsExecuting = false;
+                return;
+            }
+
+            Weibo shareResult;
+            try
+            {
+                string text = _feed.Title + "http://www.u148.net/article/" + _feed.Id + ".html";
+                shareResult = await client.ShareImageAsync(thumbnail, text);
+            }
+            catch
+            {
+                await new MessageDialog("网络连接错误").ShowAsyncEnqueue();
+                IsExecuting = false;
+                return;
+            }
+
+            if (shareResult.IsSuccess)
+            {
+                await new MessageDialog("分享成功").ShowAsyncEnqueue();
+                IsExecuting = false;
+            }
+            else
+            {
+                if (shareResult.ErrorCode == 21332)
+                {
+                    WeiboClient.ClearAuthorize();
+                }
+
+                await new MessageDialog("分享失败" + Environment.NewLine + shareResult.Error).ShowAsyncEnqueue();
+                IsExecuting = false;
+            }
+        }
+
+        private async Task<byte[]> GetThumbnailDataAsync()
+        {
+            using (HttpClient client = new HttpClient())
+            {
+                return (await client.GetBufferAsync(new Uri(_feed.PicMid))).ToArray();
+            }
+        }
+
+        private async void PnlWechat_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            IsExecuting = true;
+
+            if (DeviceFamilyHelper.IsDesktop)
+            {
+                await new MessageDialog("抱歉，桌面端暂时不支持该功能").ShowAsyncEnqueue();
+                IsExecuting = false;
+                return;
+            }
+
+            bool isSuccess = false;
+            try
+            {
+                WXImageMessage message = new WXImageMessage();
+                message.Title = _feed.Title;
+                message.ImageData = await this.GetThumbnailDataAsync();
+
+                SendMessageToWX.Req request = new SendMessageToWX.Req(message, SendMessageToWX.Req.WXSceneChooseByUser);
+                IWXAPI api = WXAPIFactory.CreateWXAPI("wx725b599977a3718a");
+
+                isSuccess = await api.SendReqAsync(request);
+            }
+            catch
+            {
+                await new MessageDialog("分享失败").ShowAsyncEnqueue();
+            }
+
+            IsExecuting = false;
         }
     }
 }

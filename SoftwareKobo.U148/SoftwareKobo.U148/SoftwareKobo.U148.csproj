@@ -198,6 +198,8 @@
     <Content Include="Assets\menu_background.jpg" />
     <Content Include="Assets\nocomment.png" />
     <None Include="Package.StoreAssociation.xml" />
+    <Content Include="Assets\SinaWeibo.png" />
+    <Content Include="Assets\wechat.png" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />

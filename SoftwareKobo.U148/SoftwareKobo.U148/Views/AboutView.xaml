@@ -33,7 +33,7 @@
                            FontSize="16" />
             </StackPanel>
         </StackPanel>
-        <TextBlock Text="友情提示：成功点击广告一次，12小时内不再显示。"
+        <TextBlock Text="友情提示：成功点击广告一次，12小时内不再显示。（需网络验证）"
                    VerticalAlignment="Bottom"
                    TextAlignment="Center"
                    TextWrapping="Wrap"
