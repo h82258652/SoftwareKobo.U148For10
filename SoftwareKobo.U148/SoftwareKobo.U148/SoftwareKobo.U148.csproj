@@ -272,7 +272,7 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\SoftwareKobo.UniversalToolkit3\SoftwareKobo.UniversalToolkit\SoftwareKobo.UniversalToolkit\SoftwareKobo.UniversalToolkit.csproj">
+    <ProjectReference Include="..\..\..\SoftwareKobo.UniversalToolkit\SoftwareKobo.UniversalToolkit\SoftwareKobo.UniversalToolkit\SoftwareKobo.UniversalToolkit.csproj">
       <Project>{2835cfd9-6d57-4b0e-a2f9-0e0fd12d3abd}</Project>
       <Name>SoftwareKobo.UniversalToolkit</Name>
     </ProjectReference>
@@ -280,15 +280,8 @@
       <Project>{7076b845-958d-412c-bf79-c7a2e61a4bff}</Project>
       <Name>SoftwareKobo.Social.Sina.Weibo</Name>
     </ProjectReference>
-    <ProjectReference Include="..\WeChatSDK.UWP\WeChatSDK.UWP.csproj">
-      <Project>{2f8d2d04-6f8e-40aa-9fbf-a2389263e4c7}</Project>
-      <Name>WeChatSDK.UWP</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <SDKReference Include="BehaviorsXamlSDKManaged, Version=12.0">
-      <Name>Behaviors SDK %28XAML%29</Name>
-    </SDKReference>
     <SDKReference Include="WindowsMobile, Version=10.0.10240.0">
       <Name>Windows Mobile Extensions for the UWP</Name>
     </SDKReference>
