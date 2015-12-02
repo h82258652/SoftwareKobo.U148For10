@@ -1,6 +1,7 @@
 ﻿using JiuYouAdUniversal.Models;
 using JYAnalyticsUniversal;
 using MicroMsg;
+using MicroMsg.sdk;
 using Porrey.Uwp.Ntp;
 using SoftwareKobo.Social.Sina.Weibo;
 using SoftwareKobo.Social.Sina.Weibo.Models;
@@ -242,17 +243,17 @@ namespace SoftwareKobo.U148.Views
                 return;
             }
 
-            bool isSuccess = false;
             try
             {
-                WXImageMessage message = new WXImageMessage();
-                message.Title = _feed.Title;
-                message.ImageData = await this.GetThumbnailDataAsync();
-
-                SendMessageToWX.Req request = new SendMessageToWX.Req(message, SendMessageToWX.Req.WXSceneChooseByUser);
+                int scene = SendMessageToWX.Req.WXSceneTimeline;
+                WXImageMessage message = new WXImageMessage()
+                {
+                    Title = _feed.Title,
+                    ImageUrl = _feed.PicMid
+                };
+                SendMessageToWX.Req req = new SendMessageToWX.Req(message, scene);
                 IWXAPI api = WXAPIFactory.CreateWXAPI("wx725b599977a3718a");
-
-                isSuccess = await api.SendReqAsync(request);
+                var isValid = await api.SendReq(req);
             }
             catch
             {
@@ -260,6 +261,11 @@ namespace SoftwareKobo.U148.Views
             }
 
             IsExecuting = false;
+        }
+
+        private void BtnComment_Click(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(CommentView), _feed);
         }
     }
 }

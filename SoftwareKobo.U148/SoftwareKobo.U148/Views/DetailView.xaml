@@ -17,7 +17,9 @@
     <Page.Transitions>
         <TransitionCollection>
             <NavigationThemeTransition>
-                <ContinuumNavigationTransitionInfo />
+                <NavigationThemeTransition.DefaultNavigationTransitionInfo>
+                    <ContinuumNavigationTransitionInfo />
+                </NavigationThemeTransition.DefaultNavigationTransitionInfo>
             </NavigationThemeTransition>
         </TransitionCollection>
     </Page.Transitions>
@@ -72,7 +74,8 @@
                     </controls:FullWindowPopup>
                 </controls:FullWindowPopup.AttachedPopup>
             </AppBarButton>
-            <controls:AppBarButtonEx Label="评论">
+            <controls:AppBarButtonEx Label="评论"
+                                     Click="BtnComment_Click">
                 <Grid>
                     <FontIcon Glyph="&#xE8BD;"
                               FontFamily="Segoe MDL2 Assets"
@@ -87,12 +90,12 @@
                             <TranslateTransform Y="-2" />
                         </TextBlock.RenderTransform></TextBlock>
                 </Grid>
-                <interactivity:Interaction.Behaviors>
+                <!--<interactivity:Interaction.Behaviors>
                     <core:EventTriggerBehavior EventName="Click">
                         <core:NavigateToPageAction TargetPage="SoftwareKobo.U148.Views.CommentView"
                                                    Parameter="{Binding Path=Feed}" />
                     </core:EventTriggerBehavior>
-                </interactivity:Interaction.Behaviors>
+                </interactivity:Interaction.Behaviors>-->
             </controls:AppBarButtonEx>
         </CommandBar>
     </Page.BottomAppBar>

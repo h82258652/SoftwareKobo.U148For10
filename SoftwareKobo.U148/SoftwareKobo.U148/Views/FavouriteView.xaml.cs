@@ -37,8 +37,8 @@ namespace SoftwareKobo.U148.Views
 
             this.Frame.RegisterNavigateBack();
 
-            UserService service = new UserService();
-            var s = await service.AddFavouriteAsync((UserInfo)AppSettings.Instance.UserInfo, new Feed() { Id = 134511 });
+            //UserService service = new UserService();
+            //var s = await service.AddFavouriteAsync((UserInfo)AppSettings.Instance.UserInfo, new Feed() { Id = 134511 });
         }
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)

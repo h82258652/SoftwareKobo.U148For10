@@ -116,13 +116,14 @@
                                 <controls:HamburgerItem Foreground="WhiteSmoke"
                                                         Text="登录"
                                                         Icon="Contact"
-                                                        Visibility="{Binding Path=IsLogined,Converter={StaticResource IsNotLoginedConverter}}">
+                                                        Visibility="{Binding Path=IsLogined,Converter={StaticResource IsNotLoginedConverter}}"
+                                                        Click="BtnLogin_Click">
                                     <interactivity:Interaction.Behaviors>
                                         <core:EventTriggerBehavior EventName="Click">
                                             <core:ChangePropertyAction TargetObject="{Binding ElementName=menu}"
                                                                        PropertyName="IsPaneOpen"
                                                                        Value="False" />
-                                            <core:NavigateToPageAction TargetPage="SoftwareKobo.U148.Views.LoginView" />
+                                            <!--<core:NavigateToPageAction TargetPage="SoftwareKobo.U148.Views.LoginView" />-->
                                         </core:EventTriggerBehavior>
                                     </interactivity:Interaction.Behaviors>
                                 </controls:HamburgerItem>
@@ -212,13 +213,13 @@
                                 </controls:HamburgerItem>
                                 <controls:HamburgerItem Foreground="WhiteSmoke"
                                                         Text="设置"
-                                                        Icon="Setting">
+                                                        Icon="Setting" Click="BtnSetting_Click">
                                     <interactivity:Interaction.Behaviors>
                                         <core:EventTriggerBehavior EventName="Click">
                                             <core:ChangePropertyAction TargetObject="{Binding ElementName=menu}"
                                                                        PropertyName="IsPaneOpen"
                                                                        Value="False" />
-                                            <core:NavigateToPageAction TargetPage="SoftwareKobo.U148.Views.SettingView" />
+                                            <!--<core:NavigateToPageAction TargetPage="SoftwareKobo.U148.Views.SettingView" />-->
                                         </core:EventTriggerBehavior>
                                     </interactivity:Interaction.Behaviors>
                                 </controls:HamburgerItem>
@@ -252,7 +253,7 @@
                                     </interactivity:Interaction.Behaviors>
                                 </controls:HamburgerItem>
                                 <controls:HamburgerItem Foreground="WhiteSmoke"
-                                                        Text="关于">
+                                                        Text="关于" Click="BtnAbout_Click">
                                     <controls:HamburgerItem.Icon>
                                         <FontIcon FontFamily="Segoe MDL2 Assets"
                                                   Glyph="&#xE946;" />
@@ -262,7 +263,7 @@
                                             <core:ChangePropertyAction TargetObject="{Binding ElementName=menu}"
                                                                        PropertyName="IsPaneOpen"
                                                                        Value="False" />
-                                            <core:NavigateToPageAction TargetPage="SoftwareKobo.U148.Views.AboutView" />
+                                            <!--<core:NavigateToPageAction TargetPage="SoftwareKobo.U148.Views.AboutView" />-->
                                         </core:EventTriggerBehavior>
                                     </interactivity:Interaction.Behaviors>
                                 </controls:HamburgerItem>

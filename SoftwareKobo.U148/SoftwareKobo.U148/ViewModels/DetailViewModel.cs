@@ -2,6 +2,7 @@
 using SoftwareKobo.U148.Services;
 using SoftwareKobo.UniversalToolkit.Mvvm;
 using System;
+using System.Diagnostics;
 
 namespace SoftwareKobo.U148.ViewModels
 {
@@ -87,6 +88,20 @@ namespace SoftwareKobo.U148.ViewModels
             {
             }
             this.IsLoading = false;
+        }
+
+        private DelegateCommand _testCommand;
+
+        public DelegateCommand TestCommand
+        {
+            get
+            {
+                _testCommand = _testCommand ?? new DelegateCommand(() =>
+                {
+                    Debugger.Break();
+                });
+                return _testCommand;
+            }
         }
     }
 }

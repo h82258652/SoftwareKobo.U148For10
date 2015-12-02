@@ -111,5 +111,20 @@ namespace SoftwareKobo.U148.Views
             string uri = "mailto:h82258652@hotmail.com?subject=Windows 10 有意思吧反馈";
             await Launcher.LaunchUriAsync(new Uri(uri));
         }
+
+        private void BtnLogin_Click(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(LoginView));
+        }
+
+        private void BtnSetting_Click(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(SettingView));
+        }
+
+        private void BtnAbout_Click(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(AboutView));
+        }
     }
 }
