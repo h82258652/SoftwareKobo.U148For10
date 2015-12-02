@@ -289,13 +289,13 @@
                         </Pivot.HeaderTemplate>
                         <Pivot.ItemTemplate>
                             <DataTemplate>
-                                <localControls:FeedView ItemsSource="{Binding Path=Value}">
+                                <localControls:FeedView ItemsSource="{Binding Path=Value}" ScrollDown="FeedView_ScrollDown" ScrollUp="FeedView_ScrollUp">
                                     <interactivity:Interaction.Behaviors>
                                         <core:EventTriggerBehavior EventName="ItemClick">
                                             <core:InvokeCommandAction Command="{Binding ElementName=page,Path=DataContext.DetailCommand}"
                                                                       InputConverter="{StaticResource ItemClickEventArgsConverter}" />
                                         </core:EventTriggerBehavior>
-                                        <core:EventTriggerBehavior EventName="ScrollDown">
+                                        <!--<core:EventTriggerBehavior EventName="ScrollDown">
                                             <core:ChangePropertyAction TargetObject="{Binding ElementName=appBar}"
                                                                        PropertyName="ClosedDisplayMode"
                                                                        Value="Minimal" />
@@ -304,7 +304,7 @@
                                             <core:ChangePropertyAction TargetObject="{Binding ElementName=appBar}"
                                                                        PropertyName="ClosedDisplayMode"
                                                                        Value="Compact" />
-                                        </core:EventTriggerBehavior>
+                                        </core:EventTriggerBehavior>-->
                                     </interactivity:Interaction.Behaviors>
                                 </localControls:FeedView>
                             </DataTemplate>
