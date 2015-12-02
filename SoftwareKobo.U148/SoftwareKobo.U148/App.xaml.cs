@@ -59,6 +59,16 @@ namespace SoftwareKobo.U148
             {
                 info.NavigatePage = null;
             }
+
+#if DEBUG
+            DispatcherTimer timer = new DispatcherTimer();
+            timer.Tick += delegate
+            {
+                var rect = Window.Current.Bounds;
+                Debug.WriteLine(rect.Width + ":" + (rect.Height + 32));
+            };
+            timer.Start();
+#endif
         }
 
         protected override async Task OnSuspendingAsync(object sender, SuspendingEventArgs e)
