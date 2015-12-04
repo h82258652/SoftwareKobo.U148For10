@@ -105,7 +105,7 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <ad:AdControl x:Name="ad"
-                      x:DeferLoadStrategy="Lazy"
+                      Visibility="Collapsed"
                       Grid.Row="0"
                       AdType="Banner"
                       ApplicationKey="4fd64ae0ccd8d54db0dd45d8ac733fb7"

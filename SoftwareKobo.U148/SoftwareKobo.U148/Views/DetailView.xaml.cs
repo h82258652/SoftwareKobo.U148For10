@@ -113,9 +113,11 @@ namespace SoftwareKobo.U148.Views
                     this.SendToViewModel(feed);
                 }
             }
+
+            SetAdVisibility();
         }
 
-        private async void DetailView_Loaded(object sender, RoutedEventArgs e)
+        private async void SetAdVisibility()
         {
             NtpClient client = new NtpClient();
             try
@@ -125,6 +127,7 @@ namespace SoftwareKobo.U148.Views
                 {
                     if (AppSettings.Instance.LastClickAdTime + TimeSpan.FromHours(12) >= time.Value)
                     {
+                        ad.Visibility = Visibility.Collapsed;
                         return;
                     }
                 }
@@ -132,7 +135,12 @@ namespace SoftwareKobo.U148.Views
             catch
             {
             }
-            this.FindName("ad");
+            ad.Visibility = Visibility.Visible;
+        }
+
+        private void DetailView_Loaded(object sender, RoutedEventArgs e)
+        {
+            SetAdVisibility();
         }
 
         private static readonly string[] NTPSERVERS = new string[]
@@ -143,7 +151,7 @@ namespace SoftwareKobo.U148.Views
 
         private async void Ad_Click(object sender, AdClickEventArgs e)
         {
-            if (e.clickResult == "1")
+            if (e.clickResult == "2")
             {
                 NtpClient client = new NtpClient();
                 try
@@ -245,11 +253,12 @@ namespace SoftwareKobo.U148.Views
 
             try
             {
-                int scene = SendMessageToWX.Req.WXSceneTimeline;
-                WXImageMessage message = new WXImageMessage()
+                int scene = SendMessageToWX.Req.WXSceneChooseByUser;
+                WXWebpageMessage message = new WXWebpageMessage()
                 {
                     Title = _feed.Title,
-                    ImageUrl = _feed.PicMid
+                    WebpageUrl = "http://www.u148.net/article/" + _feed.Id + ".html",
+                    Description = _feed.Summary
                 };
                 SendMessageToWX.Req req = new SendMessageToWX.Req(message, scene);
                 IWXAPI api = WXAPIFactory.CreateWXAPI("wx725b599977a3718a");
