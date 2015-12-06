@@ -151,7 +151,7 @@ namespace SoftwareKobo.U148.Views
 
         private async void Ad_Click(object sender, AdClickEventArgs e)
         {
-            if (e.clickResult == "2")
+            if (e.clickResult == "1" || e.clickResult == "2")
             {
                 NtpClient client = new NtpClient();
                 try
