@@ -1,2 +1,2 @@
-MainPackage=D:\Projects\SoftwareKobo.U148For10\SoftwareKobo.U148\SoftwareKobo.U148\bin\x86\Release\SoftwareKobo.U148_1.1.8.0_x86.appx
-SymbolPackage=D:\Projects\SoftwareKobo.U148For10\SoftwareKobo.U148\SoftwareKobo.U148\AppPackages\SoftwareKobo.U148_1.1.8.0_Test\SoftwareKobo.U148_1.1.8.0_x86.appxsym
+MainPackage=D:\Projects\SoftwareKobo.U148For10\SoftwareKobo.U148\SoftwareKobo.U148\bin\x86\Release\SoftwareKobo.U148_1.1.9.0_x86.appx
+SymbolPackage=D:\Projects\SoftwareKobo.U148For10\SoftwareKobo.U148\SoftwareKobo.U148\AppPackages\SoftwareKobo.U148_1.1.9.0_Test\SoftwareKobo.U148_1.1.9.0_x86.appxsym

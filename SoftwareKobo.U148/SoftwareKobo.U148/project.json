@@ -8,7 +8,7 @@
     "Newtonsoft.Json": "7.0.1",
     "PlatformSpecific.Analyzer": "2.0.2",
     "WeChatSDK": "2.0.1",
-    "Win2D.uwp": "1.9.0"
+    "Win2D.uwp": "1.10.0"
   },
   "frameworks": {
     "uap10.0": {}
