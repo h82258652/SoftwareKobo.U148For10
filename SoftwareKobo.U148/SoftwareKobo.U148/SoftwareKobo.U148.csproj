@@ -20,9 +20,9 @@
     <PackageCertificateKeyFile>SoftwareKobo.U148_StoreKey.pfx</PackageCertificateKeyFile>
     <AppxAutoIncrementPackageRevision>True</AppxAutoIncrementPackageRevision>
     <AppxBundlePlatforms>x86|x64|arm</AppxBundlePlatforms>
-    <AppxBundle>Auto</AppxBundle>
+    <AppxBundle>Always</AppxBundle>
     <PackageCertificateThumbprint>54117F01A433A9C55751831E9301CBE53A0CD80D</PackageCertificateThumbprint>
-    <SkipIntermediatePriGenerationForResourceFiles>false</SkipIntermediatePriGenerationForResourceFiles>  
+    <SkipIntermediatePriGenerationForResourceFiles>false</SkipIntermediatePriGenerationForResourceFiles>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|ARM'">
     <DebugSymbols>true</DebugSymbols>
@@ -211,6 +211,7 @@
     <Content Include="Assets\Wide310x150Logo.scale-200.png" />
     <Content Include="Web\Content\app.css" />
     <Content Include="Web\Scripts\app.js" />
+    <Content Include="Web\Scripts\hammer.min.js" />
     <Content Include="Web\Views\app.html" />
   </ItemGroup>
   <ItemGroup>

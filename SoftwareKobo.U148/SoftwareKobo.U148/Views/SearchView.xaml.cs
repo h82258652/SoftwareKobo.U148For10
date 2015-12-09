@@ -25,7 +25,7 @@ namespace SoftwareKobo.U148.Views
 
             Messenger.Register(this);
 
-            this.Frame.RegisterNavigateBack();
+            NavigationHelper.Register(this.Frame);
 
             if (e.NavigationMode != NavigationMode.Back)
             {
@@ -44,7 +44,7 @@ namespace SoftwareKobo.U148.Views
 
             Messenger.Unregister(this);
 
-            this.Frame.UnregisterNavigateBack();
+            NavigationHelper.Unregister(this.Frame);
         }
 
         private async void ListView_ItemClick(object sender, ItemClickEventArgs e)

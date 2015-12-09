@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
     <link href="../Content/app.css" rel="stylesheet" />
+    <script src="../scripts/hammer.min.js"></script>
 </head>
 <body>
     <!--<div id="title"></div>
@@ -14,5 +15,18 @@
     </div>-->
     <div id="content"></div>
     <script src="../Scripts/app.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        var hammertime = new Hammer(document.getElementsByTagName("html")[0]);
+        hammertime.on("swipeleft", function (e) {
+            if (e.pointerType !== "mouse") {
+                window.external.notify("goforward");
+            }
+        });
+        hammertime.on("swiperight", function (e) {
+            if (e.pointerType !== "mouse") {
+                window.external.notify("goback");
+            }
+        });
+    </script>
 </body>
 </html>

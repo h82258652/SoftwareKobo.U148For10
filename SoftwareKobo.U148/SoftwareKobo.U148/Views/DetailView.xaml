@@ -113,7 +113,7 @@
                       AdClick="Ad_Click" />
         <WebView x:Name="webView"
                  Grid.Row="1"
-                 DefaultBackgroundColor="Transparent" />
+                 DefaultBackgroundColor="Transparent" ScriptNotify="WebView_ScriptNotify" />
         <Grid Grid.RowSpan="2"
               Visibility="Collapsed"
               x:Name="ExecutingMask"

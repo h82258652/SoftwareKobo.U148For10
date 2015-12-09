@@ -49,7 +49,7 @@ namespace SoftwareKobo.U148.Views
 
             Messenger.Unregister(this);
 
-            this.Frame.UnregisterNavigateBack();
+            NavigationHelper.Unregister(this.Frame);
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -60,7 +60,7 @@ namespace SoftwareKobo.U148.Views
 
             Messenger.Register(this);
 
-            this.Frame.RegisterNavigateBack(() =>
+            NavigationHelper.Register(this.Frame, () => 
             {
                 if (this.Frame.CanGoBack && this.sendingMask.Visibility != Visibility.Visible)
                 {

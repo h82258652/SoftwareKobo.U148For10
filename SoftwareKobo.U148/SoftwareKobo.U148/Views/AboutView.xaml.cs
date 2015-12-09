@@ -15,14 +15,14 @@ namespace SoftwareKobo.U148.Views
         {
             base.OnNavigatedTo(e);
 
-            this.Frame.RegisterNavigateBack();
+            NavigationHelper.Register(this.Frame);
         }
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
             base.OnNavigatedFrom(e);
 
-            this.Frame.UnregisterNavigateBack();
+            NavigationHelper.Unregister(this.Frame);
         }
     }
 }

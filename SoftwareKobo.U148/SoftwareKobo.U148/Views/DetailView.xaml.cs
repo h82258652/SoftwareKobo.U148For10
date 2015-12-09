@@ -70,10 +70,18 @@ namespace SoftwareKobo.U148.Views
 
             Messenger.Unregister(this);
 
-            this.Frame.UnregisterNavigateBack();
+            NavigationHelper.Unregister(this.Frame);
         }
 
         private Feed _feed;
+
+        private void GoBack()
+        {
+            if (this.Frame.CanGoBack && this.IsExecuting == false)
+            {
+                this.Frame.GoBack();
+            }
+        }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
@@ -85,12 +93,9 @@ namespace SoftwareKobo.U148.Views
 
             if (this.Frame.CanGoBack)
             {
-                this.Frame.RegisterNavigateBack(() =>
+                NavigationHelper.Register(this.Frame, () =>
                 {
-                    if (this.Frame.CanGoBack && this.IsExecuting == false)
-                    {
-                        this.Frame.GoBack();
-                    }
+                    GoBack();
                 });
             }
 
@@ -275,6 +280,22 @@ namespace SoftwareKobo.U148.Views
         private void BtnComment_Click(object sender, RoutedEventArgs e)
         {
             Frame.Navigate(typeof(CommentView), _feed);
+        }
+
+        private void WebView_ScriptNotify(object sender, NotifyEventArgs e)
+        {
+            switch (e.Value)
+            {
+                case "goforward":
+                    if (this.Frame.CanGoForward)
+                    {
+                        this.Frame.GoForward();
+                    }
+                    break;
+                case "goback":
+                    GoBack();
+                    break;
+            }
         }
     }
 }
