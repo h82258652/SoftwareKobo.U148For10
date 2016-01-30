@@ -10,9 +10,9 @@ namespace SoftwareKobo.U148.Services
 {
     public class CommentService : ICommentService
     {
-        private const string GET_COMMENT_TEMPLATE = @"http://api.u148.net/json/get_comment/{0}/{1}";
+        private const string GetCommentTemplate = @"http://api.u148.net/json/get_comment/{0}/{1}";
 
-        private const string SEND_COMMENT_TEMPLATE = @"http://api.u148.net/json/comment";
+        private const string SendCommentTemplate = @"http://api.u148.net/json/comment";
 
         public async Task<DataResultBase<ResultList<Comment>>> GetCommentsAsync(Feed feed, int page = 1)
         {
@@ -25,7 +25,7 @@ namespace SoftwareKobo.U148.Services
                 throw new ArgumentOutOfRangeException(nameof(page), "page should greater than zero.");
             }
 
-            string url = string.Format(GET_COMMENT_TEMPLATE, feed.Id, page);
+            string url = string.Format(GetCommentTemplate, feed.Id, page);
             url = url + "?t=" + DateTime.Now.Ticks;
             using (HttpClient client = new HttpClient())
             {
@@ -56,14 +56,21 @@ namespace SoftwareKobo.U148.Services
                 throw new ArgumentException("模拟设备未定义。", nameof(device));
             }
 
-            Dictionary<string, string> postData = new Dictionary<string, string>();
-            postData.Add("id", feed.Id.ToString());
-            postData.Add("token", userInfo.Token);
+            Dictionary<string, string> postData = new Dictionary<string, string>
+            {
+                {
+                    "id", feed.Id.ToString()
+                },
+                {
+                    "token", userInfo.Token
+                }
+            };
             switch (device)
             {
                 case SimulateDevice.Android:
                     postData.Add("client", "android");
                     break;
+
                 case SimulateDevice.IPhone:
                     postData.Add("client", "iphone");
                     break;
@@ -79,7 +86,7 @@ namespace SoftwareKobo.U148.Services
             {
                 using (IHttpContent httpContent = new HttpFormUrlEncodedContent(postData))
                 {
-                    HttpResponseMessage response = await client.PostAsync(new Uri(SEND_COMMENT_TEMPLATE), httpContent);
+                    HttpResponseMessage response = await client.PostAsync(new Uri(SendCommentTemplate), httpContent);
                     json = await response.Content.ReadAsStringAsync();
                 }
             }

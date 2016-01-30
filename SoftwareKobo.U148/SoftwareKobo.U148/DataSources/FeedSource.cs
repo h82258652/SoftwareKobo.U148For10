@@ -27,7 +27,7 @@ namespace SoftwareKobo.U148.DataSources
                 throw new ArgumentException("feed category is not defined.", nameof(category));
             }
 
-            this._service = service;
+            _service = service;
             this._category = category;
         }
 
@@ -36,8 +36,8 @@ namespace SoftwareKobo.U148.DataSources
             try
             {
                 // 读取下一页数据。
-                int nextPage = this._currentPage + 1;
-                DataResultBase<ResultList<Feed>> result = await this._service.GetFeedListAsync(this._category, nextPage);
+                int nextPage = _currentPage + 1;
+                var result = await _service.GetFeedListAsync(this._category, nextPage);
                 if (result.Code == 0)// 请求成功。
                 {
                     ResultList<Feed> resultList = result.Data;

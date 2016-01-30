@@ -32,8 +32,9 @@
                 <ComboBox.Header>
                     <StackPanel>
                         <TextBlock Text="模拟设备" />
-                        <TextBlock Text="——发送评论时使用"
-                                   FontSize="10" />
+                        <TextBlock Text="——发送评论时使用，装逼功能，无实质功能性影响"
+                                   FontSize="10"
+                                   TextWrapping="Wrap" />
                     </StackPanel>
                 </ComboBox.Header>
             </ComboBox>

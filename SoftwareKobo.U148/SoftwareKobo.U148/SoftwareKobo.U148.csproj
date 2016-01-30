@@ -122,6 +122,7 @@
     <Compile Include="Converters\CommentReviewCountConverter.cs" />
     <Compile Include="Converters\FeedCategoryNameConverter.cs" />
     <Compile Include="Converters\HtmlToTextConverter.cs" />
+    <Compile Include="Converters\ImageCacheConverter.cs" />
     <Compile Include="Converters\Int32ToVisibilityConverter.cs" />
     <Compile Include="Converters\SwitchThemeModeVisibilityConverter.cs" />
     <Compile Include="Converters\TimeAgoConverter.cs" />
@@ -156,6 +157,7 @@
     <Compile Include="Services\SearchService.cs" />
     <Compile Include="Services\SimulateDevice.cs" />
     <Compile Include="Services\UserService.cs" />
+    <Compile Include="Utils\Hash.cs" />
     <Compile Include="ViewModels\AboutViewModel.cs" />
     <Compile Include="ViewModels\CommentViewModel.cs" />
     <Compile Include="ViewModels\DetailViewModel.cs" />
@@ -202,6 +204,8 @@
     <Content Include="Assets\menu_background.jpg" />
     <Content Include="Assets\nocomment.png" />
     <None Include="Package.StoreAssociation.xml" />
+    <Content Include="Assets\qq.png" />
+    <Content Include="Assets\qzone.png" />
     <Content Include="Assets\SinaWeibo.png" />
     <Content Include="Assets\wechat.png" />
     <Content Include="Properties\Default.rd.xml" />

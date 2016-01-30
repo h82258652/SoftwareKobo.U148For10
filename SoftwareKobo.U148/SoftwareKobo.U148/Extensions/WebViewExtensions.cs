@@ -14,7 +14,7 @@ namespace SoftwareKobo.U148.Extensions
 
         public static Task WaitForDOMContentLoadedAsync(this WebView webView)
         {
-            TaskCompletionSource<object> tcs = new TaskCompletionSource<object>();
+            var tcs = new TaskCompletionSource<object>();
             TypedEventHandler<WebView, WebViewDOMContentLoadedEventArgs> handler = null;
             handler = (sender, args) =>
             {

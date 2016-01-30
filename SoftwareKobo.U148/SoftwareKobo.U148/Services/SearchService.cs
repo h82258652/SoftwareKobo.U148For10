@@ -8,7 +8,7 @@ namespace SoftwareKobo.U148.Services
 {
     public class SearchService : ISearchService
     {
-        private const string SEARCH_TEMPLATE = "http://api.u148.net/json/search/{0}?keyword={1}";
+        private const string SearchTemplate = "http://api.u148.net/json/search/{0}?keyword={1}";
 
         public Task<DataResultBase<ResultList<Feed>>> GetSearchResultsAsync(string keyword, int page = 1)
         {
@@ -25,7 +25,7 @@ namespace SoftwareKobo.U148.Services
                 throw new ArgumentOutOfRangeException(nameof(page), "page should greater than zero.");
             }
 
-            string url = string.Format(SEARCH_TEMPLATE, page, keyword);
+            string url = string.Format(SearchTemplate, page, keyword);
             using (HttpClient client = new HttpClient())
             {
                 return client.GetJsonAsync<DataResultBase<ResultList<Feed>>>(new Uri(url));

@@ -1,3 +1,3 @@
-MainPackage=D:\Projects\SoftwareKobo.U148For10\SoftwareKobo.U148\SoftwareKobo.U148\bin\ARM\Release\Upload\SoftwareKobo.U148_1.1.13.0_ARM.appx
-SymbolPackage=D:\Projects\SoftwareKobo.U148For10\SoftwareKobo.U148\SoftwareKobo.U148\AppPackages\SoftwareKobo.U148_1.1.13.0\SoftwareKobo.U148_1.1.13.0_ARM.appxsym
+MainPackage=D:\Projects\SoftwareKobo.U148For10\SoftwareKobo.U148\SoftwareKobo.U148\bin\ARM\Release\Upload\SoftwareKobo.U148_1.1.15.0_ARM.appx
+SymbolPackage=D:\Projects\SoftwareKobo.U148For10\SoftwareKobo.U148\SoftwareKobo.U148\AppPackages\SoftwareKobo.U148_1.1.15.0\SoftwareKobo.U148_1.1.15.0_ARM.appxsym
 ResourcePack=D:\Projects\SoftwareKobo.U148For10\SoftwareKobo.U148\SoftwareKobo.U148\_language-zh-hans.appx

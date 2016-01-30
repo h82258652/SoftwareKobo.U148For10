@@ -1,4 +1,5 @@
-﻿using Windows.UI.Xaml;
+﻿using System.Linq;
+using Windows.UI.Xaml;
 
 namespace SoftwareKobo.U148.Extensions
 {
@@ -22,15 +23,7 @@ namespace SoftwareKobo.U148.Extensions
                     }
                 }
                 // 从包含的字典查找。
-                foreach (var childResouce in resouce.MergedDictionaries)
-                {
-                    var value = FindValue(childResouce, key);
-                    if (value != null)
-                    {
-                        return value;
-                    }
-                }
-                return null;
+                return resouce.MergedDictionaries.Select(childResouce => FindValue(childResouce, key)).FirstOrDefault(value => value != null);
             }
         }
 

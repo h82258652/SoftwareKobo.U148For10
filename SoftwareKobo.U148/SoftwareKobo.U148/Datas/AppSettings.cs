@@ -20,13 +20,7 @@ namespace SoftwareKobo.U148.Datas
             _instance = this;
         }
 
-        public static AppSettings Instance
-        {
-            get
-            {
-                return _instance ?? new AppSettings();
-            }
-        }
+        public static AppSettings Instance => _instance ?? new AppSettings();
 
         public bool ShowDetailInNewWindow
         {
@@ -41,15 +35,12 @@ namespace SoftwareKobo.U148.Datas
                 {
                     return ApplicationLocalSettings.Read<bool>(nameof(ShowDetailInNewWindow));
                 }
-                else
-                {
-                    return false;
-                }
+                return false;
             }
             set
             {
                 ApplicationLocalSettings.Write(nameof(ShowDetailInNewWindow), value);
-                this.RaisePropertyChanged();
+                RaisePropertyChanged();
             }
         }
 
@@ -61,15 +52,12 @@ namespace SoftwareKobo.U148.Datas
                 {
                     return ApplicationLocalSettings.Read<SimulateDevice>(nameof(SimulateDevice));
                 }
-                else
-                {
-                    return SimulateDevice.Android;
-                }
+                return SimulateDevice.Android;
             }
             set
             {
                 ApplicationLocalSettings.Write(nameof(SimulateDevice), value);
-                this.RaisePropertyChanged();
+                RaisePropertyChanged();
             }
         }
 
@@ -81,10 +69,7 @@ namespace SoftwareKobo.U148.Datas
                 {
                     return ApplicationLocalSettings.Read<ElementTheme>(nameof(ThemeMode));
                 }
-                else
-                {
-                    return ElementTheme.Light;
-                }
+                return ElementTheme.Light;
             }
             set
             {
@@ -94,7 +79,7 @@ namespace SoftwareKobo.U148.Datas
                 {
                     rootFrame.Background = new SolidColorBrush(value == ElementTheme.Dark ? Colors.Black : Colors.White);
                 }
-                this.RaisePropertyChanged();
+                RaisePropertyChanged();
             }
         }
 
@@ -106,15 +91,12 @@ namespace SoftwareKobo.U148.Datas
                 {
                     return ApplicationLocalSettings.Read<StorageUserInfo>(nameof(UserInfo));
                 }
-                else
-                {
-                    return null;
-                }
+                return null;
             }
             set
             {
                 ApplicationLocalSettings.Write(nameof(UserInfo), value);
-                this.RaisePropertyChanged();
+                RaisePropertyChanged();
             }
         }
 
@@ -126,15 +108,12 @@ namespace SoftwareKobo.U148.Datas
                 {
                     return ApplicationLocalSettings.Read<DateTime>(nameof(LastClickAdTime));
                 }
-                else
-                {
-                    return DateTime.MinValue;
-                }
+                return DateTime.MinValue;
             }
             set
             {
                 ApplicationLocalSettings.Write(nameof(LastClickAdTime), value);
-                this.RaisePropertyChanged();
+                RaisePropertyChanged();
             }
         }
     }

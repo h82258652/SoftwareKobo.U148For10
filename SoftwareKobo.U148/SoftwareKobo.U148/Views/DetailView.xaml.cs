@@ -1,4 +1,5 @@
-﻿using JiuYouAdUniversal.Models;
+﻿using JiuYouAdUniversal;
+using JiuYouAdUniversal.Models;
 using JYAnalyticsUniversal;
 using MicroMsg;
 using MicroMsg.sdk;
@@ -12,9 +13,12 @@ using SoftwareKobo.UniversalToolkit.Extensions;
 using SoftwareKobo.UniversalToolkit.Helpers;
 using SoftwareKobo.UniversalToolkit.Mvvm;
 using System;
+using System.Net;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Text;
 using System.Threading.Tasks;
 using Windows.Foundation;
+using Windows.System;
 using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -124,6 +128,10 @@ namespace SoftwareKobo.U148.Views
 
         private async void SetAdVisibility()
         {
+            if (_ad == null)
+            {
+                return;
+            }
             NtpClient client = new NtpClient();
             try
             {
@@ -132,7 +140,7 @@ namespace SoftwareKobo.U148.Views
                 {
                     if (AppSettings.Instance.LastClickAdTime + TimeSpan.FromHours(12) >= time.Value)
                     {
-                        ad.Visibility = Visibility.Collapsed;
+                        _ad.Visibility = Visibility.Collapsed;
                         return;
                     }
                 }
@@ -140,11 +148,32 @@ namespace SoftwareKobo.U148.Views
             catch
             {
             }
-            ad.Visibility = Visibility.Visible;
+            _ad.Visibility = Visibility.Visible;
         }
+
+        private AdControl _ad;
 
         private void DetailView_Loaded(object sender, RoutedEventArgs e)
         {
+            if (AdContainer.Children.Count == 0)
+            {
+                try
+                {
+                    _ad = new AdControl()
+                    {
+                        Visibility = Visibility.Collapsed,
+                        AdType = AdType.Banner,
+                        ApplicationKey = "4fd64ae0ccd8d54db0dd45d8ac733fb7"
+                    };
+                    _ad.AdClick += Ad_Click;
+                    AdContainer.Children.Add(_ad);
+                }
+                catch
+                {
+                    // ignored
+                }
+            }
+
             SetAdVisibility();
         }
 
@@ -169,8 +198,9 @@ namespace SoftwareKobo.U148.Views
                 }
                 catch
                 {
+                    // ignored
                 }
-                ad.Visibility = Visibility.Collapsed;
+                _ad.Visibility = Visibility.Collapsed;
             }
         }
 
@@ -292,10 +322,35 @@ namespace SoftwareKobo.U148.Views
                         this.Frame.GoForward();
                     }
                     break;
+
                 case "goback":
                     GoBack();
                     break;
             }
+        }
+
+        private async void PnlQQ_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            var builder = new StringBuilder();
+            builder.Append("http://connect.qq.com/widget/shareqq/index.html?url=");
+            builder.Append(WebUtility.UrlEncode("http://www.u148.net/article/" + _feed.Id + ".html"));
+            builder.Append("&title=");
+            builder.Append(WebUtility.UrlEncode(_feed.Title));
+            builder.Append("&summary=");
+            builder.Append(WebUtility.UrlEncode(_feed.Summary));
+            await Launcher.LaunchUriAsync(new Uri(builder.ToString()));
+        }
+
+        private async void PnlQZone_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            var builder = new StringBuilder();
+            builder.Append("http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=");
+            builder.Append(WebUtility.UrlEncode("http://www.u148.net/article/" + _feed.Id + ".html"));
+            builder.Append("&summary=");
+            builder.Append(WebUtility.UrlEncode(_feed.Summary));
+            builder.Append("&title=");
+            builder.Append(WebUtility.UrlEncode(_feed.Title));
+            await Launcher.LaunchUriAsync(new Uri(builder.ToString()));
         }
     }
 }

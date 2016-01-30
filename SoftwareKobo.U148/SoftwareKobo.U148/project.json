@@ -5,10 +5,10 @@
     "JyAnalytics": "1.0.10",
     "Microsoft.NETCore.UniversalWindowsPlatform": "5.0.0",
     "Microsoft.Xaml.Behaviors.Uwp.Managed": "1.0.3",
-    "Newtonsoft.Json": "7.0.1",
+    "Newtonsoft.Json": "8.0.2",
     "PlatformSpecific.Analyzer": "2.0.2",
     "WeChatSDK": "2.0.1",
-    "Win2D.uwp": "1.10.0"
+    "Win2D.uwp": "1.13.0"
   },
   "frameworks": {
     "uap10.0": {}

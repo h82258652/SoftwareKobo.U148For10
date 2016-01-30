@@ -129,12 +129,12 @@ namespace SoftwareKobo.U148.Views
 
         private void FeedView_ScrollDown(object sender, EventArgs e)
         {
-            appBar.ClosedDisplayMode = AppBarClosedDisplayMode.Minimal;
+            //appBar.ClosedDisplayMode = AppBarClosedDisplayMode.Minimal;
         }
 
         private void FeedView_ScrollUp(object sender, EventArgs e)
         {
-            appBar.ClosedDisplayMode = AppBarClosedDisplayMode.Compact;
+            //appBar.ClosedDisplayMode = AppBarClosedDisplayMode.Compact;
         }
     }
 }

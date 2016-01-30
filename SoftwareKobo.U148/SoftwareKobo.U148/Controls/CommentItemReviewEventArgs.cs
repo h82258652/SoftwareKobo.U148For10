@@ -25,9 +25,9 @@ namespace SoftwareKobo.U148.Controls
                 throw new ArgumentException("评论不能为空。", nameof(content));
             }
 
-            this.Comment = comment;
-            this.Content = content;
-            this.TextBox = textBox;
+            Comment = comment;
+            Content = content;
+            TextBox = textBox;
         }
 
         public Comment Comment

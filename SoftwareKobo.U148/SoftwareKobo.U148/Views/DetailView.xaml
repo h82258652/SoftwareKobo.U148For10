@@ -46,7 +46,38 @@
                                 <ColumnDefinition />
                                 <ColumnDefinition />
                             </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
                             <StackPanel Grid.Column="0"
+                                        Grid.Row="0"
+                                        Orientation="Vertical"
+                                        Margin="16"
+                                        Tapped="PnlQQ_Tapped">
+                                <Image Source="/Assets/qq.png"
+                                       Width="96"
+                                       Height="96" />
+                                <TextBlock Margin="4"
+                                           Text="QQ分享"
+                                           TextAlignment="Center"
+                                           Foreground="WhiteSmoke" />
+                            </StackPanel>
+                            <StackPanel Grid.Column="1"
+                                        Grid.Row="0"
+                                        Orientation="Vertical"
+                                        Margin="16"
+                                        Tapped="PnlQZone_Tapped">
+                                <Image Source="/Assets/qzone.png"
+                                       Width="96"
+                                       Height="96" />
+                                <TextBlock Margin="4"
+                                           Text="QQ空间分享"
+                                           TextAlignment="Center"
+                                           Foreground="WhiteSmoke" />
+                            </StackPanel>
+                            <StackPanel Grid.Column="0"
+                                        Grid.Row="1"
                                         Orientation="Vertical"
                                         Margin="16"
                                         Tapped="PnlWeibo_Tapped">
@@ -59,6 +90,7 @@
                                            Foreground="WhiteSmoke" />
                             </StackPanel>
                             <StackPanel Grid.Column="1"
+                                        Grid.Row="1"
                                         Orientation="Vertical"
                                         Margin="16"
                                         Tapped="PnlWechat_Tapped">
@@ -104,16 +136,12 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <ad:AdControl x:Name="ad"
-                      Visibility="Collapsed"
-                      Grid.Row="0"
-                      AdType="Banner"
-                      ApplicationKey="4fd64ae0ccd8d54db0dd45d8ac733fb7"
-                      VerticalAlignment="Top"
-                      AdClick="Ad_Click" />
+        <Grid Grid.Row="0"
+              x:Name="AdContainer"></Grid>
         <WebView x:Name="webView"
                  Grid.Row="1"
-                 DefaultBackgroundColor="Transparent" ScriptNotify="WebView_ScriptNotify" />
+                 DefaultBackgroundColor="Transparent"
+                 ScriptNotify="WebView_ScriptNotify" />
         <Grid Grid.RowSpan="2"
               Visibility="Collapsed"
               x:Name="ExecutingMask"

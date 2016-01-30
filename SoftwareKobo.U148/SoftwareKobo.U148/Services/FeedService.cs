@@ -8,9 +8,9 @@ namespace SoftwareKobo.U148.Services
 {
     public class FeedService : IFeedService
     {
-        private const string CATEGORY_LIST_TEMPLATE = "http://api.u148.net/json/{0}/{1}";
+        private const string CategoryListTemplate = "http://api.u148.net/json/{0}/{1}";
 
-        private const string ARTICLE_TEMPLATE = "http://api.u148.net/json/article/{0}";
+        private const string ArticleTemplate = "http://api.u148.net/json/article/{0}";
 
         public async Task<DataResultBase<ResultList<Feed>>> GetFeedListAsync(FeedCategory category, int page = 1)
         {
@@ -23,7 +23,7 @@ namespace SoftwareKobo.U148.Services
                 throw new ArgumentOutOfRangeException(nameof(page), "page should greater than zero.");
             }
 
-            string url = string.Format(CATEGORY_LIST_TEMPLATE, (int)category, page);
+            string url = string.Format(CategoryListTemplate, (int)category, page);
             using (HttpClient client = new HttpClient())
             {
                 return await client.GetJsonAsync<DataResultBase<ResultList<Feed>>>(new Uri(url));
@@ -37,7 +37,7 @@ namespace SoftwareKobo.U148.Services
                 throw new ArgumentNullException(nameof(feed));
             }
 
-            string url = string.Format(ARTICLE_TEMPLATE, feed.Id);
+            string url = string.Format(ArticleTemplate, feed.Id);
             using (HttpClient client = new HttpClient())
             {
                 return await client.GetJsonAsync<DataResultBase<Article>>(new Uri(url));

@@ -10,11 +10,11 @@ namespace SoftwareKobo.U148.Services
 {
     public class UserService : IUserService
     {
-        private const string LOGIN_TEMPLATE = @"http://api.u148.net/json/login";
+        private const string LoginTemplate = @"http://api.u148.net/json/login";
 
-        private const string GET_FAVOURITES_TEMPLATE = @"http://api.u148.net/json/get_favourite/0/{0}?token={1}";
+        private const string GetFavouritesTemplate = @"http://api.u148.net/json/get_favourite/0/{0}?token={1}";
 
-        private const string ADD_FAVOURITE_TEMPLATE = @"http://api.u148.net/json/favourite?id={0}&token={1}";
+        private const string AddFavouriteTemplate = @"http://api.u148.net/json/favourite?id={0}&token={1}";
 
         public async Task<DataResultBase<UserInfo>> LoginAsync(string email, string password)
         {
@@ -35,16 +35,22 @@ namespace SoftwareKobo.U148.Services
                 throw new ArgumentException("email could not be empty.", nameof(email));
             }
 
-            Dictionary<string, string> postData = new Dictionary<string, string>();
-            postData.Add("email", email);
-            postData.Add("password", password);
+            Dictionary<string, string> postData = new Dictionary<string, string>
+            {
+                {
+                    "email", email
+                },
+                {
+                    "password", password
+                }
+            };
 
             string json;
             using (HttpClient client = new HttpClient())
             {
                 using (IHttpContent httpContent = new HttpFormUrlEncodedContent(postData))
                 {
-                    HttpResponseMessage response = await client.PostAsync(new Uri(LOGIN_TEMPLATE), httpContent);
+                    HttpResponseMessage response = await client.PostAsync(new Uri(LoginTemplate), httpContent);
                     json = await response.Content.ReadAsStringAsync();
                 }
             }
@@ -63,7 +69,7 @@ namespace SoftwareKobo.U148.Services
                 throw new ArgumentNullException(nameof(feed));
             }
 
-            string url = string.Format(ADD_FAVOURITE_TEMPLATE, feed.Id, userInfo.Token);
+            string url = string.Format(AddFavouriteTemplate, feed.Id, userInfo.Token);
             using (HttpClient client = new HttpClient())
             {
                 return await client.GetJsonAsync<ResultBase>(new Uri(url));
@@ -81,7 +87,7 @@ namespace SoftwareKobo.U148.Services
                 throw new ArgumentOutOfRangeException(nameof(page));
             }
 
-            string url = string.Format(GET_FAVOURITES_TEMPLATE, page, userInfo.Token);
+            string url = string.Format(GetFavouritesTemplate, page, userInfo.Token);
             using (HttpClient client = new HttpClient())
             {
                 return await client.GetJsonAsync<DataResultBase<ResultList<Favourite>>>(new Uri(url));

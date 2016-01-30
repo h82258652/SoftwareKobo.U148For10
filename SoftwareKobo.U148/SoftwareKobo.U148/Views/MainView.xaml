@@ -83,7 +83,7 @@
                             PlaceholderText="搜索"
                             QueryIcon="Find"
                             Margin="8,0,8,0"
-                            QuerySubmitted="TxtSearch_QuerySubmitted"></AutoSuggestBox>
+                            QuerySubmitted="TxtSearch_QuerySubmitted" />
         </Grid>
         <SplitView x:Name="menu"
                    Grid.Row="1">
@@ -213,7 +213,8 @@
                                 </controls:HamburgerItem>
                                 <controls:HamburgerItem Foreground="WhiteSmoke"
                                                         Text="设置"
-                                                        Icon="Setting" Click="BtnSetting_Click">
+                                                        Icon="Setting"
+                                                        Click="BtnSetting_Click">
                                     <interactivity:Interaction.Behaviors>
                                         <core:EventTriggerBehavior EventName="Click">
                                             <core:ChangePropertyAction TargetObject="{Binding ElementName=menu}"
@@ -238,7 +239,7 @@
                                         </core:EventTriggerBehavior>
                                     </interactivity:Interaction.Behaviors>
                                 </controls:HamburgerItem>
-                                <controls:HamburgerItem Foreground="WhiteSmoke"
+                                <!--<controls:HamburgerItem Foreground="WhiteSmoke"
                                                         Text="反馈"
                                                         Click="BtnFeedback_Click">
                                     <controls:HamburgerItem.Icon>
@@ -251,9 +252,10 @@
                                                                        Value="False" />
                                         </core:EventTriggerBehavior>
                                     </interactivity:Interaction.Behaviors>
-                                </controls:HamburgerItem>
+                                </controls:HamburgerItem>-->
                                 <controls:HamburgerItem Foreground="WhiteSmoke"
-                                                        Text="关于" Click="BtnAbout_Click">
+                                                        Text="关于"
+                                                        Click="BtnAbout_Click">
                                     <controls:HamburgerItem.Icon>
                                         <FontIcon FontFamily="Segoe MDL2 Assets"
                                                   Glyph="&#xE946;" />
@@ -289,7 +291,9 @@
                         </Pivot.HeaderTemplate>
                         <Pivot.ItemTemplate>
                             <DataTemplate>
-                                <localControls:FeedView ItemsSource="{Binding Path=Value}" ScrollDown="FeedView_ScrollDown" ScrollUp="FeedView_ScrollUp">
+                                <localControls:FeedView ItemsSource="{Binding Path=Value}"
+                                                        ScrollDown="FeedView_ScrollDown"
+                                                        ScrollUp="FeedView_ScrollUp">
                                     <interactivity:Interaction.Behaviors>
                                         <core:EventTriggerBehavior EventName="ItemClick">
                                             <core:InvokeCommandAction Command="{Binding ElementName=page,Path=DataContext.DetailCommand}"
@@ -317,7 +321,8 @@
                         </Pivot.ItemContainerStyle>
                     </Pivot>
                     <CommandBar Grid.Row="1"
-                                x:Name="appBar">
+                                x:Name="appBar"
+                                ClosedDisplayMode="Minimal">
                         <AppBarButton Icon="Refresh"
                                       Label="刷新"
                                       Command="{Binding Path=RefreshCommand}"
