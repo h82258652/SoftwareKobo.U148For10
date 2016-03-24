@@ -1,15 +1,21 @@
-﻿using SoftwareKobo.U148.Views;
+﻿using JYAnalyticsUniversal;
+using SoftwareKobo.U148.Datas;
+using SoftwareKobo.U148.Views;
 using SoftwareKobo.UniversalToolkit;
 using SoftwareKobo.UniversalToolkit.Extensions;
+using SoftwareKobo.UniversalToolkit.Helpers;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Threading.Tasks;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -17,18 +23,12 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
-using System.Threading.Tasks;
-using SoftwareKobo.U148.Datas;
-using SoftwareKobo.UniversalToolkit.Helpers;
-using Windows.UI.ViewManagement;
-using JYAnalyticsUniversal;
-using System.Diagnostics;
 
 namespace SoftwareKobo.U148
 {
     sealed partial class App : Bootstrapper
     {
-        const string JIUYOU_APPKEY = "4fd64ae0ccd8d54db0dd45d8ac733fb7";
+        private const string JIUYOU_APPKEY = "4fd64ae0ccd8d54db0dd45d8ac733fb7";
 
         public App()
         {
@@ -50,7 +50,7 @@ namespace SoftwareKobo.U148
         {
             await JYAnalytics.StartTrackAsync(JIUYOU_APPKEY);
 
-            if (StatusBarHelper.IsUseable)
+            if (Windows.Foundation.Metadata.ApiInformation.IsTypePresent("Windows.UI.ViewManagement.StatusBar"))
             {
                 await StatusBar.GetForCurrentView().HideAsync();
             }
@@ -99,7 +99,6 @@ namespace SoftwareKobo.U148
     //        /// <param name="e">有关启动请求和过程的详细信息。</param>
     //        protected override void OnLaunched(LaunchActivatedEventArgs e)
     //        {
-
     //#if DEBUG
     //            if (System.Diagnostics.Debugger.IsAttached)
     //            {
