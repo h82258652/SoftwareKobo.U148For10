@@ -1,15 +1,14 @@
-﻿using JYAnalyticsUniversal;
-using Microsoft.Graphics.Canvas;
+﻿using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Effects;
 using Microsoft.Graphics.Canvas.UI;
 using Microsoft.Graphics.Canvas.UI.Xaml;
 using SoftwareKobo.U148.Datas;
 using SoftwareKobo.U148.Models;
+using SoftwareKobo.UniversalToolkit;
 using SoftwareKobo.UniversalToolkit.Mvvm;
 using SoftwareKobo.UniversalToolkit.Services.LauncherServices;
 using System;
 using System.Threading.Tasks;
-using Windows.ApplicationModel.Email;
 using Windows.System;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -17,14 +16,14 @@ using Windows.UI.Xaml.Navigation;
 
 namespace SoftwareKobo.U148.Views
 {
-    public sealed partial class MainView : Page, IView
+    public sealed partial class MainView : IView
     {
         private CanvasBitmap _bitmap;
 
         public MainView()
         {
-            this.InitializeComponent();
-            this.NavigationCacheMode = NavigationCacheMode.Required;
+            InitializeComponent();
+            NavigationCacheMode = NavigationCacheMode.Required;
         }
 
         public async void ReceiveFromViewModel(dynamic parameter)
@@ -33,11 +32,11 @@ namespace SoftwareKobo.U148.Views
             {
                 if (AppSettings.Instance.ShowDetailInNewWindow == false)
                 {
-                    this.Frame.Navigate(typeof(DetailView), parameter);
+                    Frame.Navigate(typeof(DetailView), parameter);
                 }
                 else
                 {
-                    await App.Current.ShowNewWindowAsync(typeof(DetailView), parameter);
+                    await Bootstrapper.Current.ShowNewWindowAsync(typeof(DetailView), parameter);
                 }
             }
         }
@@ -46,16 +45,12 @@ namespace SoftwareKobo.U148.Views
         {
             base.OnNavigatedFrom(e);
 
-            JYAnalytics.TrackPageEnd(nameof(MainView));
-
             Messenger.Unregister(this);
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
-
-            JYAnalytics.TrackPageStart(nameof(MainView));
 
             Messenger.Register(this);
 
@@ -64,19 +59,19 @@ namespace SoftwareKobo.U148.Views
 
         private void Canvas_CreateResources(CanvasControl sender, CanvasCreateResourcesEventArgs args)
         {
-            args.TrackAsyncAction(this.Canvas_CreateResourcesAsync(sender, args).AsAsyncAction());
+            args.TrackAsyncAction(Canvas_CreateResourcesAsync(sender, args).AsAsyncAction());
         }
 
         private async Task Canvas_CreateResourcesAsync(CanvasControl sender, CanvasCreateResourcesEventArgs args)
         {
-            this._bitmap = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/menu_background.jpg"));
+            _bitmap = await CanvasBitmap.LoadAsync(sender, new Uri("ms-appx:///Assets/menu_background.jpg"));
         }
 
         private void Canvas_Draw(CanvasControl sender, CanvasDrawEventArgs args)
         {
             GaussianBlurEffect effect = new GaussianBlurEffect()
             {
-                Source = this._bitmap,
+                Source = _bitmap,
                 BlurAmount = 5,
                 BorderMode = EffectBorderMode.Hard
             };
@@ -85,10 +80,10 @@ namespace SoftwareKobo.U148.Views
 
         private void Page_Unloaded(object sender, RoutedEventArgs e)
         {
-            if (this.canvas != null)
+            if (canvas != null)
             {
-                this.canvas.RemoveFromVisualTree();
-                this.canvas = null;
+                canvas.RemoveFromVisualTree();
+                canvas = null;
             }
         }
 
@@ -96,7 +91,7 @@ namespace SoftwareKobo.U148.Views
         {
             if (string.IsNullOrEmpty(args.QueryText) == false)
             {
-                this.Frame.Navigate(typeof(SearchView), sender.Text);
+                Frame.Navigate(typeof(SearchView), sender.Text);
             }
         }
 

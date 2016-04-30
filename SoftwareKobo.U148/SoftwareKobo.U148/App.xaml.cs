@@ -1,45 +1,32 @@
-﻿using JYAnalyticsUniversal;
-using SoftwareKobo.U148.Datas;
+﻿using SoftwareKobo.U148.Datas;
 using SoftwareKobo.U148.Views;
 using SoftwareKobo.UniversalToolkit;
 using SoftwareKobo.UniversalToolkit.Extensions;
-using SoftwareKobo.UniversalToolkit.Helpers;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading.Tasks;
+using UmengSDK;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Navigation;
 
 namespace SoftwareKobo.U148
 {
     sealed partial class App : Bootstrapper
     {
-        private const string JIUYOU_APPKEY = "4fd64ae0ccd8d54db0dd45d8ac733fb7";
+        private const string UmengAppKey = @"57238b5de0f55af993003119";
 
         public App()
         {
-            this.InitializeComponent();
-            this.RequestedTheme = AppSettings.Instance.ThemeMode == ElementTheme.Dark ? ApplicationTheme.Dark : ApplicationTheme.Light;
+            InitializeComponent();
+            RequestedTheme = AppSettings.Instance.ThemeMode == ElementTheme.Dark ? ApplicationTheme.Dark : ApplicationTheme.Light;
 
-            this.DefaultNavigatePage = typeof(MainView);
+            DefaultNavigatePage = typeof(MainView);
 
 #if DEBUG
-            this.DebugSettings.EnableFrameRateCounter = true;
-            this.DebugSettings.EnableDisplayMemoryUsage();
+            DebugSettings.EnableFrameRateCounter = true;
+            DebugSettings.EnableDisplayMemoryUsage();
 
             // 调试广告。
             AppSettings.Instance.LastClickAdTime = DateTime.MinValue;
@@ -48,7 +35,7 @@ namespace SoftwareKobo.U148
 
         protected override async Task OnPreStartAsync(IActivatedEventArgs args, AppStartInfo info)
         {
-            await JYAnalytics.StartTrackAsync(JIUYOU_APPKEY);
+            await UmengAnalytics.StartTrackAsync(UmengAppKey);
 
             if (Windows.Foundation.Metadata.ApiInformation.IsTypePresent("Windows.UI.ViewManagement.StatusBar"))
             {
@@ -73,7 +60,7 @@ namespace SoftwareKobo.U148
 
         protected override async Task OnSuspendingAsync(object sender, SuspendingEventArgs e)
         {
-            await JYAnalytics.EndTrackAsync();
+            await UmengAnalytics.EndTrackAsync();
         }
     }
 

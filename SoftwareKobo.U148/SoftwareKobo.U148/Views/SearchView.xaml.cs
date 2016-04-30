@@ -1,5 +1,6 @@
 ﻿using SoftwareKobo.U148.Datas;
 using SoftwareKobo.U148.Models;
+using SoftwareKobo.UniversalToolkit;
 using SoftwareKobo.UniversalToolkit.Helpers;
 using SoftwareKobo.UniversalToolkit.Mvvm;
 using Windows.UI.Xaml.Controls;
@@ -7,12 +8,12 @@ using Windows.UI.Xaml.Navigation;
 
 namespace SoftwareKobo.U148.Views
 {
-    public sealed partial class SearchView : Page, IView
+    public sealed partial class SearchView : IView
     {
         public SearchView()
         {
-            this.InitializeComponent();
-            this.NavigationCacheMode = NavigationCacheMode.Required;
+            InitializeComponent();
+            NavigationCacheMode = NavigationCacheMode.Required;
         }
 
         public void ReceiveFromViewModel(dynamic parameter)
@@ -25,7 +26,7 @@ namespace SoftwareKobo.U148.Views
 
             Messenger.Register(this);
 
-            NavigationHelper.Register(this.Frame);
+            NavigationHelper.Register(Frame);
 
             if (e.NavigationMode != NavigationMode.Back)
             {
@@ -44,7 +45,7 @@ namespace SoftwareKobo.U148.Views
 
             Messenger.Unregister(this);
 
-            NavigationHelper.Unregister(this.Frame);
+            NavigationHelper.Unregister(Frame);
         }
 
         private async void ListView_ItemClick(object sender, ItemClickEventArgs e)
@@ -54,11 +55,11 @@ namespace SoftwareKobo.U148.Views
             {
                 if (AppSettings.Instance.ShowDetailInNewWindow == false)
                 {
-                    this.Frame.Navigate(typeof(DetailView), feed);
+                    Frame.Navigate(typeof(DetailView), feed);
                 }
                 else
                 {
-                    await App.Current.ShowNewWindowAsync(typeof(DetailView), feed);
+                    await Bootstrapper.Current.ShowNewWindowAsync(typeof(DetailView), feed);
                 }
             }
         }

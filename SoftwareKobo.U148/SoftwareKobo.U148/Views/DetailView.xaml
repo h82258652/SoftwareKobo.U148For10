@@ -8,12 +8,10 @@
       xmlns:localConv="using:SoftwareKobo.U148.Converters"
       xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
       xmlns:core="using:Microsoft.Xaml.Interactions.Core"
-      xmlns:ad="using:JiuYouAdUniversal"
       xmlns:controls="using:SoftwareKobo.UniversalToolkit.Controls"
       mc:Ignorable="d"
       DataContext="{Binding Source={StaticResource Locator},Path=Detail}"
-      RequestedTheme="{Binding Source={StaticResource Settings},Path=ThemeMode}"
-      Loaded="DetailView_Loaded">
+      RequestedTheme="{Binding Source={StaticResource Settings},Path=ThemeMode}">
     <Page.Transitions>
         <TransitionCollection>
             <NavigationThemeTransition>

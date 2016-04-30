@@ -1,22 +1,22 @@
 ﻿using SoftwareKobo.UniversalToolkit.Helpers;
 using SoftwareKobo.UniversalToolkit.Mvvm;
 using System;
+using System.Diagnostics;
 using Windows.System;
 using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Automation.Peers;
 using Windows.UI.Xaml.Automation.Provider;
-using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Navigation;
 
 namespace SoftwareKobo.U148.Views
 {
-    public sealed partial class LoginView : Page, IView
+    public sealed partial class LoginView : IView
     {
         public LoginView()
         {
-            this.InitializeComponent();
+            InitializeComponent();
         }
 
         public async void ReceiveFromViewModel(dynamic parameter)
@@ -29,7 +29,7 @@ namespace SoftwareKobo.U148.Views
                     if (package.Item2)
                     {
                         await new MessageDialog("登录成功").ShowAsync();
-                        this.GoBack();
+                        GoBack();
                     }
                     else
                     {
@@ -45,7 +45,7 @@ namespace SoftwareKobo.U148.Views
 
             Messenger.Unregister(this);
 
-            NavigationHelper.Unregister(this.Frame);
+            NavigationHelper.Unregister(Frame);
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -54,17 +54,17 @@ namespace SoftwareKobo.U148.Views
 
             Messenger.Register(this);
 
-            NavigationHelper.Register(this.Frame, () =>
+            NavigationHelper.Register(Frame, () =>
             {
-                this.GoBack();
+                GoBack();
             });
         }
 
         private void GoBack()
         {
-            if (this.Frame.CanGoBack && this.loginingMask.Visibility != Visibility.Visible)
+            if (Frame.CanGoBack && loginingMask.Visibility != Visibility.Visible)
             {
-                this.Frame.GoBack();
+                Frame.GoBack();
             }
         }
 
@@ -85,7 +85,8 @@ namespace SoftwareKobo.U148.Views
 
                 btnLogin.Focus(FocusState.Programmatic);
                 ButtonAutomationPeer buttonPeer = new ButtonAutomationPeer(btnLogin);
-                IInvokeProvider invokeProvider = buttonPeer.GetPattern(PatternInterface.Invoke) as IInvokeProvider;
+                IInvokeProvider invokeProvider = (IInvokeProvider)buttonPeer.GetPattern(PatternInterface.Invoke);
+                Debug.Assert(invokeProvider != null);
                 invokeProvider.Invoke();
             }
         }

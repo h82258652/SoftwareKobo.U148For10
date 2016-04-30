@@ -7,13 +7,13 @@
              xmlns:models="using:SoftwareKobo.U148.Models"
              xmlns:conv="using:SoftwareKobo.UniversalToolkit.Converters"
              xmlns:localConv="using:SoftwareKobo.U148.Converters"
+             xmlns:gif="using:XamlAnimatedGif"
              mc:Ignorable="d"
              d:DesignHeight="300"
              d:DesignWidth="400"
              d:DataContext="{d:DesignInstance Type=models:Feed}">
     <UserControl.Resources>
         <localConv:FeedCategoryNameConverter x:Key="FeedCategoryNameConverter" />
-        <localConv:ImageCacheConverter x:Key="ImageCacheConverter" />
         <conv:StringFormatConverter x:Key="StringFormatConverter" />
     </UserControl.Resources>
     <Grid x:Name="root"
@@ -106,7 +106,7 @@
                Grid.Column="0"
                Grid.Row="0"
                Grid.RowSpan="2"
-               Source="{Binding Path=PicMin,Converter={StaticResource ImageCacheConverter}}"
+               gif:AnimationBehavior.SourceUri="{Binding Path=PicMin}"
                Stretch="UniformToFill"
                VerticalAlignment="Top"
                Width="100"

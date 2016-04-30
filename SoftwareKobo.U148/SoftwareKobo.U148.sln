@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.24720.0
+VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SoftwareKobo.U148", "SoftwareKobo.U148\SoftwareKobo.U148.csproj", "{A5224634-50FB-4FCE-A4D3-AE59211400F6}"
 EndProject
@@ -22,6 +22,8 @@ Global
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{A5224634-50FB-4FCE-A4D3-AE59211400F6}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{A5224634-50FB-4FCE-A4D3-AE59211400F6}.Debug|Any CPU.Build.0 = Debug|x86
+		{A5224634-50FB-4FCE-A4D3-AE59211400F6}.Debug|Any CPU.Deploy.0 = Debug|x86
 		{A5224634-50FB-4FCE-A4D3-AE59211400F6}.Debug|ARM.ActiveCfg = Debug|ARM
 		{A5224634-50FB-4FCE-A4D3-AE59211400F6}.Debug|ARM.Build.0 = Debug|ARM
 		{A5224634-50FB-4FCE-A4D3-AE59211400F6}.Debug|ARM.Deploy.0 = Debug|ARM

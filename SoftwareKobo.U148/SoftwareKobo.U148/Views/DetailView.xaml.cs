@@ -1,9 +1,4 @@
-﻿using JiuYouAdUniversal;
-using JiuYouAdUniversal.Models;
-using JYAnalyticsUniversal;
-using MicroMsg;
-using MicroMsg.sdk;
-using Porrey.Uwp.Ntp;
+﻿using MicroMsg.sdk;
 using SoftwareKobo.Social.Sina.Weibo;
 using SoftwareKobo.Social.Sina.Weibo.Models;
 using SoftwareKobo.U148.Datas;
@@ -28,7 +23,7 @@ using Windows.Web.Http;
 
 namespace SoftwareKobo.U148.Views
 {
-    public sealed partial class DetailView : Page, IView
+    public sealed partial class DetailView : IView
     {
         private bool _isExecuting;
 
@@ -51,8 +46,8 @@ namespace SoftwareKobo.U148.Views
 
         public DetailView()
         {
-            this.InitializeComponent();
-            this.NavigationCacheMode = NavigationCacheMode.Required;
+            InitializeComponent();
+            NavigationCacheMode = NavigationCacheMode.Required;
         }
 
         public async void ReceiveFromViewModel(dynamic parameter)
@@ -60,7 +55,7 @@ namespace SoftwareKobo.U148.Views
             Article article = parameter as Article;
             if (article != null)
             {
-                await this._domReadyTcs.Task;
+                await _domReadyTcs.Task;
                 await webView.InvokeScriptAsync("setThemeMode", AppSettings.Instance.ThemeMode.ToString());
                 await webView.InvokeScriptAsync("setContent", article.Content);
             }
@@ -70,20 +65,18 @@ namespace SoftwareKobo.U148.Views
         {
             base.OnNavigatedFrom(e);
 
-            JYAnalytics.TrackPageEnd(nameof(DetailView));
-
             Messenger.Unregister(this);
 
-            NavigationHelper.Unregister(this.Frame);
+            NavigationHelper.Unregister(Frame);
         }
 
         private Feed _feed;
 
         private void GoBack()
         {
-            if (this.Frame.CanGoBack && this.IsExecuting == false)
+            if (Frame.CanGoBack && IsExecuting == false)
             {
-                this.Frame.GoBack();
+                Frame.GoBack();
             }
         }
 
@@ -91,13 +84,11 @@ namespace SoftwareKobo.U148.Views
         {
             base.OnNavigatedTo(e);
 
-            JYAnalytics.TrackPageStart(nameof(DetailView));
-
             Messenger.Register(this);
 
-            if (this.Frame.CanGoBack)
+            if (Frame.CanGoBack)
             {
-                NavigationHelper.Register(this.Frame, () =>
+                NavigationHelper.Register(Frame, () =>
                 {
                     GoBack();
                 });
@@ -105,12 +96,12 @@ namespace SoftwareKobo.U148.Views
 
             if (e.NavigationMode != NavigationMode.Back)
             {
-                this._domReadyTcs = new TaskCompletionSource<object>();
+                _domReadyTcs = new TaskCompletionSource<object>();
                 TypedEventHandler<WebView, WebViewDOMContentLoadedEventArgs> handler = null;
                 handler = (sender, args) =>
                 {
                     webView.DOMContentLoaded -= handler;
-                    this._domReadyTcs.SetResult(null);
+                    _domReadyTcs.SetResult(null);
                 };
                 webView.DOMContentLoaded += handler;
                 webView.Navigate(new Uri("ms-appx-web:///Web/Views/app.html"));
@@ -121,86 +112,6 @@ namespace SoftwareKobo.U148.Views
                     _feed = feed;
                     this.SendToViewModel(feed);
                 }
-            }
-
-            SetAdVisibility();
-        }
-
-        private async void SetAdVisibility()
-        {
-            if (_ad == null)
-            {
-                return;
-            }
-            NtpClient client = new NtpClient();
-            try
-            {
-                DateTime? time = await client.GetAsync(NTPSERVERS);
-                if (time.HasValue)
-                {
-                    if (AppSettings.Instance.LastClickAdTime + TimeSpan.FromHours(12) >= time.Value)
-                    {
-                        _ad.Visibility = Visibility.Collapsed;
-                        return;
-                    }
-                }
-            }
-            catch
-            {
-            }
-            _ad.Visibility = Visibility.Visible;
-        }
-
-        private AdControl _ad;
-
-        private void DetailView_Loaded(object sender, RoutedEventArgs e)
-        {
-            if (AdContainer.Children.Count == 0)
-            {
-                try
-                {
-                    _ad = new AdControl()
-                    {
-                        Visibility = Visibility.Collapsed,
-                        AdType = AdType.Banner,
-                        ApplicationKey = "4fd64ae0ccd8d54db0dd45d8ac733fb7"
-                    };
-                    _ad.AdClick += Ad_Click;
-                    AdContainer.Children.Add(_ad);
-                }
-                catch
-                {
-                    // ignored
-                }
-            }
-
-            SetAdVisibility();
-        }
-
-        private static readonly string[] NTPSERVERS = new string[]
-        {
-            "time.windows.com",
-            "time.nist.gov"
-        };
-
-        private async void Ad_Click(object sender, AdClickEventArgs e)
-        {
-            if (e.clickResult == "1" || e.clickResult == "2")
-            {
-                NtpClient client = new NtpClient();
-                try
-                {
-                    DateTime? time = await client.GetAsync(NTPSERVERS);
-                    if (time.HasValue)
-                    {
-                        AppSettings.Instance.LastClickAdTime = time.Value;
-                    }
-                }
-                catch
-                {
-                    // ignored
-                }
-                _ad.Visibility = Visibility.Collapsed;
             }
         }
 
@@ -213,7 +124,7 @@ namespace SoftwareKobo.U148.Views
         {
             IsExecuting = true;
 
-            WeiboClient client = null;
+            WeiboClient client;
             try
             {
                 client = await WeiboClient.CreateAsync();
@@ -317,9 +228,9 @@ namespace SoftwareKobo.U148.Views
             switch (e.Value)
             {
                 case "goforward":
-                    if (this.Frame.CanGoForward)
+                    if (Frame.CanGoForward)
                     {
-                        this.Frame.GoForward();
+                        Frame.GoForward();
                     }
                     break;
 

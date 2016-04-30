@@ -1,21 +1,20 @@
-﻿using SoftwareKobo.U148.Models;
+﻿using SoftwareKobo.U148.Controls;
+using SoftwareKobo.U148.Models;
 using SoftwareKobo.UniversalToolkit.Helpers;
 using SoftwareKobo.UniversalToolkit.Mvvm;
 using System;
 using Windows.UI.Popups;
-using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
-using JYAnalyticsUniversal;
-using SoftwareKobo.U148.Controls;
 
 namespace SoftwareKobo.U148.Views
 {
-    public sealed partial class CommentView : Page, IView
+    public sealed partial class CommentView : IView
     {
         public CommentView()
         {
-            this.InitializeComponent();
+            InitializeComponent();
         }
 
         public async void ReceiveFromViewModel(dynamic parameter)
@@ -45,26 +44,22 @@ namespace SoftwareKobo.U148.Views
         {
             base.OnNavigatedFrom(e);
 
-            JYAnalytics.TrackPageEnd(nameof(CommentView));
-
             Messenger.Unregister(this);
 
-            NavigationHelper.Unregister(this.Frame);
+            NavigationHelper.Unregister(Frame);
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
 
-            JYAnalytics.TrackPageStart(nameof(CommentView));
-
             Messenger.Register(this);
 
-            NavigationHelper.Register(this.Frame, () => 
+            NavigationHelper.Register(Frame, () =>
             {
-                if (this.Frame.CanGoBack && this.sendingMask.Visibility != Visibility.Visible)
+                if (Frame.CanGoBack && sendingMask.Visibility != Visibility.Visible)
                 {
-                    this.Frame.GoBack();
+                    Frame.GoBack();
                 }
             });
 
