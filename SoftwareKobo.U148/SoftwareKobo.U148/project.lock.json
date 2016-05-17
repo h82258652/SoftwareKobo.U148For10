@@ -324,7 +324,7 @@
           "lib/portable-net45+wp80+win8+wpa81+dnxcore50/Newtonsoft.Json.dll": {}
         }
       },
-      "NuGet.CommandLine/3.4.3": {},
+      "NuGet.CommandLine/3.3.0": {},
       "PlatformSpecific.Analyzer/2.0.2": {
         "compile": {
           "lib/uap/PlatformSpecific.dll": {}
@@ -1868,7 +1868,7 @@
           "lib/wpa81/MicroMsg.sdk.dll": {}
         }
       },
-      "Win2D.uwp/1.17.0": {
+      "Win2D.uwp/1.18.0": {
         "compile": {
           "lib/uap10.0/Microsoft.Graphics.Canvas.winmd": {}
         },
@@ -1890,7 +1890,7 @@
           }
         }
       },
-      "XamlAnimatedGif/1.1.2": {
+      "XamlAnimatedGif/1.1.3": {
         "compile": {
           "lib/portable-win81+wpa81/XamlAnimatedGif.dll": {}
         },
@@ -2171,7 +2171,7 @@
           "lib/portable-net45+wp80+win8+wpa81+dnxcore50/Newtonsoft.Json.dll": {}
         }
       },
-      "NuGet.CommandLine/3.4.3": {},
+      "NuGet.CommandLine/3.3.0": {},
       "PlatformSpecific.Analyzer/2.0.2": {
         "compile": {
           "lib/uap/PlatformSpecific.dll": {}
@@ -3626,7 +3626,7 @@
           "lib/wpa81/MicroMsg.sdk.dll": {}
         }
       },
-      "Win2D.uwp/1.17.0": {
+      "Win2D.uwp/1.18.0": {
         "compile": {
           "lib/uap10.0/Microsoft.Graphics.Canvas.winmd": {}
         },
@@ -3637,7 +3637,7 @@
           "runtimes/win10-arm/native/Microsoft.Graphics.Canvas.dll": {}
         }
       },
-      "XamlAnimatedGif/1.1.2": {
+      "XamlAnimatedGif/1.1.3": {
         "compile": {
           "lib/portable-win81+wpa81/XamlAnimatedGif.dll": {}
         },
@@ -3915,7 +3915,7 @@
           "lib/portable-net45+wp80+win8+wpa81+dnxcore50/Newtonsoft.Json.dll": {}
         }
       },
-      "NuGet.CommandLine/3.4.3": {},
+      "NuGet.CommandLine/3.3.0": {},
       "PlatformSpecific.Analyzer/2.0.2": {
         "compile": {
           "lib/uap/PlatformSpecific.dll": {}
@@ -5331,7 +5331,7 @@
           "lib/wpa81/MicroMsg.sdk.dll": {}
         }
       },
-      "Win2D.uwp/1.17.0": {
+      "Win2D.uwp/1.18.0": {
         "compile": {
           "lib/uap10.0/Microsoft.Graphics.Canvas.winmd": {}
         },
@@ -5342,7 +5342,7 @@
           "runtimes/win10-arm/native/Microsoft.Graphics.Canvas.dll": {}
         }
       },
-      "XamlAnimatedGif/1.1.2": {
+      "XamlAnimatedGif/1.1.3": {
         "compile": {
           "lib/portable-win81+wpa81/XamlAnimatedGif.dll": {}
         },
@@ -5628,7 +5628,7 @@
           "lib/portable-net45+wp80+win8+wpa81+dnxcore50/Newtonsoft.Json.dll": {}
         }
       },
-      "NuGet.CommandLine/3.4.3": {},
+      "NuGet.CommandLine/3.3.0": {},
       "PlatformSpecific.Analyzer/2.0.2": {
         "compile": {
           "lib/uap/PlatformSpecific.dll": {}
@@ -7086,7 +7086,7 @@
           "lib/wpa81/MicroMsg.sdk.dll": {}
         }
       },
-      "Win2D.uwp/1.17.0": {
+      "Win2D.uwp/1.18.0": {
         "compile": {
           "lib/uap10.0/Microsoft.Graphics.Canvas.winmd": {}
         },
@@ -7097,7 +7097,7 @@
           "runtimes/win10-x64/native/Microsoft.Graphics.Canvas.dll": {}
         }
       },
-      "XamlAnimatedGif/1.1.2": {
+      "XamlAnimatedGif/1.1.3": {
         "compile": {
           "lib/portable-win81+wpa81/XamlAnimatedGif.dll": {}
         },
@@ -7375,7 +7375,7 @@
           "lib/portable-net45+wp80+win8+wpa81+dnxcore50/Newtonsoft.Json.dll": {}
         }
       },
-      "NuGet.CommandLine/3.4.3": {},
+      "NuGet.CommandLine/3.3.0": {},
       "PlatformSpecific.Analyzer/2.0.2": {
         "compile": {
           "lib/uap/PlatformSpecific.dll": {}
@@ -8791,7 +8791,7 @@
           "lib/wpa81/MicroMsg.sdk.dll": {}
         }
       },
-      "Win2D.uwp/1.17.0": {
+      "Win2D.uwp/1.18.0": {
         "compile": {
           "lib/uap10.0/Microsoft.Graphics.Canvas.winmd": {}
         },
@@ -8802,7 +8802,7 @@
           "runtimes/win10-x64/native/Microsoft.Graphics.Canvas.dll": {}
         }
       },
-      "XamlAnimatedGif/1.1.2": {
+      "XamlAnimatedGif/1.1.3": {
         "compile": {
           "lib/portable-win81+wpa81/XamlAnimatedGif.dll": {}
         },
@@ -9088,7 +9088,7 @@
           "lib/portable-net45+wp80+win8+wpa81+dnxcore50/Newtonsoft.Json.dll": {}
         }
       },
-      "NuGet.CommandLine/3.4.3": {},
+      "NuGet.CommandLine/3.3.0": {},
       "PlatformSpecific.Analyzer/2.0.2": {
         "compile": {
           "lib/uap/PlatformSpecific.dll": {}
@@ -10546,7 +10546,7 @@
           "lib/wpa81/MicroMsg.sdk.dll": {}
         }
       },
-      "Win2D.uwp/1.17.0": {
+      "Win2D.uwp/1.18.0": {
         "compile": {
           "lib/uap10.0/Microsoft.Graphics.Canvas.winmd": {}
         },
@@ -10557,7 +10557,7 @@
           "runtimes/win10-x86/native/Microsoft.Graphics.Canvas.dll": {}
         }
       },
-      "XamlAnimatedGif/1.1.2": {
+      "XamlAnimatedGif/1.1.3": {
         "compile": {
           "lib/portable-win81+wpa81/XamlAnimatedGif.dll": {}
         },
@@ -10835,7 +10835,7 @@
           "lib/portable-net45+wp80+win8+wpa81+dnxcore50/Newtonsoft.Json.dll": {}
         }
       },
-      "NuGet.CommandLine/3.4.3": {},
+      "NuGet.CommandLine/3.3.0": {},
       "PlatformSpecific.Analyzer/2.0.2": {
         "compile": {
           "lib/uap/PlatformSpecific.dll": {}
@@ -12251,7 +12251,7 @@
           "lib/wpa81/MicroMsg.sdk.dll": {}
         }
       },
-      "Win2D.uwp/1.17.0": {
+      "Win2D.uwp/1.18.0": {
         "compile": {
           "lib/uap10.0/Microsoft.Graphics.Canvas.winmd": {}
         },
@@ -12262,7 +12262,7 @@
           "runtimes/win10-x86/native/Microsoft.Graphics.Canvas.dll": {}
         }
       },
-      "XamlAnimatedGif/1.1.2": {
+      "XamlAnimatedGif/1.1.3": {
         "compile": {
           "lib/portable-win81+wpa81/XamlAnimatedGif.dll": {}
         },
@@ -13169,11 +13169,11 @@
         "tools/install.ps1"
       ]
     },
-    "NuGet.CommandLine/3.4.3": {
-      "sha512": "EKEnY3ldEM0tDo9MYVbRJSA/ueHfHYzJbIUcbYEV3l1H+wQnQqVFXxQUVKpyzh31RkMQDX5AnvkX+71or4ZRvA==",
+    "NuGet.CommandLine/3.3.0": {
+      "sha512": "6YrMwIwj8LJxQ/E8mgPpwb7Vt/paAeE/SiZFC3n64DkJuUT+qQV9+KEc8oVa4ko0/T595GMBVChya6u79PxLxg==",
       "type": "package",
       "files": [
-        "NuGet.CommandLine.3.4.3.nupkg.sha512",
+        "NuGet.CommandLine.3.3.0.nupkg.sha512",
         "NuGet.CommandLine.nuspec",
         "tools/NuGet.exe"
       ]
@@ -16048,7 +16048,7 @@
       ]
     },
     "UmengPlusAnalytics/3.1.0": {
-      "sha512": "klLI75h97wbaEKeG5iD8y1FaFCuOOJIsuARs/CtZBh6+wjEmzoyL9d4C7M6a8jWvzcOT3PtFUH7udUwyKZJsWQ==",
+      "sha512": "P4cbkqijyHd7BmPVPTmlNYcqPhRepBudStbyqFAaiOjorXbHem1CIVPA02TPh/9GOA0HAwGmbYV16YfslPRX4Q==",
       "type": "package",
       "files": [
         "UmengPlusAnalytics.3.1.0.nupkg.sha512",
@@ -16073,11 +16073,11 @@
         "lib/wpa81/MicroMsg.sdk.dll"
       ]
     },
-    "Win2D.uwp/1.17.0": {
-      "sha512": "G5rG8c4dBX4Aq1RKzjvmtjM3Q/us7GdzllyqF1rsiy65eQg3UE5Kc8R09ROSnHeptqf5l6W6GDZ7uJMKdHKP0Q==",
+    "Win2D.uwp/1.18.0": {
+      "sha512": "qPRgHJF9l7vKLyM/adOjUHE9OE90nYFCpa3/IOaBu1lMyiMwcfXyV2JEri+beNir0eo7luzz8dRBpyBIkjK9qw==",
       "type": "package",
       "files": [
-        "Win2D.uwp.1.17.0.nupkg.sha512",
+        "Win2D.uwp.1.18.0.nupkg.sha512",
         "Win2D.uwp.nuspec",
         "Win2d.githash.txt",
         "build/native/Win2D.uwp.targets",
@@ -16090,11 +16090,11 @@
         "runtimes/win10-x86/native/Microsoft.Graphics.Canvas.dll"
       ]
     },
-    "XamlAnimatedGif/1.1.2": {
-      "sha512": "0sVL7SPbadIrLIQ67JFUQ08GTuvb89NdEie/ROrboSeYweYYwTow9fBQDYzcWQ0pUHETPXA17Zs6oxapBaqwyQ==",
+    "XamlAnimatedGif/1.1.3": {
+      "sha512": "7axsfB60P/FeQtVBOufaQWh4F6GbywT91tPYyz/6FqVWpNMCkQSgziYc++NQ7EbQgjyA3np0wx+c7hZnerI4rg==",
       "type": "package",
       "files": [
-        "XamlAnimatedGif.1.1.2.nupkg.sha512",
+        "XamlAnimatedGif.1.1.3.nupkg.sha512",
         "XamlAnimatedGif.nuspec",
         "lib/net40/XamlAnimatedGif.dll",
         "lib/net45/XamlAnimatedGif.dll",
@@ -16111,8 +16111,8 @@
       "PlatformSpecific.Analyzer >= 2.0.2",
       "UmengPlusAnalytics >= 3.1.0",
       "WeChatSDK >= 2.0.1",
-      "Win2D.uwp >= 1.17.0",
-      "XamlAnimatedGif >= 1.1.2"
+      "Win2D.uwp >= 1.18.0",
+      "XamlAnimatedGif >= 1.1.3"
     ],
     "UAP,Version=v10.0": []
   }

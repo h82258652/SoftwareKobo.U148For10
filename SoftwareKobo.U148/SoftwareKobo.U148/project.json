@@ -6,8 +6,8 @@
     "PlatformSpecific.Analyzer": "2.0.2",
     "UmengPlusAnalytics": "3.1.0",
     "WeChatSDK": "2.0.1",
-    "Win2D.uwp": "1.17.0",
-    "XamlAnimatedGif": "1.1.2"
+    "Win2D.uwp": "1.18.0",
+    "XamlAnimatedGif": "1.1.3"
   },
   "frameworks": {
     "uap10.0": {}
